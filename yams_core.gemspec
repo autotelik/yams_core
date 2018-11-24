@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = YamsCore::VERSION
   s.authors     = ["Tom Statter"]
   s.email       = ["tomstatter@autotelik.co.uk"]
-  s.homepage    = "http://www.yams.fm"
+  s.homepage    = "http://www.yams_core.fm"
   s.summary     = "Open Source Rails engine for sharing music."
   s.description = "Yet Another Music Service - Open Source Rails engine for creating music sharing sites, band pages or record shops."
   s.license     = "MIT"

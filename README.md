@@ -1,4 +1,4 @@
-Yet Another Music Service
+Yet Another Music Service - Core Engine
 ================
 
 Open source Rails Engine. Install in a host Rails app.
@@ -7,7 +7,13 @@ For creating music streaming services, band pages or record stores
 
 #### Installation
 
-In your host Rails app,mount the engine to a location of your choice in `config/routes.rb`
+In your host Rails app, first add gem 'yams_core' to your Gemfile
+
+```ruby
+gem 'yams_core'
+```
+
+Then mount the engine to a location of your choice in your app's `config/routes.rb` file.
  
 ```ruby
    mount YamsCore::Engine, at: "/"

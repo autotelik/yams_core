@@ -9,8 +9,4 @@ class Available < ApplicationRecord
     self.on ||= DateTime.now
   end
 
-  after_create do
-    AnnounceAvailableCreatedWorker.perform(self)
-  end
-
 end

@@ -3,7 +3,7 @@
 # Nice management UI for Docker : https://github.com/portainer/portainer
 # This creates a local (development) style installation, availble at http://http://docker.yams/yams
 # Note:  Requires following entry in your local /etc/hosts
-#   127.0.0.1 yams.docker
+#   127.0.0.1 yams_core.docker
 #
 version: '3'
 
