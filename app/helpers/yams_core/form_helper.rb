@@ -16,15 +16,31 @@ module YamsCore
       icon_tag(icon, text: text, text_front: false)
     end
 
-    def delete_icon(model, text: nil, html_options: {})
-      options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: I18n.t(:delete_confirm, scope: :global) } }
-      if text
-        link_to back_icon_tag('icon-trash', text: text), model, options.merge(html_options)
+    # TODO - paperclip[ had nice support for different sizes, bit broken by switch to Actrive Storage
+    # - how to mimic thumbs via variants ?? e.g rails_representation_path(track.cover_image.variant(resize: '120x120'))
+
+    def cover_image_tag(cover, size: :thumb, css: 'img-fluid rounded')
+      if cover.attached?
+        view.image_tag(rails_blob_url(cover.image, only_path: true), class: css)
       else
-        link_to icon_tag('icon-trash'), model, options.merge(html_options)
+        default = DefaultCover.for_track
+        view.image_tag(rails_blob_url(default.image), class: css) if default.attached?
       end
     end
 
+    # icon represents complete deletion from system
+    #
+    def delete_icon(model, text: nil, html_options: {})
+      options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: I18n.t(:delete_confirm, scope: :global) } }
+      if text
+        view.link_to back_icon_tag('icon-trash', text: text), model, options.merge(html_options)
+      else
+        view.link_to icon_tag('icon-trash'), model, options.merge(html_options)
+      end
+    end
+
+    # icon represents removal of an item only from a list - item remains in DB, i.e not deletion of that item from system
+    #
     def remove_icon(model, text: nil, confirm: I18n.t(:remove_confirm, scope: :global), html_options: {})
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
       if text
@@ -37,10 +53,12 @@ module YamsCore
     def edit_icon(model, text: nil, html_options: {})
       options = { id: "edit-icon-#{model.class}-#{model.id}" }
 
+      path = polymorphic_path([view.yams_core, model], action: :edit)
+
       if text
-        link_to back_icon_tag('icon-pencil', text: text), edit_polymorphic_path(model), options.merge(html_options)
+        view.link_to back_icon_tag('icon-pencil', text: text), path, options.merge(html_options)
       else
-        link_to icon_tag('icon-pencil'), edit_polymorphic_path(model), options.merge(html_options)
+        view.link_to icon_tag('icon-pencil'), path, options.merge(html_options)
       end
     end
 

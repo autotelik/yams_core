@@ -7,11 +7,11 @@
     <div class="col-8 card p-0">
       <div class="card-body">
 
-        <%= render partial: 'shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
+        <%= render partial: 'yams_core/shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
 
         <div class="row">
           <div class="col float-right text-center">
-            <%= render 'shared/errors', model: resource %>
+            <%= render 'yams_core/shared/errors', model: resource %>
           </div>
         </div>
 

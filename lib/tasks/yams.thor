@@ -2,7 +2,7 @@
 
 require_relative 'common/task_common'
 
-module Yams
+module YamsCore
   class Db < Thor
 
     include TaskCommon
@@ -19,17 +19,36 @@ module Yams
 
       DataShift.load_commands
 
-      user = User.where(name: options[:user]).first
+      user = ::YamsCore::User.where(name: options[:user]).first
 
-      Album.create(user: user, title: 'Photon Histories', description: 'Demo album loaded via db:seed', published_state: "published")
-      Album.create(user: user, title: 'Serrated Ambient Twerks', description: 'Ambient glitch', published_state: "published")
+      ::YamsCore::Album.create(user: user, title: 'Photon Histories', description: 'Demo album loaded via db:seed', published_state: "published")
+      ::YamsCore::Album.create(user: user, title: 'Serrated Ambient Twerks', description: 'Ambient glitch', published_state: "published")
 
-      Playlist.create(user: user, name: 'All time faves')
-      Playlist.create(user: user, name: 'The Best')
-      Playlist.create(user: user, name: 'Top of the Pops')
-      Playlist.create(user: user, name: 'Chillout')
+      ::YamsCore::Playlist.create(user: user, name: 'All time faves')
+      ::YamsCore::Playlist.create(user: user, name: 'The Best')
+      ::YamsCore::Playlist.create(user: user, name: 'Top of the Pops')
+      ::YamsCore::Playlist.create(user: user, name: 'Chillout')
 
-      system 'thor datashift:import:excel -i db/seed/aqwan_tracks.xls -m Track -c db/seed/aqwan_tracks_import.yaml'
+      excel = File.join(::YamsCore.root_path, 'db/seed/aqwan_tracks.xls')
+      config = File.join(::YamsCore.root_path, 'db/seed/aqwan_tracks_import.yaml')
+
+      invoke "datashift:import:excel", [], ['-i', excel, '-m', 'YamsCore::Track', '-c', config]
     end
   end
+
+  class SearchIndex < Thor
+
+    include TaskCommon
+    desc :build, 'Build full Index for Elastic Search'
+
+    def build
+
+      load_rails_environment
+
+      # TODO: make part of deployement ?
+      ::YamsCore::Track.reindex
+      ::YamsCore::Album.reindex
+    end
+  end
+
 end

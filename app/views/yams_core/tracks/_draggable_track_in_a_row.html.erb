@@ -7,7 +7,7 @@
       </div>
 
       <div class="col-2 align-items-center">
-        <%= track_presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %>
+        <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track_presenter.cover_image, only_path: true), class: "avatar rounded avatar-sm") %>
       </div>
 
       <div class="col-6">
@@ -19,11 +19,11 @@
       </div>
 
       <div class="col-1">
-        <%= edit_icon(track_presenter) %>
+        <%= track_presenter.edit_icon(track_presenter.model) %>
       </div>
 
       <div class="col-1">
-        <%= delete_icon(track_presenter) %>
+        <%= track_presenter.delete_icon(track_presenter.model) %>
       </div>
 
     </div>

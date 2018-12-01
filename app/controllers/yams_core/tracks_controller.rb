@@ -24,7 +24,7 @@ module YamsCore
       Track.connection.execute("select setseed(#{seed_val})")
       @tracks = Track.eager_load(:cover, :user).for_commercial.order('random()').page(params[:page]).per(30)
 
-      @tracks_json = Yams::AudioEnginePlayListBuilder.call(@tracks, current_user)
+      @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@tracks, current_user)
 
       respond_to do |format|
         format.html {}
@@ -37,7 +37,7 @@ module YamsCore
     def show;
       respond_to do |format|
         format.html {}
-        format.json { @track_json = Yams::AudioEnginePlayListBuilder.call(@track, current_user) }
+        format.json { @track_json = YamsCore::AudioEnginePlayListBuilder.call(@track, current_user) }
       end
     end
 

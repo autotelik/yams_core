@@ -9,7 +9,10 @@
           <div class="col-1">
             <%= playlist.bootstrap_actions_dropdown %>
           </div>
-          <div class="col-2"><%= playlist.cover_image_tag %></div>
+
+          <div class="col-2">
+            <%= playlist.cover_image_tag %>
+          </div>
           <div class="col"><h5 class="playlist-track"><%= playlist.name %></h5></div>
           <a data-toggle="collapse" href="#<%= accordion %>" aria-expanded="true">
             <div class="col"><i class="icon-chevron-small-right" style="border: 2px solid;"></i></div>
@@ -27,7 +30,7 @@
       <div class="card-body">
         <div id="<%= accordion %>" class="collapse show col-12 playlist-track" role="tabpanel">
           <div class="show-track-playlist-dropzone">
-            <%= render partial: 'tracks/shared/sortable_tracks_table', locals: { owner: playlist, sortable: playlist.playlist_tracks } %>
+            <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: playlist, sortable: playlist.playlist_tracks } %>
           </div>
         </div>
       </div>

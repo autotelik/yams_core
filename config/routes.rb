@@ -1,5 +1,9 @@
 YamsCore::Engine.routes.draw do
 
+  # TODO - is this relasly the right place for this ... need to prevent error :
+  #   Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+  default_url_options :host => "localhost:3000"    # TODO: if really needed use dotenv
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }, module: :devise, class_name: "YamsCore::User"
 
   devise_scope :user do

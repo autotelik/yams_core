@@ -23,7 +23,7 @@ module YamsCore
       respond_to do |format|
         format.html {}
         format.json do
-          @tracks_json = Yams::AudioEnginePlayListBuilder.call(@playlist.tracks, current_user)
+          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@playlist.tracks, current_user)
         end
       end
     end

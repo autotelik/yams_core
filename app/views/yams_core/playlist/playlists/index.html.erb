@@ -13,7 +13,7 @@
       <% @playlists.each do |playlist| %>
 
         <li id="playlist_row_<%= playlist.id %>">
-          <% playlist = PlaylistPresenter.new(playlist, self) %>
+          <% playlist = YamsCore::PlaylistPresenter.new(playlist, self) %>
           <div class="media align-items-center">
             <div class="accordion-item playlist-track col-12">
               <div class="card card-sm ml-2 mr-2">

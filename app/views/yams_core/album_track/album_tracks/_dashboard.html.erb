@@ -63,7 +63,7 @@
           <div class="card-body drag show-track-album-dropzone">
             <div id="target-for-album-track_removal-reinsertion"></div>
             <% @tracks.each do |t| %>
-              <%= render partial: 'tracks/draggable_track_in_a_row', locals: { track_presenter: TrackPresenter.new(t, self) } %>
+              <%= render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
             <% end %>
           </div>
         </div>
@@ -73,7 +73,7 @@
 
   <!-- ALBUMS -->
   <div class="col-7 album-track-manager-dropzone m-0 p-0">
-    <%= render partial: 'albums/dashboard_with_dropzone' %>
+    <%= render partial: 'yams_core/albums/dashboard_with_dropzone' %>
   </div>
 
 </div>

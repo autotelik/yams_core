@@ -5,9 +5,10 @@
     <div class="col-6 card p-0">
       <div class="card-body">
 
-        <%= render partial: 'shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
+        <%= render partial: 'yams_core/shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
 
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
           <%= devise_error_messages! %>
 
           <div class="form-row form-group">

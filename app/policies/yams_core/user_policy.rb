@@ -13,9 +13,9 @@ module YamsCore
       @current_user.admin?
     end
 
-    # Logged in users can see other artists profiles
+    # Anyone can see other artists profiles
     def show?
-      @current_user.admin? || @current_user
+     true
     end
 
     def update?

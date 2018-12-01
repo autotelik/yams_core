@@ -1,0 +1,65 @@
+<!-- TODO - do we really need to load the records from the DB - can we just get the cover ? -->
+
+<% if presenter.search_results[:track].present? %>
+
+  <div class="col-12">
+    <div class="card card-outline-secondary">
+
+      <%= bootstrap_card_header( t(:tracks, scope: :global) ) %>
+
+      <div class="card-body">
+        <div class="col-md-12 search_result">
+
+          <% presenter.search_results[:track].each do |t| %>
+            <% track = YamsCore::TrackPresenter.new(t, self) %>
+
+            <div class="row pb-1 pt-1" id="search_track_row_<%= track.id %>" data-artifact-id="<%= track.id %>">
+              <div class="col-2 align-items-center">
+                <%= track.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %>
+              </div>
+
+              <div class="col-6">
+                <h6 class="mb-0"><%= link_to track.title, track_path(track) %></h6>
+              </div>
+            </div>
+
+            <%= paginate presenter.search_results[:track] %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<% if presenter.search_results[:album].present? %>
+
+  <div class="col-12">
+    <div class="card card-outline-secondary">
+
+      <%= bootstrap_card_header( t(:albums, scope: :global) ) %>
+
+      <div class="card-body">
+        <div class="col-md-12 search_result">
+
+          <% presenter.search_results[:album].each do |a| %>
+            <% album = YamsCore::AlbumPresenter.new(a, self) %>
+
+            <div class="row pb-1 pt-1" id="search_album_row_<%= album.id %>" data-artifact-id="<%= album.id %>">
+              <div class="col-2 align-items-center">
+                <%= album.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %>
+              </div>
+
+              <div class="col-6">
+                <h6 class="mb-0"><%= link_to album.title, album_path(album) %></h6>
+              </div>
+            </div>
+
+            <%= paginate presenter.search_results[:album] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

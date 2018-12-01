@@ -63,7 +63,7 @@
           <div class="card-body drag show-track-playlist-dropzone">
             <div id="target-for-playlist-track_removal-reinsertion"></div>
             <% @tracks.each do |t| %>
-              <%= render partial: 'tracks/draggable_track_in_a_row', locals: { track_presenter: TrackPresenter.new(t, self) } %>
+              <%= render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
             <% end %>
           </div>
         </div>

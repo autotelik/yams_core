@@ -10,7 +10,7 @@
 
         <div class="card-body">
 
-          <%= render 'shared/errors', model: @track %>
+          <%= render 'yams_core/shared/errors', model: @track %>
 
           <div class="form-group">
             <%= f.label t(:title, scope: :tracks) %>
@@ -22,7 +22,7 @@
             <%= f.text_field :description, :autofocus => true, class: 'form-control' %>
           </div>
 
-          <%= render partial: 'shared/edit_tag_list', locals: { form: f, model: @track } %>
+          <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track } %>
 
           <div class="form-group">
             <% if @track.audio.try(:original_filename) %>
@@ -31,7 +31,7 @@
             <%= custom_file_field(f, :audio, t('.choose_audio_file'), additional: t('.accept_audio_file')) %>
           </div>
 
-          <%= render partial: 'shared/choose_cover', locals: { form: f, model: @track } %>
+          <%= render partial: 'yams_core/shared/choose_cover', locals: { form: f, model: @track } %>
 
           <%= render partial: 'permissions', locals: { form: f } %>
 

@@ -1,0 +1,11 @@
+<div class="row pt-1">
+  <h4>Total of <%= @search_results.count %> results</h4>
+</div>
+<div class="row pt-1 pb-2">
+  <h4>Query: "<%= params.fetch(:searches, {})[:q] %>"</h4>
+</div>
+
+<div id="endless">
+  <%= render partial: 'search_result', locals: { presenter: @search_results } %>
+</div>
+

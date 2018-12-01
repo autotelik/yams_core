@@ -47,6 +47,9 @@ module YamsCore
   class Engine < ::Rails::Engine
     isolate_namespace YamsCore
 
+    # Add a load path for this specific Engine
+    config.autoload_paths << File.expand_path("../app/workers/yams_core", __FILE__)
+
     def self.load_thor_tasks
       base = File.join(YamsCore.library_path, 'tasks')
 

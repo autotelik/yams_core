@@ -14,7 +14,7 @@ module YamsCore
 
     scope :for_user, -> (user) { Playlist.eager_load(:user, playlist_tracks: [:track] ).where('playlists.user_id = ?', user.id) }
 
-    include Yams::AvailableFor
+    include YamsCore::AvailableFor
 
     acts_as_taggable
 

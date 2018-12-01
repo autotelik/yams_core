@@ -21,9 +21,9 @@ module YamsCore
           seed_val = rand
           Track.connection.execute("select setseed(#{seed_val})")
 
-          @tracks = Track.eager_load(:cover, :user).for_radio.order('random()').page(params[:page]).per(per_page)
+          @tracks = Track.eager_load(:cover, :user).for_free.order('random()').page(params[:page]).per(per_page)
 
-          @tracks_json = Yams::AudioEnginePlayListBuilder.call(@tracks, current_user)
+          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@tracks, current_user)
         end
       end
     end

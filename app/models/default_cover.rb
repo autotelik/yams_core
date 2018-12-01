@@ -2,7 +2,7 @@
 
 class DefaultCover < ApplicationRecord
 
-  include Yams::Covering
+  include YamsCore::Covering
 
   enum kind: %i[album artist playlist track user]
 

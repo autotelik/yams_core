@@ -14,7 +14,7 @@ module YamsCore
 
     has_one_attached :audio
 
-    include Yams::AvailableFor
+    include YamsCore::AvailableFor
 
     acts_as_taggable
 
@@ -24,7 +24,7 @@ module YamsCore
 
     validates_presence_of :title, :audio, :user
 
-    validates :audio, attached: true, content_type: Yams::AudioService.valid_types
+    validates :audio, attached: true, content_type: YamsCore::AudioService.valid_types
 
     searchkick callbacks: :queue
 
@@ -37,14 +37,16 @@ module YamsCore
     scope :for_user, -> (user) { Track.where('user_id = ?', user.id) }
 
     def attach_audio_file(path)
-      audio.attach(io: File.open(path), filename:  File.split(path).last, content_type: Yams::AudioService.valid_types)
+      audio.attach(io: File.open(path), filename:  File.split(path).last, content_type: YamsCore::AudioService.valid_types)
     end
 
     def attach_cover(path)
       self.cover = Cover.create!(owner: self).tap{ |c| c.image.attach(io: File.open(path), filename: File.split(path).last) }
     end
 
+    # DEPRECATED - see Presenter
     def cover_image(size: :thumb)
+      Rails.logger.info("DEPRECATED Track.cover_image - USE PRESENTER")
       track_cover = self.cover.try(:attached?) ? cover : DefaultCover.for_track
       track_cover.image
     end
@@ -55,11 +57,11 @@ module YamsCore
 
     def duration
       assign_mp3_properties unless length?
-      length
+      length || 0
     end
 
     def display_duration
-      return 0 unless length?
+      #return 0 unless length?
       Time.at(duration).utc.strftime('%H:%M:%S')
     end
 
@@ -69,7 +71,7 @@ module YamsCore
 
       begin
         Rails.logger.debug("Calling Mp3Worker for Track #{id}")
-        Mp3Worker.perform_async(id)
+        YamsCore::Mp3Worker.perform_async(id)
       rescue Redis::CannotConnectError => x
         Rails.logger.error("Redis DOWN - MP3 properties not updated #{x.message}")
 
@@ -88,7 +90,7 @@ module YamsCore
       begin
 
         Rails.logger.debug("Calling Searchkick to update ES Track Index")
-        Searchkick::ProcessQueueJob.perform_later(class_name: "Track")
+        Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
 
       rescue Redis::CannotConnectError => x
         Rails.logger.error("Redis DOWN - Elastic search update failed #{x.message}")

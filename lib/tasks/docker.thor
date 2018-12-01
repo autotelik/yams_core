@@ -2,7 +2,7 @@
 
 require_relative 'common/task_common'
 
-module Yams
+module YamsCore
 
   module Docker
 
@@ -33,7 +33,7 @@ module Yams
       desc :up, 'Build cluster : Db, SideKiq, Redis, ELK containers'
 
       def up
-        cli = "docker-compose -f #{}docker-compose.yml up --no-recreate -d sidekiq"
+        cli = "docker-compose -f docker-compose.yml up --no-recreate -d sidekiq"
         puts "Running": cli
         system cli
       end

@@ -34,8 +34,7 @@ module YamsCore
       # Re-enable Track for selection
       @track_presenter =  TrackPresenter.new(album_track.track, view_context)
 
-      # TODO - view should probably send complete ccs ID for us to remove row
-      @album_track_row_id = album_track.sortable_id
+      @album_track_row_id = @track_presenter.sortable_id
 
       unless album_track.destroy
         flash[:error] = 'Sorry we failed to remove Track from Album'
