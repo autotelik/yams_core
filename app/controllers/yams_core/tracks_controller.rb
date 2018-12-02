@@ -82,6 +82,9 @@ module YamsCore
     def update
       respond_to do |format|
         if update_track
+
+          Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
+
           format.html { redirect_to edit_track_path(@track), notice: 'Track was successfully updated.' }
           format.json { render :show, status: :ok, location: @track }
         else
@@ -125,11 +128,11 @@ module YamsCore
     end
 
     def track_params
-      params.require(:track).permit(:audio, :description, :license_id, :release_year, :release_month, :release_day, :title, :user_id, tag_list: [], cover_attributes: %i[id image])
+      params.require(:track).permit(:album, :audio, :description, :license_id, :release_year, :release_month, :release_day, :title, :user_id, tag_list: [], cover_attributes: %i[id image])
     end
 
     def available_for_params
-      params.permit(availables: Available.concepts.keys)
+      params.permit(:album, availables: YamsCore::Available.concepts.keys)
     end
 
   end

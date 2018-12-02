@@ -9,18 +9,18 @@ module YamsCore
 
       accepts_nested_attributes_for :availables, allow_destroy: true
 
-      scope :for_free, -> { joins(:availables).where('availables.mode': Available.concepts[:free]) }
-      scope :for_commercial, -> { joins(:availables).where('availables.mode': Available.concepts[:commercial]) }
+      scope :for_free, -> { joins(:availables).where('availables.mode': YamsCore::Available.concepts[:free]) }
+      scope :for_commercial, -> { joins(:availables).where('availables.mode': YamsCore::Available.concepts[:commercial]) }
     end
 
     def available_for?(mode)
       # https://semaphoreci.com/blog/2017/03/14/faster-rails-how-to-check-if-a-record-exists.html
-      availables.where(type: self, mode: Available.concepts[mode]).exists?
+      availables.where(type: self, mode: YamsCore::Available.concepts[mode]).exists?
     end
 
     def make_available_for(mode)
       save! if new_record?
-      availables.create!(mode: Available.concepts[mode])
+      availables.create!(mode: YamsCore::Available.concepts[mode])
     end
 
   end

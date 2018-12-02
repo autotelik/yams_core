@@ -61,7 +61,6 @@ module YamsCore
     end
 
     def display_duration
-      #return 0 unless length?
       Time.at(duration).utc.strftime('%H:%M:%S')
     end
 
@@ -88,10 +87,7 @@ module YamsCore
     def after_save_hook
 
       begin
-
-        Rails.logger.debug("Calling Searchkick to update ES Track Index")
         Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
-
       rescue Redis::CannotConnectError => x
         Rails.logger.error("Redis DOWN - Elastic search update failed #{x.message}")
       rescue  => x

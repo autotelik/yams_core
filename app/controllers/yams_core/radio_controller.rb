@@ -9,10 +9,12 @@ module YamsCore
 
     def index
 
-      # Render the Audio Player via HTML first
-      # Player partial will then make a callback to get the JSON Playlist
       respond_to do |format|
+
+        # Render the Audio Player via HTML first
         format.html {}
+
+        # Player partial will then make a callback to get the JSON Playlist
         format.json do
           per_page = 30
 

@@ -1,7 +1,11 @@
+# TODO does not seem like a very good root node name
 json.saved do
+
   json.service do
-    json.user_token   current_user.id
-    json.client_token '0987654321' # TODO: - add tokens to devise
+    if current_user # radio stream can be accessed by non signed in visitors
+      json.user_token   current_user.id
+      json.client_token '0987654321' # TODO: - add tokens to devise
+    end
   end
 
   # not sure we need to bother with these in init  - audio to play comes in via load anyway

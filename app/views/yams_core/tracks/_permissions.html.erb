@@ -6,7 +6,7 @@
 
     <%= label_tag t('.available_for') %><br>
 
-    <% Available.concepts.keys.each do |c|  %>
+    <% YamsCore::Available.concepts.keys.each do |c|  %>
       <div class="collection-check-box">
         <%= check_box_tag "availables[#{c}]", true, @track.available_for?(c) %>
         <%= form.label c %>

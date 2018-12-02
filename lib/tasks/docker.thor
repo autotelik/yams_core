@@ -7,7 +7,6 @@ module YamsCore
   module Docker
 
     class Dev < Thor
-
       include TaskCommon
 
       desc :up, 'Build development cluster : Sidekiq, DB, ELK'
@@ -27,7 +26,6 @@ module YamsCore
     end
 
     class Prod < Thor
-
       include TaskCommon
 
       desc :up, 'Build cluster : Db, SideKiq, Redis, ELK containers'
@@ -37,7 +35,20 @@ module YamsCore
         puts "Running": cli
         system cli
       end
+    end
 
+    %w{ Elasticsearch Kibana Redis Sidekiq }.each do |name|
+
+      klass = Class.new(Thor) do
+        include TaskCommon
+
+        desc :up, "Start #{name} docker container"
+        define_method(:up) {
+          docker_up("#{name.downcase}")
+        }
+      end
+
+      YamsCore.const_set name, klass
     end
 
   end
