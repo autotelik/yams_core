@@ -1,6 +1,6 @@
 YamsCore::Engine.routes.draw do
 
-  # TODO - is this relasly the right place for this ... need to prevent error :
+  # TODO - is this really the right place for this ... need to prevent error :
   #   Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
   default_url_options :host => "localhost:3000"    # TODO: if really needed use dotenv
 
@@ -10,15 +10,15 @@ YamsCore::Engine.routes.draw do
     get 'users/:id' => 'users/registrations#show', as: :user, module: :devise, class_name: "YamsCore::User"
   end
 
-  resources :albums do
-    delete :tracks, as: :clear_tracks
-  end
+  resources :artists, only: [:show]
 
-  resources :album_tracks, only: [:create, :destroy, :edit, :index], module: 'album_track' do
-    resources :track_selections, only: [:create]
-  end
+  resources :albums, module: 'album'
 
-  post 'player_init', to: 'player_init#create'
+  namespace :album do
+    resources :management, only: [:index]
+
+    resources :tracks, only: [:create, :destroy]
+  end
 
   resources :playlists, module: 'playlist'
 
@@ -34,9 +34,12 @@ YamsCore::Engine.routes.draw do
   resources :licenses
 
   resource :searches, only: [:show]
+
   resources :tracks
 
   mount DatashiftAudioEngine::Engine, at: "/audio"
+
+  post 'player_init', to: 'player_init#create'
 
   post 'player_status_callback', to: 'player_status_callback#create'
 

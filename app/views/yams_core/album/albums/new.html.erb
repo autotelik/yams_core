@@ -1,0 +1,32 @@
+<% content_for :album_column do %> <!-- ALBUM COLUMN -->
+
+  <div class="media align-items-center">
+    <div class="accordion-item album-track col-12">
+      <div class="card card-sm col p-0">
+        <%= bootstrap_card_header( t('.create')) %>
+      </div>
+
+      <div class="card card-sm p-0 col">
+        <div class="card-body">
+          <div id="toggle-new-album-form" class="collapse show col-12 album-track" role="tabpanel">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <div class="col-12">
+                  <%= render(partial: 'yams_core/album/albums/form', locals: { album: YamsCore::Album.new }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul id="album-management-dashboard-with-dropzone" class="striped-list list-group list-group-flush">
+          <!-- Target for dynamic CREATE - new album from remote controller-->
+          <div id="target-for-album-create-insertion-point"></div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render partial: 'yams_core/album/track_selection_form', locals: { header: t('.track_selection_form') } %>

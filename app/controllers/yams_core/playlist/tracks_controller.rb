@@ -2,9 +2,11 @@
 
 module YamsCore
 
-  # TODO - think this is more or less same as album_track -> TrackSelectionsController - stick to a naming convention and look at possible concern
+  # TODO - think this is more or less same as album -> TrackController - stick to a naming convention and look at possible concern
   #
   class Playlist::TracksController < ApplicationController
+
+    before_action :authenticate_user!
 
     def create
 
@@ -34,7 +36,7 @@ module YamsCore
       # Re-enable Track for selection
       @track_presenter =  TrackPresenter.new(playlist_track.track, view_context)
 
-      @playlist_track_row_id = @track_presenter.sortable_id
+      @track_row_id = @track_presenter.sortable_id
 
       unless playlist_track.destroy
         flash[:error] = 'Sorry we failed to remove Track from Playlist'

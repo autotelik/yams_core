@@ -21,6 +21,7 @@
       </div>
 
       <div class="card-header" ondrop="return false;">
+        <!-- DROP INSERTION POINT - ID given by : data-playlist-id -->
         <ul id="playlist-track-drop-zone-<%= playlist.id %>" data-playlist-id="<%= playlist.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
           <h6 class="text-white"><%= t('global.drop_tracks') %></h6>
         </ul>

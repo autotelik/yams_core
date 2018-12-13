@@ -15,5 +15,8 @@ module YamsCore
 
     validates :album, :track, presence: true
     validates :track, uniqueness: { scope: :album, message: ' is already present in that Album' }
+
+    delegate :artist, :artist_name, :cover_image, :display_duration, :title, to: :track
+
   end
 end

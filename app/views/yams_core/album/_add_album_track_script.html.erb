@@ -1,0 +1,47 @@
+<% content_for :body_extension do %>
+
+  <script>
+      function allowDrop(ev) {
+          ev.preventDefault();
+      }
+
+      function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev, album) {
+
+          if (ev.stopPropagation) {
+              ev.stopPropagation(); // Stops some browsers from redirecting.
+          }
+
+          ev.preventDefault();
+
+          var track = document.getElementById(ev.dataTransfer.getData('Text'));
+
+          // Hide whole Track source row (track details plus any other buttons - edit, delete etc)
+          track.parentNode.remove();
+
+          // Wrap button in li so tracks insert vertically
+          var wrapper = document.createElement('li');
+
+          // Disallow dropping onto these new items., we want it to be elem with the album id
+          wrapper.setAttribute("ondrop", "return false;");
+
+          track.parentNode.insertBefore(wrapper, track);
+
+          wrapper.appendChild(track);
+
+          var rails_album = album.getAttribute("data-album-id");
+          var rails_track = track.getAttribute("data-track-id");
+
+          $.ajax({
+              url: '<%= url_for(album_tracks_path) %>',
+              type: "POST",
+              dataType: "script",
+              data: { album_track: { id: rails_album, track_id: rails_track } }
+          })
+      }
+  </script>
+
+<% end %>

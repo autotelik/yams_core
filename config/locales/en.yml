@@ -1,9 +1,46 @@
 ---
 en:
+  global:
+    about: About
+    actions: Actions
+    add_album: Add Album
+    add_playlist: Add Playlist
+    albums: Albums
+    artist: Artist
+    artists: Artists
+    delete_confirm: Sure you want to permanently Delete?
+    drop_tracks: Drag and drop tracks here
+    edit: Edit
+    home: YAMS
+    manage_albums: Manage Albums
+    manage_playlists: Manage Playlists
+    permissions: Permissions
+    playlists: Playlists
+    profile: Profile
+    radio: Radio
+    sign_out: Sign out
+    tags: Tags
+    tracks: Tracks
+    upload: Upload
   yams_core:
     admin: Admin
     album_tracks:
       remove: Remove Track from Album ?
+    album:
+      albums:
+        new:
+          add_album: Add new Album
+          create: Create Album
+          track_selection_form: Add Album
+        edit:
+          header: Album Details
+          track_selection_form: Manage Album
+      management:
+        index:
+          track_selection_form: Manage Albums
+      track_selection_form:
+        add_album:  Add new Album
+        create: Create Album
     albums:
       edit:
         card_header: Edit Album
@@ -15,6 +52,7 @@ en:
         submit: Create album
       new:
         submit: Create album
+        track_selection_form: Add Track
       show_album:
         delete_album: Delete album
     contact:
@@ -58,7 +96,10 @@ en:
     global:
       about: About
       actions: Actions
+      add_album: Add Album
+      add_playlist: Add Playlist
       albums: Albums
+      artist: Artist
       artists: Artists
       delete_confirm: Sure you want to permanently Delete?
       drop_tracks: Drag and drop tracks here
@@ -81,6 +122,12 @@ en:
             submit: Update Playlist
           index:
             submit: Create
+          new:
+            submit: Create
+            track_selection_form: Add Playlist
+        new:
+          create: New Playlist
+          track_selection_form: Add Playlist
         track_selection:
           add: Add Track
       index:

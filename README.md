@@ -19,7 +19,7 @@ Then mount the engine to a location of your choice in your app's `config/routes.
    mount YamsCore::Engine, at: "/"
 ```
 
-Copy over relavent files
+Copy over relevant files
  
 ```sh
 bin/rails yams_core:install:migrations

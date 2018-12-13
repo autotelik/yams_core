@@ -1,0 +1,8 @@
+<% content_for :album_column do %>
+  <!-- ALBUMS -->
+  <div class="album-track-manager-dropzone m-0 p-0">
+    <%= render partial: 'dashboard_with_dropzone', locals: { albums: @albums } %>
+  </div>
+<% end %>
+
+<%= render partial: 'yams_core/album/track_selection_form', locals: { header: t('.track_selection_form') } %>

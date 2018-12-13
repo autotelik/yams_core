@@ -1,0 +1,43 @@
+<% content_for :album_column do %> <!-- ALBUM COLUMN -->
+
+  <div class="media align-items-center">
+    <div class="accordion-item album-track col-12">
+      <div class="card card-sm col p-0">
+        <%= bootstrap_card_header( t('.header')) %>
+      </div>
+
+      <div class="card card-sm p-0 col">
+        <div class="card-body">
+          <div id="toggle-new-album-form" class="collapse show col-12 album-track" role="tabpanel">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <div class="col-12">
+                  <%= render(partial: 'yams_core/album/albums/form', locals: { album: @album }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-header" ondrop="return false;">
+          <ul id="album-track-drop-zone-<%= @album.id %>" data-album-id="<%= @album.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+            <h6 class="text-white"><%= t('global.drop_tracks') %></h6>
+          </ul>
+        </div>
+
+        <!-- ALBUM TRACKS -->
+        <div class="card-body">
+          <div id="album-track-manager-<%= "#{@album.id}" %>" class="collapse show col-12 album-track" role="tabpanel">
+            <div class="show-track-album-dropzone">
+              <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: @album,  sortable: @album.album_tracks } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render partial: 'yams_core/album/track_selection_form', locals: { header: t('.track_selection_form') } %>
+

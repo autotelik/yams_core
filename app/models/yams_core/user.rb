@@ -6,13 +6,16 @@ module YamsCore
     has_many :albums, dependent: :destroy
     has_many :tracks, dependent: :destroy
 
-    enum role: %i[users vip admin]
-    after_initialize :set_default_role, if: :new_record?
-
+    # TODO - how to mimic and cache styles with ActiveStorage
     has_one_attached :avatar#, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: ':style/missing.png'
-    # TODO validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
     acts_as_taggable
+
+    enum role: %i[users vip admin]
+
+    after_initialize :set_default_role, if: :new_record?
+
+    # TODO validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
     def set_default_role
       self.role ||= :users

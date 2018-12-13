@@ -18,7 +18,7 @@ module YamsCore
 
     acts_as_taggable
 
-    after_create :after_create_hook
+    after_create :assign_mp3_properties
 
     after_save :after_save_hook
 
@@ -51,8 +51,12 @@ module YamsCore
       track_cover.image
     end
 
-    def artist
+    def artist_name
       user.try(:name)
+    end
+
+    def artist
+      user
     end
 
     def duration
@@ -78,10 +82,6 @@ module YamsCore
         Rails.logger.error("UNHANDLED - MP3 properties not updated #{x.message}")
       end
 
-    end
-
-    def after_create_hook
-      assign_mp3_properties
     end
 
     def after_save_hook

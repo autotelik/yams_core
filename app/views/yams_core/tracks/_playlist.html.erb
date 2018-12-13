@@ -1,25 +1,3 @@
 <% tracks.each_with_index do |track, index| %>
-
-  <% presenter = YamsCore::TrackPresenter.new(track, self) %>
-
-  <!-- ID format important xxxxxx-index - cos JS needs to be able to grab index -->
-  <li id="track-<%= index %>">
-    <div class="col-2">
-      <%# TODO need to sort out variants e.g - track.cover_image.variant(resize: '120x120')) %>
-      <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track.cover_image, only_path: true), class: "avatar rounded avatar-lg") %>
-    </div>
-    <div class="col-2">
-      <div class="datashift-audio-track-details">
-        <%= link_to(track.artist, user_path(track.user), class: "datashift-audio-full-name") %>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="datashift-audio-track-details">
-        <%= link_to(track.title, track_path(track), class: "datashift-audio-track-title") %>
-      </div>
-    </div>
-    <div class="col-1 p-0 m-0">
-      <div class="datashift-audio-duration pull-right"><%= track.display_duration %></div>
-    </div>
-  </li>
+  <%= render parial: 'yams_core/shared/single_track_for_player', locals: { track: track } %>
 <% end %>

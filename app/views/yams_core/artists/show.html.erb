@@ -1,0 +1,35 @@
+<div class="media row">
+
+  <div class="accordion-item playlist-track col-4">
+    <div class="card card-sm col p-0">
+
+      <div class="card-header">
+        <div class="row">
+          <div class="col-3">
+            <%= image_tag(main_app.rails_blob_url(@artist.avatar), class: 'img-fluid rounded') %>
+          </div>
+          <div class="col-7 pt-3">
+            <h5 class="align-middle"><%= @artist.name %></h5>
+          </div>
+          <% if current_user == @artist %>
+            <div class="col-2 float-right align-middle text-center">
+              <%= link_to icon_tag('icon-pencil'), edit_user_registration_path, class: 'icon_tag' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% datashift_audio_player_in_navbar(init_url: "#{player_init_url}.json", load_url: "#{artist_url(@artist)}.json") %>
+    </div>
+  </div>
+
+  <!-- JS insertion point, for rendering track listing of currently selected Artist -->
+  <div id="datashift-audio-playlist" class="col-8"></div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        datashift_audio_engine.settings.autoplay = false;
+    });
+</script>

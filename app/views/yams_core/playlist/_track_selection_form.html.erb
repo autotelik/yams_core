@@ -1,0 +1,44 @@
+<%= render partial: 'yams_core/playlist/add_drag_drop_track_script' %>
+
+<div class="media align-items-center">
+
+  <div class="accordion-item playlist-track col-12">
+    <div class="card card-sm col p-0">
+      <%= bootstrap_card_header( header ) %>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+
+        <div ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+        <!-- TRACKS COLUMN -->
+        <div class="col-5">
+          <div class="media align-items-center">
+            <div class="accordion-item playlist-track col-12">
+              <div class="card card-sm col p-0">
+                <%= bootstrap_card_header( t(:tracks, scope: :global)) %>
+              </div>
+
+              <div class="card card-sm p-0 col">
+                <div class="card-body drag show-track-playlist-dropzone">
+                  <div id="target-for-track_removal-reinsertion"></div>   <!-- INSERTION TARGET -->
+                  <% @tracks.each do |t| %>
+                    <%= render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLAYLIST COLUMN -->
+        <div class="col-7">
+          <%= yield :playlist_column %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

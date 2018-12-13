@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
+  s.test_files = Dir["spec/**/*"]
+
   s.add_dependency "rails", "~> 5.2.1"
 
   s.add_dependency 'coffee-rails', '~> 4.2'

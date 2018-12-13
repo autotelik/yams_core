@@ -5,12 +5,13 @@ module YamsCore
 
     belongs_to :user
 
-    has_many :album_tracks, class_name: 'AlbumTrack'
+    has_many :album_tracks, class_name: 'AlbumTrack', dependent: :destroy
     has_many :tracks, through: :album_tracks, class_name: 'Track'
 
     has_one :cover, as: :owner, dependent: :destroy
     accepts_nested_attributes_for :cover, allow_destroy: true
 
+    # TODO extract to a concern with Track, Playlist etc as contract_state : %i[draft private published etc]
     enum published_state: %i[draft published]
 
     acts_as_taggable
@@ -23,7 +24,7 @@ module YamsCore
 
     scope :without_track, -> (track, user) { Album.for_user(user).where.not(id: AlbumTrack.where('track_id = ?', track.id).select(:album_id)) }
 
-    #after_save :after_save_hook
+    include YamsCore::AvailableFor
 
     searchkick callbacks: :queue
 

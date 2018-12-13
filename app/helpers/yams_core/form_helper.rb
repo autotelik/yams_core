@@ -75,10 +75,10 @@ module YamsCore
 
     def avatar_image_tag(user)
       if user.avatar.try(:attached?)
-        image_tag(polymorphic_url(current_user.avatar), class: 'avatar avatar-lg')
+        image_tag(rails_blob_url(user.avatar), class: 'avatar avatar-lg')
       else
         default = DefaultCover.for_user
-        image_tag(polymorphic_url(default.image), class: 'avatar avatar-lg') if default.try(:image)
+        image_tag(rails_blob_url(default.image), class: 'avatar avatar-lg') if default.try(:image)
       end
     end
 

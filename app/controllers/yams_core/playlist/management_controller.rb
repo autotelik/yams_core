@@ -3,6 +3,8 @@
 module YamsCore
   class Playlist::ManagementController < ApplicationController
 
+    before_action :authenticate_user!
+
     def index
       @playlists = Playlist.for_user(current_user)
 

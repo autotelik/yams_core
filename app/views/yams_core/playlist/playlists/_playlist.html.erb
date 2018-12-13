@@ -13,7 +13,7 @@
     <div class="collapse show col-12 playlist-track" role="tabpanel">
       <div class="datashift-audio-playlist-content p-1 col-12 w-100">
 
-        <ol id="datashift-audio-playlist" class="datashift-audio-playlist p-1">
+        <ul id="datashift-audio-playlist" class="datashift-audio-playlist p-1">
 
           <% playlist.playlist_tracks.order([:sort]).each_with_index do |play_track, index| %>
 
@@ -23,7 +23,7 @@
               <div class="col-1"><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></div>
               <div class="col-3">
                 <div class="datashift-audio-track-details">
-                  <%= link_to(play_track.track.artist, user_path(play_track.track.user), class: "datashift-audio-full-name") %>
+                  <%= link_to(play_track.track.artist_name, artist_path(play_track.track.user), class: "datashift-audio-full-name") %>
                 </div>
               </div>
               <div class="col-5">
@@ -35,7 +35,7 @@
             </li>
 
           <% end %>
-        </ol>
+        </ul>
 
       </div>
     </div>
