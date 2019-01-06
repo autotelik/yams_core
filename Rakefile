@@ -14,8 +14,6 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-APP_RAKEFILE = File.expand_path("test/dummy/Rakefile", __dir__)
-
 require 'bundler/gem_tasks'
 
 require 'rspec/core'

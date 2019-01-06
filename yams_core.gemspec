@@ -36,8 +36,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'bourbon'
 
- # s.add_dependency 'datashift_audio_engine'#, git: 'https://github.com/autotelik/datashift_audio_engine.git'
-
   s.add_dependency 'devise'
   s.add_dependency 'devise-jwt', '~> 0.5.7'          # Tokens
   s.add_dependency 'devise_invitable'                # An invitation strategy for devise
@@ -69,17 +67,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
 
-  s.add_development_dependency 'factory_bot_rails'
-  s.add_development_dependency 'faker'
-
   s.add_development_dependency 'i18n-tasks', '~> 0.9.24'
   s.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
 
   s.add_development_dependency 'rails_layout'
   s.add_development_dependency 'rubocop', '~> 0.57.2'
-  s.add_development_dependency 'rspec-rails'
 
-  s.add_development_dependency 'spring-commands-rspec'
   s.add_development_dependency 'spring'
   s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
   s.add_development_dependency 'web-console', '>= 3.3.0'

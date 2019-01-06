@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# This migration comes from yams_core (originally 20180302185927)
 
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change

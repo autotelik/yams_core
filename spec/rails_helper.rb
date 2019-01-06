@@ -6,7 +6,6 @@ require File.expand_path('../dummy/config/environment.rb', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -22,11 +21,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-
-# Checks for pending migrations and applies them before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+Dir[File.expand_path("../support/**/*.rb", __FILE__)].each {|f| require f}
 
 Capybara.javascript_driver = :webkit
 
@@ -39,6 +34,11 @@ Capybara::Webkit.configure do |config|
   # Timeout if requests take longer than 5 seconds
   config.timeout = 5
 end
+
+Searchkick.disable_callbacks
+
+FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+FactoryBot.find_definitions
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
