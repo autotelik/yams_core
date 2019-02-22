@@ -12,9 +12,12 @@ module YamsCore
       desc :up, 'Build development cluster : Sidekiq, DB, ELK'
 
       method_option :init, type: :boolean, default: false
+      method_option :sidekiq, type: :boolean, default: false, desc: 'Also spin up Sidekiq container'
 
       def up
-        docker_up('sidekiq')
+        %w{db elasticsearch kibana redis}.each {|c| docker_up(c) }
+
+        docker_up('sidekiq') if(options[:sidekiq])
 
         if(options[:init])
           docker_exec(cmd: 'bundle exec rake db:create')

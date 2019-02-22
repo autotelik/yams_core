@@ -1,6 +1,8 @@
 module YamsCore
   module FormHelper
 
+    include Rails.application.routes.url_helpers
+
     # Create an icon tag with text, placed either before or after the icon
     def icon_tag(icon, text: nil, text_front: true)
       icon = "<i class=\"icon_tag #{icon}\"></i>"
@@ -73,12 +75,13 @@ module YamsCore
       content_tag(:div, content, class: 'audio-upload')
     end
 
-    def avatar_image_tag(user)
+    def avatar_image_tag(user, html_options: { class: 'avatar avatar-lg' })
       if user.avatar.try(:attached?)
-        image_tag(rails_blob_url(user.avatar), class: 'avatar avatar-lg')
+        image_tag(rails_blob_url(user.avatar), html_options)
       else
         default = DefaultCover.for_user
-        image_tag(rails_blob_url(default.image), class: 'avatar avatar-lg') if default.try(:image)
+        Rails.logger.error('Default Cover missing for User') unless default
+        image_tag(rails_blob_url(default.image), html_options) if default.try(:image)
       end
     end
 

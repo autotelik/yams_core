@@ -26,8 +26,9 @@ module YamsCore
     end
 
     def cover_image_tag(size: :thumb, css: 'avatar img-fluid rounded')
-      return unless respond_to?(:cover_image)   # TODO  reorganise 'cover' concepts into concern to avoid this check
+      return unless respond_to?(:cover_image)
       cover = cover_image(size: size)
+      return unless cover
       view.image_tag(Rails.application.routes.url_helpers.rails_blob_path(cover, only_path: true), class: css)
     end
 

@@ -18,6 +18,7 @@ module YamsCore
       availables.where(type: self, mode: YamsCore::Available.concepts[mode]).exists?
     end
 
+    # Make the inclusign model availble for supplied mode. Saves model first if required for has_many association
     def make_available_for(mode)
       save! if new_record?
       availables.create!(mode: YamsCore::Available.concepts[mode])

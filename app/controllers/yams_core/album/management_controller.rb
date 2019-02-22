@@ -7,7 +7,6 @@ module YamsCore
 
     def index
       @albums = Album.for_user(current_user)
-
       @tracks = Track.for_user(current_user).page(params[:page]).per(30)
     end
 

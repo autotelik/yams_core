@@ -22,19 +22,41 @@ en:
     tags: Tags
     tracks: Tracks
     upload: Upload
+  devise:
+    confirmations:
+      new:
+        panel_title: Resend confirmation instructions
+        submit: Resend confirmation
+    passwords:
+      new:
+        panel_title: Forgot your password?
+        submit: Send me reset instructions
+    registrations:
+      form:
+        avatar_heading: Avatar
+        bio: Bio
+        cancel_button: Cancel Account
+        cancel_confirm: Are you sure?
+        firstname: Firstname
+        lastname: Lastname
+        city: City
+        country: Country
+        panel_title: Change profile
+        submit: Save changes
+        choose_avatar: Choose Image
+      new:
+        panel_title: Sign up to access YAMS
+        submit: Create account
+    sessions:
+      new:
+        panel_title: Sign in
+        submit: Login
   yams_core:
     admin: Admin
     album_tracks:
       remove: Remove Track from Album ?
     album:
       albums:
-        new:
-          add_album: Add new Album
-          create: Create Album
-          track_selection_form: Add Album
-        edit:
-          header: Album Details
-          track_selection_form: Manage Album
       management:
         index:
           track_selection_form: Manage Albums
@@ -46,6 +68,8 @@ en:
         card_header: Edit Album
         choose_cover: Choose Cover Image
         submit: Update
+        header: Album Details
+        track_selection_form: Manage Album
       form:
         submit: Update
       index:
@@ -53,6 +77,9 @@ en:
       new:
         submit: Create album
         track_selection_form: Add Track
+        add_album: Add new Album
+        create: Create Album
+        track_selection_form: Add Album
       show_album:
         delete_album: Delete album
     contact:
@@ -66,31 +93,7 @@ en:
         <hr class="spacer" />
       link: Contact
       title: "Contact %{instance}"
-    devise:
-      confirmations:
-        new:
-          panel_title: Resend confirmation instructions
-          submit: Resend confirmation
-      passwords:
-        new:
-          panel_title: Forgot your password?
-          submit: Send me reset instructions
-      registrations:
-        form:
-          avatar_heading: Avatar
-          bio: Bio
-          cancel_button: Cancel Account
-          cancel_confirm: Are you sure?
-          panel_title: Edit your profile
-          submit: Save changes
-          choose_avatar: Choose Image
-        new:
-          panel_title: Sign up to access YAMS
-          submit: Create account
-      sessions:
-        new:
-          panel_title: Sign in
-          submit: Login
+
     display_name: Display Name"
     email: Email
     global:
@@ -139,8 +142,12 @@ en:
     shared:
       album_selection:
           add: Add Track to Album
+      errors:
+        you_have: You have
       choose_cover:
-        choose_cover: Choose Image
+        cover: Cover
+        choose_cover: Cover
+        choose_image_file: Choose Image
       track_selection:
         add: Add to Album
     sign_in: Login
@@ -166,6 +173,11 @@ en:
         cover: Cover Image
         submit: Update
       new:
+        accept_audio_file: Please choose an audio file - MP3s are accepted
+        available_for: Available for
+        choose_audio_file: Choose File
+        choose_cover: Choose Image
+        cover: Cover Image
         card-header: Upload new Track
         submit: Upload
       permissions:

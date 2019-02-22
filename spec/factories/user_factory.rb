@@ -5,7 +5,7 @@ FactoryBot.define do
     confirmed_at { Time.now }
     name  { Faker::Artist.name }
     email { Faker::Internet.unique.email }
-    password { 'please123' }
+    password { 'rspec123' }
 
     trait :with_avatar do
       avatar { fixture_file_upload(fixture_file('test_image.jpg'), 'image/jpeg') }

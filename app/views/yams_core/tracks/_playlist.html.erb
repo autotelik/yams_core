@@ -1,3 +1,3 @@
 <% tracks.each_with_index do |track, index| %>
-  <%= render parial: 'yams_core/shared/single_track_for_player', locals: { track: track } %>
+  <%= render partial: 'yams_core/shared/single_track_for_player.html', locals: { track: track, index: index } %>
 <% end %>

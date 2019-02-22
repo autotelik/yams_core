@@ -34,8 +34,26 @@ module YamsCore
     def bootstrap_card_header(heading)
       html = <<-EOS
     <div class="card-header">
-      <div>
-       <h5 class=".text-light">#{heading}</h5>
+      <div class="row">
+        <div class="col-10">
+         <h5 class=".text-light">#{heading}</h5>
+        </div>
+      </div>
+    </div>
+      EOS
+      raw(html)
+    end
+
+    def bootstrap_card_header_edit(heading, edit_path)
+      html = <<-EOS
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10">
+         <h5 class=".text-light">#{heading}</h5>
+        </div>
+        <div class="col-2">
+#{link_to icon_tag('icon-pencil', text: 'Edit', text_front: false), edit_path, class: 'icon_tag float-right'}
+        </div>
       </div>
     </div>
       EOS

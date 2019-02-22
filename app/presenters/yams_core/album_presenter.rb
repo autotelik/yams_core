@@ -32,7 +32,7 @@ module YamsCore
 
     def cover_image(size: :thumb)
       cover = self.cover.try(:attached?) ? cover : DefaultCover.for_album
-      cover.image
+      cover.try(:image)
     end
 
     alias_method :album, :model

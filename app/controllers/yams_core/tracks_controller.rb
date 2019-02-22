@@ -62,7 +62,6 @@ module YamsCore
 
       respond_to do |format|
         if @track.save
-
           available_for_params[:availables].keys.each { |mode| @track.make_available_for(mode) } if available_for_params[:availables].present?
 
           format.html { redirect_to @track, notice: 'Track was successfully created.' }

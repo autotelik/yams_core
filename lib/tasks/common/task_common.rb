@@ -3,7 +3,9 @@
 module TaskCommon
 
   def docker_up(container)
-    cli = "docker-compose -f docker-compose.yml up --no-recreate -d #{container}"
+    file = File.join(::YamsCore.root_path, 'docker-compose.yml')
+
+    cli = "docker-compose -f #{file} up --no-recreate -d #{container}"
     puts "Running": cli
     system cli
   end

@@ -1,8 +1,8 @@
 <% remote = local_assigns[:remote].present? ? local_assigns[:remote] : true %>
 
-<%= form_with(model: album, remote: remote) do |f| %>
+<%= form_for(@album, url: yams_core.albums_path, method: :post, remote: remote) do |f| %>
 
-  <%= render 'yams_core/shared/errors', model: album %>
+  <%= render 'yams_core/shared/errors', model: @album %>
 
   <div class="row">
     <div class="col-10">

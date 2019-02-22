@@ -2,7 +2,7 @@
 
 module YamsCore
 
-  class Album::AlbumsController < ApplicationController
+  class AlbumsController < ApplicationController
 
     before_action :set_album, only: %i[show edit destroy]
 
@@ -15,7 +15,7 @@ module YamsCore
     layout 'application_with_player', only: %i[index show]
 
     def index
-
+ 
       # Technique to generate same list for a certain time - driven by the cookie expire time
       # seed_val = Track.connection.quote(cookies[:rand_seed])
       seed_val = rand
@@ -58,7 +58,6 @@ module YamsCore
 
       respond_to do |format|
         if album.save
-
           @album = AlbumPresenter.new(album, view_context)
 
           format.html { redirect_to album, notice: 'Album was successfully created.' }

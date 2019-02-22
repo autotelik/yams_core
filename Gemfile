@@ -31,5 +31,5 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.4'
 end

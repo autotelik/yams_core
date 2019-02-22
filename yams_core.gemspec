@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Yet Another Music Service - Open Source Rails engine for creating music sharing sites, band pages or record shops."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "spec/factories/**/*", 'docker-compose.yml', 'MIT-LICENSE', "Rakefile", "README.md"]
 
   s.test_files = Dir["spec/**/*"]
 
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'loofah', ">= 2.2.3"
 
-  s.add_dependency 'nokogiri', '1.8.2'
+  s.add_dependency "nokogiri", ">= 1.8.5"
 
   s.add_dependency 'pg', '~> 0.18'
   s.add_dependency 'pundit'

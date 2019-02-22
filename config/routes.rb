@@ -12,7 +12,7 @@ YamsCore::Engine.routes.draw do
 
   resources :artists, only: [:show]
 
-  resources :albums, module: 'album'
+  resources :albums
 
   namespace :album do
     resources :management, only: [:index]
@@ -38,6 +38,7 @@ YamsCore::Engine.routes.draw do
   resources :tracks
 
   mount DatashiftAudioEngine::Engine, at: "/audio"
+  mount YamsEvents::Engine, at: "/yams_events"
 
   post 'player_init', to: 'player_init#create'
 

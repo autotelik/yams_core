@@ -37,8 +37,8 @@ end
 
 Searchkick.disable_callbacks
 
-FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
-FactoryBot.find_definitions
+#FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+#FactoryBot.find_definitions
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

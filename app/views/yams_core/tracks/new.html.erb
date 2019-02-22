@@ -1,8 +1,8 @@
-<%= form_with model: @track, local: true do |f| %>
+<%= form_with model: [@track], url: yams_core.tracks_path, method: :post, local: true do |f| %>
+
 
   <div class="row">
     <div class="col-7 offset-1">
-      <span class="anchor" id="formLogin"></span>
 
       <div class="card card-outline-secondary">
 
@@ -28,7 +28,7 @@
             <% if @track.audio.try(:original_filename) %>
               <p>Replace : <%= @track.audio.original_filename %></p>
             <% end %>
-            <%= custom_file_field(f, :audio, t('.choose_audio_file'), additional: t('.accept_audio_file')) %>
+            <%= custom_file_field(f, :audio, t('.choose_audio_file'), options: { multiple: true, direct_upload: true }, additional: t('.accept_audio_file')) %>
           </div>
 
           <%= render partial: 'yams_core/shared/choose_cover', locals: { form: f, model: @track } %>

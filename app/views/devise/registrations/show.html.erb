@@ -1,31 +1,30 @@
-<div class="row flex-md-row card card-sm">
-  <div class="col card-body bg-secondary">
+<div class="row">
+  <div class="col-8 offset-1">
+    <div class="card card-sm p-0 col">
 
-    <div class="row">
-      <div class="col-2 text-center">
-        <div>
-          <%= avatar_image_tag(@user) %>
-        </div>
-      </div>
-      <div class="col-2 text-center">
-        <h3 class=".text-light"> <%= @user.name %></h3>
-      </div>
-      <div class="col-4"></div>
-      <div class="col-4 float-right text-center">
-        <h5 class=".text-light"><%= @user.email %></h5>
-      </div>
-    </div>
+      <% if current_user == @user %>
+        <%= bootstrap_card_header_edit( t(".card-header"), yams_core.edit_user_registration_path ) %>
+      <% else %>
+        <%= bootstrap_card_header( t(".card-header") ) %>
+      <% end %>
 
-    <% if current_user == @user %>
-      <div class="row">
-        <div class="col-8"></div>
-        <div class="col float-right text-center">
-          <div>
-            <%= link_to icon_tag('icon-pencil', text: 'Edit', text_front: false), edit_user_registration_path, class: 'icon_tag' %>
+      <div class="card-body">
+        <div class="row d-flex flex-wrap tex align-items-center">
+          <div class="col-2 text-center">
+            <%= avatar_image_tag(@user) %>
+          </div>
+
+          <div class="col-4">
+            <h3 class=".text-light"> <%= @user.name %></h3>
+            <div><h5 class=".text-light"><%= @user.email %></h5></div>
+            <div><h5 class=".text-light"><%= @user.permalink_url %></h5></div>
+            <div><h6 class=".text-light"><%= @user.city %></h6></div>
+            <div><h6 class=".text-light"><%= @user.country %></h6></div>
+            <div class=".text-light"><%= @user.bio %></div>
           </div>
         </div>
       </div>
-    <% end %>
 
+    </div>
   </div>
 </div>

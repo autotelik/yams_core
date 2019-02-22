@@ -54,16 +54,16 @@ ActiveRecord::Schema.define(version: 2019_01_06_124275) do
     t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
-  create_table "announcements", force: :cascade do |t|
+  create_table "contractableResources", force: :cascade do |t|
     t.integer "category"
     t.integer "status"
     t.string "related_type"
     t.integer "related_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category"], name: "index_announcements_on_category"
-    t.index ["related_type", "related_id"], name: "index_announcements_on_related_type_and_related_id"
-    t.index ["status"], name: "index_announcements_on_status"
+    t.index ["category"], name: "index_contractableResources_on_category"
+    t.index ["related_type", "related_id"], name: "index_contractableResources_on_related_type_and_related_id"
+    t.index ["status"], name: "index_contractableResources_on_status"
   end
 
   create_table "availables", force: :cascade do |t|

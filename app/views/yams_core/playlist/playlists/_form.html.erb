@@ -1,6 +1,6 @@
 <% remote = local_assigns[:remote].present? ? local_assigns[:remote] : true %>
 
-<%= form_with(model: playlist, remote: remote) do |f| %>
+<%= form_with(model: playlist, url: yams_core.playlists_path, method: :post, remote: remote) do |f| %>
 
   <%= render 'yams_core/shared/errors', model: playlist %>
 
