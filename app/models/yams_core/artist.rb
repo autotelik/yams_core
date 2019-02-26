@@ -2,7 +2,5 @@
 
 module YamsCore
   class Artist < User
-
-    artist_tracks
   end
 end
