@@ -12,7 +12,7 @@ YamsCore::Engine.routes.draw do
 
   resources :artists, only: [:show]
 
-  resources :albums
+  resources :albums, module: 'album'
 
   namespace :album do
     resources :management, only: [:index]
@@ -33,15 +33,21 @@ YamsCore::Engine.routes.draw do
   resources :id3_genres
   resources :licenses
 
+  resource :audio_player_init, only: [:create], defaults: { :format => :json }, controller: 'audio_player_init'
+
+  post 'player_status_callback', to: 'player_status_callback#create'
+
   resource :searches, only: [:show]
+
+  namespace :track do
+    resources :albums, only: [:create]
+
+    resource :bulk_uploads, only: [:new, :create]
+    resources :bulk_upload_templates, only: [:show]
+  end
 
   resources :tracks
 
   mount DatashiftAudioEngine::Engine, at: "/audio"
-  mount YamsEvents::Engine, at: "/yams_events"
-
-  post 'player_init', to: 'player_init#create'
-
-  post 'player_status_callback', to: 'player_status_callback#create'
 
 end

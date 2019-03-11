@@ -1,4 +1,4 @@
-<%= form_with model: @track, local: true do |f| %>
+<%= form_with model: @track.model, url: polymorphic_path([yams_core, @track.model]) , local: true do |f| %>
 
   <div class="row">
     <div class="col-6 offset-1">
@@ -22,7 +22,7 @@
             <%= f.text_field :description, :autofocus => true, class: 'form-control' %>
           </div>
 
-          <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track } %>
+          <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track.model } %>
 
           <div class="form-group">
             <% if @track.audio.try(:filename) %>
@@ -55,20 +55,22 @@
             <%= bootstrap_card_header( t(:albums, scope: :global)) %>
 
             <div class="card-body">
-
               <div class="row">
                 <div class="col-12">
                   <%= render partial: 'yams_core/shared/album_selection' %>
                 </div>
               </div>
 
-              <hr>
+              <hr class="m-3 pb-0">
 
+              <h5><%= t('.track_albums_list') %></h5> <ul>
               <% track.albums.each do |a|  %>
-                <div class="form-group">
-                  <%= link_to(a.title, edit_album_path(a)) %>
-                </div>
+                <li class="form-group">
+                  <%= link_to(a.title, yams_core.edit_album_path(a)) %>
+                </li>
               <% end %>
+              <li class="form-group" id="target-for-add-track-album-selection"></li>
+            </ul>
             </div>
           </div>
         </div>

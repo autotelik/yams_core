@@ -34,10 +34,13 @@ module YamsCore
     #
     def delete_icon(model, text: nil, html_options: {})
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: I18n.t(:delete_confirm, scope: :global) } }
+
+      path = polymorphic_path([view.yams_core, model])
+
       if text
-        view.link_to back_icon_tag('icon-trash', text: text), model, options.merge(html_options)
+        view.link_to back_icon_tag('icon-trash', text: text), path, options.merge(html_options)
       else
-        view.link_to icon_tag('icon-trash'), model, options.merge(html_options)
+        view.link_to icon_tag('icon-trash'), path, options.merge(html_options)
       end
     end
 
@@ -45,10 +48,13 @@ module YamsCore
     #
     def remove_icon(model, text: nil, confirm: I18n.t(:remove_confirm, scope: :global), html_options: {})
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
+
+      path = polymorphic_path([yams_core, model])
+
       if text
-        link_to back_icon_tag('icon-circle-with-cross', text: text), model, options.merge(html_options)
+        link_to back_icon_tag('icon-circle-with-cross', text: text), path, options.merge(html_options)
       else
-        link_to icon_tag('icon-circle-with-cross'), model, options.merge(html_options)
+        link_to icon_tag('icon-circle-with-cross'), path, options.merge(html_options)
       end
     end
 

@@ -21,7 +21,7 @@ module YamsCore
         <i class="icon-dots-three-horizontal"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
-        #{view.link_to back_icon_tag('icon-pencil', text: I18n.t(:edit, scope: :global)), edit_album_path(album), { id: "edit-icon-#{model.class}-#{model.id}", class: 'dropdown-item' }  unless except_list.include? :edit}
+        #{view.link_to back_icon_tag('icon-pencil', text: I18n.t(:edit, scope: :global)), view.yams_core.edit_album_path(album), { id: "edit-icon-#{model.class}-#{model.id}", class: 'dropdown-item' }  unless except_list.include? :edit}
         <div class="dropdown-divider"></div>
         #{delete_icon(model, text: 'Delete', html_options: { class: 'dropdown-item' }) unless except_list.include? :delete}
       </div>

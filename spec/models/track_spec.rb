@@ -9,6 +9,13 @@ RSpec.describe YamsCore::Track, type: :model do
     expect(create(:track, :with_audio)).to be_valid
   end
 
+  it 'stores an uploaded file as an activestoragte attachment (as audio)' do
+    track = create(:track, :with_audio_upload_fixture)
+    expect(track.audio).to be_a ActiveStorage::Attached::One
+    expect(track.audio.filename).to eq 'test.wav'
+    expect(track.audio.content_type).to eq 'audio/x-wav'
+  end
+
   it 'returns tracks not assigned to an Album' do
     tracks = create_list(:track, 5, :with_audio)
     YamsCore::AlbumTrack.create(track: tracks.first, album: album)

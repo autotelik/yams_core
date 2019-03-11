@@ -6,11 +6,18 @@
 
     <%= label_tag t('.available_for') %><br>
 
+    <% info = { 'free' => 'Available for listening, by any visitor, e.g on radio stream'} %>
+
     <% YamsCore::Available.concepts.keys.each do |c|  %>
       <div class="collection-check-box">
         <%= check_box_tag "availables[#{c}]", true, @track.available_for?(c) %>
-        <%= form.label c %>
+        <%= form.label c, 'data-toggle': "tooltip", 'data-placement': "right", title: info[c] %>
       </div>
     <% end %>
   </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

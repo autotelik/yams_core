@@ -37,6 +37,8 @@ end
 
 Searchkick.disable_callbacks
 
+ActiveJob::Base.queue_adapter = :test
+
 #FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
 #FactoryBot.find_definitions
 

@@ -19,7 +19,8 @@
         </div>
       </div>
 
-      <% datashift_audio_player_in_navbar(init_url: "#{player_init_url}.json", load_url: "#{artist_url(@artist)}.json") %>
+      <% datashift_audio_player_in_navbar(init_url: yams_core.audio_player_init_url(format: :json),
+                                          load_url: yams_core.artist_url(@artist, format: :json)) %>
     </div>
   </div>
 

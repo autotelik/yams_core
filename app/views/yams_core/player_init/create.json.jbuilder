@@ -28,6 +28,6 @@ end
 json.routes do
   json.save_interval DatashiftAudioEngine::Configuration.call.save_interval
 
-  json.save_url player_status_callback_url
+  json.save_url yams_core.player_status_callback_url
 end
 

@@ -8,6 +8,7 @@ en:
     albums: Albums
     artist: Artist
     artists: Artists
+    bulk_upload: Bulk upload
     delete_confirm: Sure you want to permanently Delete?
     drop_tracks: Drag and drop tracks here
     edit: Edit
@@ -37,6 +38,8 @@ en:
         bio: Bio
         cancel_button: Cancel Account
         cancel_confirm: Are you sure?
+        display_name: Display Name
+        email: Email
         firstname: Firstname
         lastname: Lastname
         city: City
@@ -44,6 +47,7 @@ en:
         panel_title: Change profile
         submit: Save changes
         choose_avatar: Choose Image
+        track_selection_form: Tracks
       new:
         panel_title: Sign up to access YAMS
         submit: Create account
@@ -57,12 +61,17 @@ en:
       remove: Remove Track from Album ?
     album:
       albums:
+        edit:
+          header: Albums
+          track_selection_form: Manage Album
+        form:
+          edit:
+            submit: Update Album
+        add_album:  Add new Album
+        create: Create Album
       management:
         index:
           track_selection_form: Manage Albums
-      track_selection_form:
-        add_album:  Add new Album
-        create: Create Album
     albums:
       edit:
         card_header: Edit Album
@@ -82,20 +91,6 @@ en:
         track_selection_form: Add Album
       show_album:
         delete_album: Delete album
-    contact:
-      link: Contact
-      body_html: |
-        <h2>Contact</h2>
-        <h3 id="collect">Find us on Github</h3>
-        <ul>
-          <li><a href="https://github.com/autotelik/yet_another_music_service/issues" class="btn btn-lg btn-success text-black" target="_blank">Please raise any issues @ YAMS on github</a></li>
-        </ul>
-        <hr class="spacer" />
-      link: Contact
-      title: "Contact %{instance}"
-
-    display_name: Display Name"
-    email: Email
     global:
       about: About
       actions: Actions
@@ -141,7 +136,7 @@ en:
     security_policy: Security Policy
     shared:
       album_selection:
-          add: Add Track to Album
+          add: Add Track
       errors:
         you_have: You have
       choose_cover:
@@ -155,6 +150,13 @@ en:
     sign_up: Register
     site_name: yams
     state: State
+    track:
+      bulk_uploads:
+        new:
+          card_header: Bulk Upload Tracks
+          choose_speadsheet: Select Spreadsheet
+          generate_template: Generate Template
+          submit: Upload
     tracks:
       create:
         form:
@@ -172,6 +174,7 @@ en:
         choose_cover: Choose Image
         cover: Cover Image
         submit: Update
+        track_albums_list: Present In
       new:
         accept_audio_file: Please choose an audio file - MP3s are accepted
         available_for: Available for

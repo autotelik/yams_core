@@ -36,7 +36,7 @@
           var rails_track = track.getAttribute("data-track-id");
 
           $.ajax({
-              url: '<%= url_for(playlist_tracks_path) %>',
+              url: '<%= url_for(yams_core.playlist_tracks_path) %>',
               type: "POST",
               dataType: "script",
               data: { playlist_track: { id: rails_playlist, track_id: rails_track } }

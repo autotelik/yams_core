@@ -6,7 +6,7 @@
     </div>
 
     <% if @playlists.present? %>
-      <%= datashift_audio_player_in_navbar(init_url: "#{player_init_url}.json", load_url: "#{playlist_url(@playlists.first)}.json") %>
+      <%= datashift_audio_player_in_navbar(init_url: yams_core.audio_player_init_url(format: :json), load_url: yams_core.playlist_url(@playlists.first, format: :json)) %>
     <% end %>
 
     <ul id="playlist-index" class="striped-list list-group list-group-flush">
@@ -24,12 +24,12 @@
                       <%= playlist.cover_image_tag %>
                     </div>
                     <div class="col">
-                      <%= link_to(playlist.name, "#{playlist_url(playlist)}.json", id: "select_playlist_row_#{playlist.id}") %>
+                      <%= link_to(playlist.name, yams_core.playlist_url(playlist, format: :json), id: "select_playlist_row_#{playlist.id}") %>
 
                       <script type="text/javascript" charset="utf-8">
                           $('#<%= "select_playlist_row_#{playlist.id}" %>').click(function (event) {
                               event.preventDefault(); // Prevent link from following its href
-                              datashift_audio_engine.load('<%= "#{playlist_url(playlist)}.json" %>');
+                              datashift_audio_engine.load('<%= yams_core.playlist_url(playlist, format: :json) %>');
                           });
                       </script>
 

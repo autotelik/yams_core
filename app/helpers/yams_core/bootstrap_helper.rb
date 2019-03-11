@@ -31,13 +31,14 @@ module YamsCore
       raw(html)
     end
 
-    def bootstrap_card_header(heading)
+    def bootstrap_card_header(heading, width: 10, &block)
       html = <<-EOS
     <div class="card-header">
       <div class="row">
-        <div class="col-10">
+        <div class="col-#{width}">
          <h5 class=".text-light">#{heading}</h5>
         </div>
+        #{capture(&block) if block_given?}
       </div>
     </div>
       EOS

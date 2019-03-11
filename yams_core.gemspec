@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = YamsCore::VERSION
   s.authors     = ["Tom Statter"]
   s.email       = ["tomstatter@autotelik.co.uk"]
-  s.homepage    = "http://www.yams_core.fm"
+  s.homepage    = "http://www.yams.fm"
   s.summary     = "Open Source Rails engine for sharing music."
   s.description = "Yet Another Music Service - Open Source Rails engine for creating music sharing sites, band pages or record shops."
   s.license     = "MIT"
@@ -72,8 +72,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rails_layout'
   s.add_development_dependency 'rubocop', '~> 0.57.2'
-
-  s.add_development_dependency 'spring'
-  s.add_development_dependency 'spring-watcher-listen', '~> 2.0.0'
   s.add_development_dependency 'web-console', '>= 3.3.0'
+
+  s.add_development_dependency "sqlite3", "~> 1.3.6"
+
 end

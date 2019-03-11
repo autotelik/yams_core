@@ -1,0 +1,5 @@
+$("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages') %>");
+
+<% if(@album_track.errors.blank?) %>
+  $('#target-for-add-track-album-selection').after("<li class=\"form-group\"><%= j link_to(@album_track.album.title, yams_core.edit_album_path(@album_track.album)) %></li>");
+<% end %>

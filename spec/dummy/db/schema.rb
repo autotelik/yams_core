@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_124275) do
+ActiveRecord::Schema.define(version: 2019_03_02_103434) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,18 +54,6 @@ ActiveRecord::Schema.define(version: 2019_01_06_124275) do
     t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
-  create_table "contractableResources", force: :cascade do |t|
-    t.integer "category"
-    t.integer "status"
-    t.string "related_type"
-    t.integer "related_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category"], name: "index_contractableResources_on_category"
-    t.index ["related_type", "related_id"], name: "index_contractableResources_on_related_type_and_related_id"
-    t.index ["status"], name: "index_contractableResources_on_status"
-  end
-
   create_table "availables", force: :cascade do |t|
     t.string "type_type"
     t.integer "type_id"
@@ -73,7 +61,25 @@ ActiveRecord::Schema.define(version: 2019_01_06_124275) do
     t.datetime "on"
     t.datetime "expires"
     t.index ["mode"], name: "index_availables_on_mode"
+    t.index ["type_id", "type_type", "mode"], name: "index_availables_on_type_id_and_type_type_and_mode", unique: true
     t.index ["type_type", "type_id"], name: "index_availables_on_type_type_and_type_id"
+  end
+
+  create_table "bulk_uploads", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bulk_uploads_on_user_id"
+  end
+
+  create_table "contractable_resources", force: :cascade do |t|
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.integer "spree_product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_type", "resource_id"], name: "index_contractable_resources_on_resource_type_and_resource_id"
+    t.index ["spree_product_id"], name: "index_contractable_resources_on_spree_product_id"
   end
 
   create_table "covers", force: :cascade do |t|
@@ -88,24 +94,6 @@ ActiveRecord::Schema.define(version: 2019_01_06_124275) do
     t.integer "kind", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "event_store_events", id: :string, limit: 36, force: :cascade do |t|
-    t.string "event_type", null: false
-    t.text "metadata"
-    t.text "data", null: false
-    t.datetime "created_at", null: false
-    t.index ["created_at"], name: "index_event_store_events_on_created_at"
-  end
-
-  create_table "event_store_events_in_streams", force: :cascade do |t|
-    t.string "stream", null: false
-    t.integer "position"
-    t.string "event_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["created_at"], name: "index_event_store_events_in_streams_on_created_at"
-    t.index ["stream", "event_id"], name: "index_event_store_events_in_streams_on_stream_and_event_id", unique: true
-    t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
   end
 
   create_table "id3_genres", force: :cascade do |t|

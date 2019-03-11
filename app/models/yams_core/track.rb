@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'open-uri'
 
 module YamsCore
   class Track < ApplicationRecord
@@ -36,12 +37,13 @@ module YamsCore
 
     scope :for_user, -> (user) { Track.where('user_id = ?', user.id) }
 
+    # TODO: probably not scalable & should spin off a job, so perhaps best driven externally, out of here completely
     def attach_audio_file(path)
-      audio.attach(io: File.open(path), filename:  File.split(path).last, content_type: YamsCore::AudioService.valid_types)
+      AttachAudioService.call(self, path)
     end
 
     def attach_cover(path)
-      self.cover = Cover.create!(owner: self).tap{ |c| c.image.attach(io: File.open(path), filename: File.split(path).last) }
+      AttachCoverService.call(self, path)
     end
 
     # DEPRECATED - see Presenter

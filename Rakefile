@@ -25,4 +25,5 @@ RSpec::Core::RakeTask.new(:spec => 'app:db:test:prepare')
 task :default => :spec
 
 APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
+load 'rails/tasks/engine.rake'
 

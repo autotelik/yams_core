@@ -24,7 +24,7 @@
         let rails_album = '<%= @album.id %>';
         $.ajax({
             type: 'POST',
-            url: '<%= url_for(album_track_track_selections_path(@album.id)) %>',
+            url: '<%= url_for(yams.corealbum_track_track_selections_path(@album.id)) %>',
             dataType: "script",
             data: { album_track: { id: rails_album, track_id: rails_track } },
             success:function(data){

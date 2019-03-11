@@ -8,7 +8,7 @@ module RspecFileHelpers
       return default if File.exists?(default)
     end
 
-    File.join(File.expand_path("."), 'spec', 'fixtures', 'files', name)
+    File.join(File.expand_path(YamsCore::Engine.root), 'spec', 'fixtures', 'files', name)
   end
 
 end

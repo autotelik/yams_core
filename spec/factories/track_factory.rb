@@ -7,7 +7,7 @@ FactoryBot.define do
     description   { 'My House Track' }
     association   :user
 
-    trait :with_audio_fixture do
+    trait :with_audio_upload_fixture do
       audio { fixture_file_upload(fixture_file('test.wav'), 'audio/x-wav') }
     end
 

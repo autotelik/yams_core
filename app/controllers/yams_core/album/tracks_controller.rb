@@ -16,7 +16,7 @@ module YamsCore
       respond_to do |format|
         if @album_track.save
           format.html { redirect_to @album, notice: 'Track successfully added to Album' }
-          format.js   {}
+          format.js   { }
         else
           format.html { render :new }
           format.json { render json: @album_track.errors, status: :unprocessable_entity }

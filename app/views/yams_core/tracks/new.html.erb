@@ -25,8 +25,8 @@
           <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track } %>
 
           <div class="form-group">
-            <% if @track.audio.try(:original_filename) %>
-              <p>Replace : <%= @track.audio.original_filename %></p>
+            <% if @track.audio.try(:filename) %>
+              <p>Replace : <%= @track.audio.filename %></p>
             <% end %>
             <%= custom_file_field(f, :audio, t('.choose_audio_file'), options: { multiple: true, direct_upload: true }, additional: t('.accept_audio_file')) %>
           </div>

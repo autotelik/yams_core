@@ -1,15 +1,14 @@
 <div class="row">
 
-  <div class="col-8">
+  <div class="col-9">
     <div class="form-group">
       <%= select(:album, :album_id, options_for_select(YamsCore::Album.without_track(@track, current_user).pluck(:title, :id)), {}, class: 'form-control') %>
     </div>
-
   </div>
 
-  <div class="col-4">
-    <div class="form-group">
-      <input type='button' id="submitAlbumTrack" value="<%= t('.add') %>">
+  <div class="col-3">
+    <div class="form-group p-0">
+      <input type='button' id="submitAlbumTrack" class="album-selection-add" value="<%= t('.add') %>">
     </div>
   </div>
 
@@ -22,20 +21,11 @@
     });
 
     $('#submitAlbumTrack').click(function() {
-
-        let rails_album =$("#album_album_id").val();
-        let rails_track = '<%= @track.id %>';
         $.ajax({
             type: 'POST',
-            url: '<%= url_for(album_tracks_path) %>',
+            url: '<%= url_for(yams_core.track_albums_path) %>',
             dataType: "script",
-            data: { album_track: { id: rails_album, track_id: rails_track } },
-            success:function(data){
-                alert('ok')
-            },
-            error:function(){
-                $('#ajax_response').html('<p class="error"><strong>Oops!</strong> Try that again in a few moments.</p>');
-            }
+            data: { album_track: { id: '<%= @track.id %>', album_id: $("#album_album_id").val() } }
         });
     });
 

@@ -43,10 +43,13 @@ module YamsCore
 
     # GET /tracks/new
     def new
-      @track = Track.new.tap do |track|
-        track.availables.build
-        track.build_cover
+
+      track = Track.new.tap do |t|
+        t.availables.build
+        t.build_cover
       end
+
+      @track = TrackPresenter.new(track, view_context)
     end
 
     # GET /tracks/1/edit
@@ -56,9 +59,9 @@ module YamsCore
 
     # TODO: forms are AJAX by default we should implement error handling etc and then we can remove from form 'local: true'
     def create
-      @track = Track.new(track_params).tap do |t|
-        t.user = current_user
-      end
+      @track = Track.create(track_params.merge(user: current_user))
+
+      @track.audio.attach(track_params[:audio])
 
       respond_to do |format|
         if @track.save

@@ -63,5 +63,18 @@ module YamsCore
       FactoryBot.definition_file_paths << File.expand_path('../../../spec/factories', __FILE__) if defined?(FactoryBot)
     end
 
+    initializer :append_migrations do |app|
+      unless app.root.to_s.match root.to_s
+        config.paths["db/migrate"].expanded.each do |expanded_path|
+          app.config.paths["db/migrate"] << expanded_path
+        end
+      end
+    end
+
+    config.to_prepare do
+      ApplicationController.helper(YamsCore::FormHelper)
+      ApplicationController.helper(YamsCore::BootstrapHelper)
+    end
+
   end
 end
