@@ -10,3 +10,4 @@ Searchkick.client_options = {
       }
     }
 }
+

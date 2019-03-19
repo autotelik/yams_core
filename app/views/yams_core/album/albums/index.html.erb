@@ -25,15 +25,14 @@
                       <%= album.cover_image_tag %>
                     </div>
                     <div class="col">
-                      <%= link_to(album.title, "#{album_url(album)}.json", id: "select_album_row_#{album.id}") %>
+                      <%= link_to(album.title, yams_core.album_url(album, format: :json), id: "select_album_row_#{album.id}") %>
 
                       <script type="text/javascript" charset="utf-8">
                           $('#<%= "select_album_row_#{album.id}" %>').click(function (event) {
                               event.preventDefault(); // Prevent link from following its href
-                              datashift_audio_engine.load('<%= "#{album_url(album)}.json" %>');
+                              datashift_audio_engine.load('<%= yams_core.album_url(album, format: :json) %>');
                           });
                       </script>
-
                     </div>
                   </div>
                 </div>
@@ -56,6 +55,6 @@
         datashift_audio_engine.save_interval = 30000;
 
         // auto load first album in list
-        datashift_audio_engine.load('<%= "#{album_url(@albums.first)}.json" %>');
+        datashift_audio_engine.load('<%= yams_core.album_url(@albums.first, format: :json) %>');
     });
 </script>

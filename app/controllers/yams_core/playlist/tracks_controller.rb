@@ -9,7 +9,6 @@ module YamsCore
     before_action :authenticate_user!
 
     def create
-
       playlist = Playlist.find(playlist_track_params[:id])
 
       track = Track.find(playlist_track_params[:track_id])

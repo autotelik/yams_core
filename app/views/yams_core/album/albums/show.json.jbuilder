@@ -11,5 +11,5 @@ json.total_pages  '1'
 json.track '0'
 json.position '0'
 
-# Render the Tracks - auto inserts into #datashift-audio-playlist
-json.playlist_partial json.partial! 'album.html.erb', locals: { album: @album, tracks: @tracks }
+# Render the Track Playlist
+json.playlist_partial json.partial! 'yams_core/tracks/playlist.html.erb', locals: { tracks:@album.tracks }

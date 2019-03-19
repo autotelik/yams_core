@@ -1,45 +1,44 @@
-<%= content_for :playlist_form_extras do %>
-  <div class="card mt-3">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-3">
-          <h5 class=".text-light"><%= t('global.tracks') %></h5>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
+<% content_for :playlist_column do %> <!-- playlist COLUMN -->
 
-      <div class="row">
-        <div class="col-12">
-          <%= render partial: 'track_selection' %>
-        </div>
+  <div class="media align-items-center">
+    <div class="accordion-item playlist-track col-12">
+      <div class="card card-sm col p-0">
+        <%= bootstrap_card_header(@playlist.name) %>
       </div>
 
-      <hr>
-      <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: @playlist,  sortable: @playlist.playlist_tracks } %>
+      <div class="card card-sm p-0 col">
+        <div class="card-body">
+          <div id="toggle-new-playlist-form" class="collapse show col-12 playlist-track" role="tabpanel">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <div class="col-12">
+                  <%= render partial: 'form', locals: { method: :put, playlist: @playlist } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-header" ondrop="return false;">
+          <ul id="playlist-track-drop-zone-<%= @playlist.id %>" data-playlist-id="<%= @playlist.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+            <h6 class="text-white"><%= t('global.drop_tracks') %></h6>
+          </ul>
+        </div>
+
+        <!-- playlist TRACKS -->
+        <div class="card-body">
+          <div id="playlist-track-manager-<%= "#{@playlist.id}" %>" class="collapse show col-12 playlist-track" role="tabpanel">
+            <div class="show-track-playlist-dropzone">
+              <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: @playlist,  sortable: @playlist.playlist_tracks } %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script type="text/javascript" charset="utf-8">
-      $(function() {
-          $('.sortable').railsSortable();
-      })
-  </script>
 
 <% end %>
 
-
-<div class="col-md-6 offset-md-3">
-
-  <div class="card card-outline-secondary">
-
-    <%= bootstrap_card_header( t('.card_header') ) %>
-
-    <div class="card-body">
-      <%= render partial: 'form', locals: { playlist: @playlist } %>
-    </div>
-
-  </div>
-</div>
+<%= render partial: 'yams_core/playlist/track_selection_form', locals: { header: t('.track_selection_form') } %>
 
 

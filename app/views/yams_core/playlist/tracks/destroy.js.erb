@@ -2,5 +2,5 @@ $("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages'
 
 <% if(@track_presenter.errors.blank?) %>
   $("#<%= @track_row_id %>").remove();
-  $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: @track_presenter } %>");
+  $('#playlist-target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: @track_presenter } %>");
 <% end %>

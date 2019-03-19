@@ -44,7 +44,7 @@
         <div class="row">
           <div class="col text-center" style="padding-top: 16px">
             <span>By clicking '<%= t('.submit') %>' you agree to our <%= link_to t('terms.link'), page_path(:terms) %></span>
-            <div style="padding-top: 16px">Already have an account? <%= link_to t(:sign_in), yams_core.new_user_session_path, class: 'sign-up' %></div>
+            <div style="padding-top: 16px">Already have an account? <%= link_to t(:sign_in, scope: :global), yams_core.new_user_session_path, class: 'sign-up' %></div>
           </div>
         </div>
 

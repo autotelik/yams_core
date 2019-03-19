@@ -87,7 +87,7 @@ module YamsCore
 
           Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
 
-          format.html { redirect_to edit_track_path(@track), notice: 'Track was successfully updated.' }
+          format.html { redirect_to yams_core.edit_track_path(@track), notice: 'Track was successfully updated.' }
           format.json { render :show, status: :ok, location: @track }
         else
           format.html { render :edit }
@@ -101,7 +101,7 @@ module YamsCore
     def destroy
       @track.destroy
       respond_to do |format|
-        format.html { redirect_to tracks_url, notice: 'Track was successfully removed.' }
+        format.html { redirect_to yams_core.tracks_url, notice: 'Track was successfully removed.' }
         format.json { head :no_content }
         format.js   { render :destroy, notice: 'Track was successfully removed.' }
       end

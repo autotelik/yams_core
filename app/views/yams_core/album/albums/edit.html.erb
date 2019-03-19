@@ -3,7 +3,7 @@
   <div class="media align-items-center">
     <div class="accordion-item album-track col-12">
       <div class="card card-sm col p-0">
-        <%= bootstrap_card_header( t('.header')) %>
+        <%= bootstrap_card_header( @album.title ) %>  <!-- TODO ajax needs to update this if remote update changes this title -->
       </div>
 
       <div class="card card-sm p-0 col">

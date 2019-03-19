@@ -1,0 +1,12 @@
+<%= render partial: 'datashift_audio_engine/shared/player_in_navbar',
+           locals: {
+               init_url: yams_core.audio_player_init_url(format: :json),
+               load_url: yams_core.album_url(@album, format: :json)
+           }
+%>
+
+<div class="media row">
+  <div class="accordion-item album-track col">
+    <%= render partial: 'album', locals: { album: @album, tracks: @album.tracks } %>
+  </div>
+</div>

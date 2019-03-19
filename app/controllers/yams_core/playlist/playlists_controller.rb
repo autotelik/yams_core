@@ -34,8 +34,9 @@ module YamsCore
       @tracks = Track.for_user(current_user).page(params[:page]).per(30)
     end
 
-
-    def edit; end
+    def edit
+      @tracks = Track.for_user(current_user) - @playlist.tracks
+    end
 
     def create
 

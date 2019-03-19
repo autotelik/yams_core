@@ -1,5 +1,5 @@
 # TODO does not seem like a very good root node name
-json.saved do
+json.datashift_audio do
 
   json.service do
     if current_user # radio stream can be accessed by non signed in visitors
@@ -15,6 +15,10 @@ json.saved do
     #json.total_pages
     #json.track
     #json.position
+  end
+
+  json.settings do
+    json.autoplay true
   end
 
   json.waveform_colors do

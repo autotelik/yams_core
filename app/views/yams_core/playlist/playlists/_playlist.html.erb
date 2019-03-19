@@ -28,10 +28,10 @@
               </div>
               <div class="col-5">
                 <div class="datashift-audio-track-details">
-                  <%= link_to(play_track.track.title, track_path(play_track.track), class: "datashift-audio-track-title") %>
+                  <%= link_to(play_track.track.title, yams_core.track_path(play_track.track), class: "datashift-audio-track-title") %>
                 </div>
               </div>
-              <div><%= remove_icon(play_track, confirm: I18n.t(:remove, scope: :playlist_track) ) %></div>
+              <div><%= remove_icon(play_track, confirm: t('.remove') ) %></div>
             </li>
 
           <% end %>

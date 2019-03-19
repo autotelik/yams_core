@@ -19,10 +19,14 @@ en:
     playlists: Playlists
     profile: Profile
     radio: Radio
+    sign_in: Login
     sign_out: Sign out
+    sign_up: Register
     tags: Tags
     tracks: Tracks
     upload: Upload
+  terms:
+    link: Terms & Privacy Policy
   devise:
     confirmations:
       new:
@@ -62,35 +66,33 @@ en:
     album:
       albums:
         edit:
-          header: Albums
+          card_header: Edit Album
+          choose_cover: Choose Cover Image
+          submit: Update
+          header: Album
           track_selection_form: Manage Album
         form:
           edit:
             submit: Update Album
+          new:
+            submit: Create album
+          state: State
+          submit: Update
+        index:
+          submit: Create album
+        new:
+          submit: Create album
+          track_selection_form: Add Track
+          add_album: Add new Album
+          create: Create Album
+          track_selection_form: Add Album
+        show_album:
+          delete_album: Delete album
         add_album:  Add new Album
         create: Create Album
       management:
         index:
           track_selection_form: Manage Albums
-    albums:
-      edit:
-        card_header: Edit Album
-        choose_cover: Choose Cover Image
-        submit: Update
-        header: Album Details
-        track_selection_form: Manage Album
-      form:
-        submit: Update
-      index:
-        submit: Create album
-      new:
-        submit: Create album
-        track_selection_form: Add Track
-        add_album: Add new Album
-        create: Create Album
-        track_selection_form: Add Album
-      show_album:
-        delete_album: Delete album
     global:
       about: About
       actions: Actions
@@ -114,7 +116,9 @@ en:
     playlist:
       playlists:
         edit:
+          header: Manage Playlist
           card_header: Manage Playlist
+          track_selection_form: Manage Playlist
         form:
           edit:
             submit: Update Playlist
@@ -133,6 +137,7 @@ en:
     playlist_tracks:
       remove: Remove Track from Playlist ?
     privacy_policy: Privacy Policy
+    remove:  Really remove %{removal} ?
     security_policy: Security Policy
     shared:
       album_selection:
@@ -145,9 +150,6 @@ en:
         choose_image_file: Choose Image
       track_selection:
         add: Add to Album
-    sign_in: Login
-    sign_out: Sign out
-    sign_up: Register
     site_name: yams
     state: State
     track:
@@ -162,7 +164,6 @@ en:
         form:
             card-header: New Track Details
             submit: Upload
-      description: Description
       edit:
         form:
           card-header: Edit Track Details
@@ -182,10 +183,11 @@ en:
         choose_cover: Choose Image
         cover: Cover Image
         card-header: Upload new Track
+        description: Description
         submit: Upload
+        title: Title
       permissions:
         available_for: Available for
-      title: Title
       update:
         form:
           submit: Update

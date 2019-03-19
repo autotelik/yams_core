@@ -1,6 +1,7 @@
 <% remote = local_assigns[:remote].present? ? local_assigns[:remote] : true %>
+<% method = local_assigns[:method].present? ? local_assigns[:method] : :post %>
 
-<%= form_with(model: playlist, url: yams_core.playlists_path, method: :post, remote: remote) do |f| %>
+<%= form_with(model: playlist, method: method, remote: remote) do |f| %>
 
   <%= render 'yams_core/shared/errors', model: playlist %>
 
@@ -15,7 +16,7 @@
 
   <div  class="row">
     <div class="col-10">
-      <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track } %>
+      <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: playlist } %>
     </div>
   </div>
 
