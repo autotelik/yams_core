@@ -55,6 +55,8 @@
         datashift_audio_engine.save_interval = 30000;
 
         // auto load first album in list
-        datashift_audio_engine.load('<%= yams_core.album_url(@albums.first, format: :json) %>');
+        <% if @albums.present? %>
+          datashift_audio_engine.load('<%= yams_core.album_url(@albums.first, format: :json) %>');
+        <% end %>
     });
 </script>

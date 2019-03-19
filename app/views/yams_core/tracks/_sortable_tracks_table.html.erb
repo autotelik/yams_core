@@ -2,7 +2,7 @@
 
   <tbody class="sortable" id="target-for-track-drop-insertion-point-<%= owner.id %>">  <!-- sortable target and insertion point -->
     <% sortable.each do |at| %>
-      <%= render partial: 'yams_core/tracks/sortable_tracks_row', locals: { sortable_with_track: at } %>
+      <%= render partial: 'yams_core/tracks/sortable_tracks_row', locals: { owner: owner, sortable_with_track: at } %>
     <% end %>
   </tbody>
 
