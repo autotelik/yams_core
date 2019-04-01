@@ -29,8 +29,8 @@ module YamsCore
     end
 
     def cover_image(size: :thumb)
-      track_cover = self.cover.try(:attached?) ? cover : DefaultCover.for_track
-      track_cover.image
+      @track_cover ||= self.cover.try(:attached?) ? cover : DefaultCover.for_track
+      @track_cover.image
     end
 
   end

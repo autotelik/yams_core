@@ -19,7 +19,7 @@
 
             <% presenter = YamsCore::TrackPresenter.new(play_track.track, self) %>
 
-            <li id="track-<%= index %>">
+            <li id="track-<%= play_track.track.id %>">
               <div class="col-1"><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></div>
               <div class="col-3">
                 <div class="datashift-audio-track-details">

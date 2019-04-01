@@ -3,8 +3,7 @@
 module YamsCore
   class RadioController < ApplicationController
 
-    helper DatashiftAudioEngine::ApplicationHelper
-
+    helper  DatashiftAudioEngine::PlayerHelper
     layout 'application_with_player'
 
     def index

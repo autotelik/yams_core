@@ -3,7 +3,7 @@
 module YamsCore
   class AudioPlayerInitController < ApplicationController
 
-    helper DatashiftAudioEngine::ApplicationHelper
+    helper  DatashiftAudioEngine::PlayerHelper
 
     def create
       # The audio player init call back -  it sends request during datashift_audio_engine.init() function call once

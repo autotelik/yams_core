@@ -7,7 +7,9 @@
       </div>
 
       <div class="col-2 align-items-center">
-        <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track_presenter.cover_image, only_path: true), class: "avatar rounded avatar-sm") %>
+        <% if track_presenter.cover_image.present? %>
+          <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track_presenter.cover_image, only_path: true), class: "avatar rounded avatar-sm") %>
+        <% end %>
       </div>
 
       <div class="col-6">

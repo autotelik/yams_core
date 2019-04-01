@@ -14,10 +14,7 @@
       <div class="datashift-audio-album-content p-1 col-12 w-100">
 
         <ul id="datashift-audio-album" class="datashift-audio-album p-1 col-12 ">
-
-          <% album.album_tracks.order([:sort]).each_with_index do |track, index| %>
-            <%= render partial: 'yams_core/shared/single_track_for_player.html', locals: { track: track, index: index } %>
-          <% end %>
+          <%= render partial: 'yams_core/tracks/as_single_list_item.html', collection: album.album_tracks.order([:sort]), as: :track %>
         </ul>
 
       </div>

@@ -1,10 +1,3 @@
-<%= render partial: 'datashift_audio_engine/shared/player_in_navbar',
-           locals: {
-               init_url: yams_core.audio_player_init_url(format: :json),
-               load_url: "/radio.json"
-           }
-%>
-
 <div class="row">
   <div id="future_possible-menu" class="col-2"></div>
   <div class="col-8">
@@ -13,3 +6,11 @@
   </div>
 </div>
 
+<script>
+  $.ajax({
+      type: 'POST',
+      url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
+      dataType: "script",
+      data: { 'init_url': '<%= yams_core.audio_player_init_url(format: :json) %>', 'load_url': "/radio.json" }
+  });
+</script>

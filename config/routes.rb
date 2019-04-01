@@ -48,6 +48,6 @@ YamsCore::Engine.routes.draw do
 
   resources :tracks
 
-  mount DatashiftAudioEngine::Engine, at: "/audio"
+  mount DatashiftAudioEngine::Engine, at: '/audio_engine'
 
 end
