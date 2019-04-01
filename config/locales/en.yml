@@ -1,32 +1,5 @@
 ---
 en:
-  global:
-    about: About
-    actions: Actions
-    add_album: Add Album
-    add_playlist: Add Playlist
-    albums: Albums
-    artist: Artist
-    artists: Artists
-    bulk_upload: Bulk upload
-    delete_confirm: Sure you want to permanently Delete?
-    drop_tracks: Drag and drop tracks here
-    edit: Edit
-    home: YAMS
-    manage_albums: Manage Albums
-    manage_playlists: Manage Playlists
-    permissions: Permissions
-    playlists: Playlists
-    profile: Profile
-    radio: Radio
-    sign_in: Login
-    sign_out: Sign out
-    sign_up: Register
-    tags: Tags
-    tracks: Tracks
-    upload: Upload
-  terms:
-    link: Terms & Privacy Policy
   devise:
     confirmations:
       new:
@@ -42,16 +15,15 @@ en:
         bio: Bio
         cancel_button: Cancel Account
         cancel_confirm: Are you sure?
+        choose_avatar: Choose Image
+        city: City
+        country: Country
         display_name: Display Name
         email: Email
         firstname: Firstname
         lastname: Lastname
-        city: City
-        country: Country
         panel_title: Change profile
         submit: Save changes
-        choose_avatar: Choose Image
-        track_selection_form: Tracks
       new:
         panel_title: Sign up to access YAMS
         submit: Create account
@@ -59,65 +31,41 @@ en:
       new:
         panel_title: Sign in
         submit: Login
+  global:
+    albums: Albums
+    delete_confirm: Sure you want to permanently Delete?
+    drop_tracks: Drag and drop tracks here
+    edit: Edit
+    permissions: Permissions
+    playlists: Playlists
+    sign_in: Login
+    sign_up: Register
+    tags: Tags
+    tracks: Tracks
+  terms:
+    link: Terms & Privacy Policy
   yams_core:
-    admin: Admin
-    album_tracks:
-      remove: Remove Track from Album ?
     album:
       albums:
         edit:
-          card_header: Edit Album
-          choose_cover: Choose Cover Image
-          submit: Update
-          header: Album
           track_selection_form: Manage Album
         form:
+          create:
+            submit: Create Album
           edit:
             submit: Update Album
           new:
-            submit: Create album
+            submit: Create Album
           state: State
-          submit: Update
-        index:
-          submit: Create album
         new:
-          submit: Create album
-          track_selection_form: Add Track
-          add_album: Add new Album
           create: Create Album
           track_selection_form: Add Album
-        show_album:
-          delete_album: Delete album
-        add_album:  Add new Album
-        create: Create Album
       management:
         index:
           track_selection_form: Manage Albums
-    global:
-      about: About
-      actions: Actions
-      add_album: Add Album
-      add_playlist: Add Playlist
-      albums: Albums
-      artist: Artist
-      artists: Artists
-      delete_confirm: Sure you want to permanently Delete?
-      drop_tracks: Drag and drop tracks here
-      edit: Edit
-      home: YAMS
-      permissions: Permissions
-      playlists: Playlists
-      profile: Profile
-      radio: Radio
-      tags: Tags
-      tracks: Tracks
-      upload: Upload
-    music: Music
     playlist:
       playlists:
         edit:
-          header: Manage Playlist
-          card_header: Manage Playlist
           track_selection_form: Manage Playlist
         form:
           edit:
@@ -126,32 +74,20 @@ en:
             submit: Create
           new:
             submit: Create
-            track_selection_form: Add Playlist
         new:
           create: New Playlist
           track_selection_form: Add Playlist
-        track_selection:
-          add: Add Track
-      index:
-        submit: Create
-    playlist_tracks:
-      remove: Remove Track from Playlist ?
-    privacy_policy: Privacy Policy
-    remove:  Really remove %{removal} ?
-    security_policy: Security Policy
+    remove: Really remove %{removal} ?
     shared:
       album_selection:
-          add: Add Track
+        add: Add Track
+      choose_cover:
+        choose_image_file: Choose Image
+        cover: Cover
       errors:
         you_have: You have
-      choose_cover:
-        cover: Cover
-        choose_cover: Cover
-        choose_image_file: Choose Image
       track_selection:
         add: Add to Album
-    site_name: yams
-    state: State
     track:
       bulk_uploads:
         new:
@@ -160,34 +96,21 @@ en:
           generate_template: Generate Template
           submit: Upload
     tracks:
-      create:
-        form:
-            card-header: New Track Details
-            submit: Upload
-      edit:
-        form:
-          card-header: Edit Track Details
-          submit: Update
       form:
         accept_audio_file: Please choose an audio file - MP3s are accepted
-        available_for: Available for
         choose_audio_file: Choose File
-        choose_cover: Choose Image
-        cover: Cover Image
+        description: Description
+        edit:
+          card-header: Edit Track
         submit: Update
+        title: Title
         track_albums_list: Present In
       new:
         accept_audio_file: Please choose an audio file - MP3s are accepted
-        available_for: Available for
-        choose_audio_file: Choose File
-        choose_cover: Choose Image
-        cover: Cover Image
         card-header: Upload new Track
+        choose_audio_file: Choose File
         description: Description
         submit: Upload
         title: Title
       permissions:
         available_for: Available for
-      update:
-        form:
-          submit: Update

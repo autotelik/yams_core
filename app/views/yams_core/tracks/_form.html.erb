@@ -6,19 +6,19 @@
 
       <div class="card card-outline-secondary">
 
-        <%= bootstrap_card_header( t("tracks.#{params[:action]}.form.card-header") ) %>
+        <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
 
         <div class="card-body">
 
           <%= render 'yams_core/shared/errors', model: @track %>
 
           <div class="form-group">
-            <%= f.label t(:title, scope: :tracks) %>
+            <%= f.label t('.title') %>
             <%= f.text_field :title, :autofocus => true, class: 'form-control' %>
           </div>
 
           <div class="form-group">
-            <%= f.label t(:description, scope: :tracks) %>
+            <%= f.label t('.description') %>
             <%= f.text_field :description, :autofocus => true, class: 'form-control' %>
           </div>
 

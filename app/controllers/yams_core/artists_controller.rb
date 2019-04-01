@@ -8,7 +8,7 @@ module YamsCore
 
     before_action :authenticate_user!
 
-    helper DatashiftAudioEngine::ApplicationHelper
+    helper DatashiftAudioEngine::PlayerHelper
 
     layout 'application_with_player', only: %i[show]
 

@@ -1,21 +1,27 @@
 <!-- ID format important xxxxxx-index - cos JS needs to be able to grab index -->
-<li class="mb-2 col-12" id="track-<%= track.id %>">
-    <div class="col-1">
-      <%# TODO need to sort out variants e.g - track.cover_image.variant(resize: '120x120')) %>
-      <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track.cover_image, only_path: true), class: "avatar rounded avatar-lg") %>
-    </div>
-    <div class="col-2">
-      <div class="datashift-audio-track-details">
-        <%= link_to(track.artist_name, artist_path(track.artist), class: "datashift-audio-full-name") %>
+<li class="col p-0 m-0" style="border-bottom: 1px solid #74B3CE;" id="track-<%= track.id %>">
+
+  <div class="col-2 pb-1 pt-1 m-0">
+    <%# TODO need to sort out variants e.g - track.cover_image.variant(resize: '120x120')) %>
+    <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track.cover_image, only_path: true), class: "avatar rounded avatar-lg") %>
+  </div>
+
+  <div class="col-7 p-0 m-0">
+    <div class="row">
+      <div class="col datashift-audio-track-details">
+        <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "datashift-audio-full-name") %>
       </div>
     </div>
-    <div class="col-7">
-      <div class="datashift-audio-track-details">
+    <div class="row">
+      <div class="col datashift-audio-track-details">
         <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
       </div>
     </div>
-    <div class="col-1 p-0 m-0">
-      <div class="datashift-audio-duration"><%= track.display_duration %></div>
-    </div>
+  </div>
+
+  <div class="col-2 p-0 m-0 pt-4 pull-right">
+    <div class="datashift-audio-duration pull-right"><%= track.display_duration %></div>
+  </div>
+
 </li>
 

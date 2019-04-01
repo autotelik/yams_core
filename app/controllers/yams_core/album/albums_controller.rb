@@ -10,7 +10,7 @@ module YamsCore
 
     before_action :set_presenter, only: %i[edit update]
 
-    helper DatashiftAudioEngine::ApplicationHelper
+    helper DatashiftAudioEngine::PlayerHelper
 
     layout 'application_with_player', only: %i[index show]
 

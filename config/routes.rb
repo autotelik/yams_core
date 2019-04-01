@@ -10,6 +10,11 @@ YamsCore::Engine.routes.draw do
     get 'users/:id' => 'users/registrations#show', as: :user, module: :devise, class_name: "YamsCore::User"
   end
 
+  namespace :admin do
+    resources :users
+    root to: "users#index"
+  end
+
   resources :artists, only: [:show]
 
   resources :albums, module: 'album'
@@ -28,7 +33,7 @@ YamsCore::Engine.routes.draw do
     resources :tracks, only: [:create, :destroy]
   end
 
-  resources :radio, only: [:index]
+  resources :radio, only: [:index], as: :radio
 
   resources :id3_genres
   resources :licenses

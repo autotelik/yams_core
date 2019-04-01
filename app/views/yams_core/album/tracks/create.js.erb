@@ -1,6 +1,11 @@
 $("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages') %>");
 
 <% if(@album_track.errors.blank?) %>
-  // TODO: how to also update the dropdown box and remove the recently added album
-  $('#target-for-track-drop-insertion-point-<%= @album_track.album.id %>').append("<%= j render(partial: 'yams_core/tracks/sortable_tracks_row', locals: { sortable_with_track: @album_track } ) %>");
+  $('#target-for-track-drop-insertion-point-<%= @album_track.album.id %>').append("<%= j render(partial: 'yams_core/tracks/sortable_tracks_row',
+   locals: {
+    owner: @album_track
+    sortable_with_track: @album_track
+    } ) %>");
+<% else %>
+  $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(@track, self) } %>");
 <% end %>
