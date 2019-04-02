@@ -5,11 +5,6 @@
       <%= bootstrap_card_header( t(:albums, scope: :global)) %>
     </div>
 
-    <% if @albums.present? %>
-      <%= datashift_audio_player_in_navbar(init_url: yams_core.audio_player_init_url,
-                                           load_url: yams_core.album_url(@albums.first, format: :json)) %>
-    <% end %>
-
     <ul id="album-index" class="striped-list list-group list-group-flush">
       <% @albums.each do |album| %>
 
@@ -48,6 +43,20 @@
   <div id="datashift-audio-playlist" class="col-8"></div>
 
 </div>
+
+
+<script>
+    $.ajax({
+        type: 'POST',
+        url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
+        dataType: "script",
+        data: {
+            target_element: '#navbar-audio-player-insertion-point',
+            player_settings: '<%= raw @datashift_audio_json_settings %>',
+            load_url: '<%= yams_core.album_url(@albums.first, format: :json) %>'
+        }
+    });
+</script>
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
