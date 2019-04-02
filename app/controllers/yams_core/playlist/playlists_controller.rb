@@ -31,11 +31,11 @@ module YamsCore
     def new
       @playlist = Playlist.new(user: current_user)
 
-      @tracks = Track.for_user(current_user).page(params[:page]).per(30)
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
     end
 
     def edit
-      @tracks = Track.for_user(current_user) - @playlist.tracks
+      @tracks = Track.for_user(current_user).includes(cover: { image_attachment: :blob } ) - @playlist.tracks.includes(cover: { image_attachment: :blob } )
     end
 
     def create

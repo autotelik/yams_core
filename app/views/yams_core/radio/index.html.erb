@@ -7,13 +7,15 @@
 </div>
 
 <script>
-  $.ajax({
-      type: 'POST',
-      url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
-      dataType: "script",
-      data: {
-          'init_url': '<%= yams_core.audio_player_init_url(format: :json) %>',
-          'load_url': '<%= yams_core.radio_index_url(format: :json) %>'
-      }
-  });
+    $.ajax({
+        type: 'POST',
+        url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
+        dataType: "script",
+        data: {
+            target_element: '#navbar-audio-player-insertion-point',
+            player_settings: '<%= raw @datashift_audio_json_settings %>',
+            load_url: '<%= yams_core.radio_index_url(format: :json) %>'
+        }
+    });
 </script>
+

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.tracks @tracks_json
+json.tracks YamsCore::AudioEnginePlayListBuilder.call(@tracks, current_user)
 
 if current_user
   json.user_token current_user.id

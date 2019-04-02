@@ -8,7 +8,7 @@ module YamsCore
     def index
       @playlists = Playlist.for_user(current_user)
 
-      @tracks = Track.for_user(current_user).page(params[:page]).per(30)
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
     end
 
     private

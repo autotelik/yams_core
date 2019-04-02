@@ -121,7 +121,7 @@
             <div class="card card-sm p-0 col">
               <div class="card-body drag show-track-album-dropzone">
                 <div id="target-for-track_removal-reinsertion"></div>   <!-- INSERTION TARGET -->
-                <% resource.tracks.each do |t| %>
+                <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
                   <%= render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
                 <% end %>
               </div>

@@ -38,7 +38,7 @@ YamsCore::Engine.routes.draw do
   resources :id3_genres
   resources :licenses
 
-  resource :audio_player_init, only: [:create], defaults: { :format => :json }, controller: 'audio_player_init'
+  #resource :audio_player_init, only: [:create], defaults: { :format => :json }, controller: 'audio_player_init'
 
   post 'player_status_callback', to: 'player_status_callback#create'
 

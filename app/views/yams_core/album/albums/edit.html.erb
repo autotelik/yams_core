@@ -29,7 +29,9 @@
         <div class="card-body">
           <div id="album-track-manager-<%= "#{@album.id}" %>" class="collapse show col-12 album-track" role="tabpanel">
             <div class="show-track-album-dropzone">
-              <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: @album,  sortable: @album.album_tracks } %>
+              <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: {
+                  owner: @album,
+                  sortable: @album.album_tracks.includes(track: { cover: { image_attachment: :blob } } ) } %>
             </div>
           </div>
         </div>

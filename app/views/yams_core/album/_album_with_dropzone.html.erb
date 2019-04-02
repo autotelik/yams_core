@@ -27,7 +27,10 @@
       <div class="card-body">
         <div id="<%= accordion %>" class="collapse show col-12 album-track" role="tabpanel">
           <div class="show-track-album-dropzone">
-            <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: { owner: album_presenter,  sortable: album_presenter.album_tracks } %>
+            <%= render partial: 'yams_core/tracks/sortable_tracks_table', locals: {
+                owner: album_presenter,
+                sortable: album_presenter.album_tracks.includes(track: { cover: { image_attachment: :blob } } )
+            } %>
           </div>
         </div>
       </div>

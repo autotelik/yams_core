@@ -33,7 +33,7 @@ module YamsCore
       respond_to do |format|
         format.html {}
         format.json do
-          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@album.tracks, current_user)
+          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@album.tracks.includes(cover: { image_attachment: :blob } ), current_user)
         end
       end
     end
@@ -42,12 +42,12 @@ module YamsCore
     def new
       @album = Album.new(user: current_user)
 
-      @tracks = Track.for_user(current_user).page(params[:page]).per(30)
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
     end
 
     # GET /albums/1/edit
     def edit;
-      @tracks = Track.for_user(current_user).page(params[:page]).per(30)
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
     end
 
     # POST /albums
