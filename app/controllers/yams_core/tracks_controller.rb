@@ -10,8 +10,6 @@ module YamsCore
 
     include YamsCore::RandomSeed
 
-    layout 'application_with_player', only: [:show]
-
     # For returning random lists of records
     before_action :set_rand_cookie, only: %i[index]
 

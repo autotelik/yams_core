@@ -10,8 +10,6 @@ module YamsCore
 
     helper DatashiftAudioEngine::PlayerHelper
 
-    layout 'application_with_player', only: %i[show]
-
     def show;
       respond_to do |format|
         format.html {}

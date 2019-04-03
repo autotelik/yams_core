@@ -4,39 +4,28 @@ module YamsCore
   class RadioController < ApplicationController
 
     helper  DatashiftAudioEngine::PlayerHelper
-    layout 'application_with_player'
 
-    def index
+    def create
+
+      per_page = params[:per_page] || 30
+
+      # Technique to generate same list for a certain time - driven by the cookie expire time
+      # seed_val = Track.connection.quote(cookies[:rand_seed])
+      seed_val = rand
+      Track.connection.execute("select setseed(#{seed_val})")
+
+      @tracks = Track.eager_load(:user)
+                  .includes([{ cover: { image_attachment: :blob } } ])
+                  .for_free.order('random()')
+                  .page(params[:page]).per(per_page)
 
       # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
-      @datashift_audio_json_settings = datashift_audio_settings if request.format.html? || request.format.js?
-
-      respond_to do |format|
-
-        # Render the Audio Player
-        format.html {}
-        format.js {}
-
-        # Player partial will then make a callback to get the JSON Playlist
-        format.json do
-          per_page = 30
-
-          # Technique to generate same list for a certain time - driven by the cookie expire time
-          # seed_val = Track.connection.quote(cookies[:rand_seed])
-          seed_val = rand
-          Track.connection.execute("select setseed(#{seed_val})")
-
-          @tracks = Track.eager_load(:user)
-                        .includes([{ cover: { image_attachment: :blob } } ])
-                        .for_free.order('random()')
-                        .page(params[:page]).per(per_page)
-        end
-      end
+      @datashift_audio_json = datashift_audio_player_setup(@tracks, current_user)
     end
 
     private
 
-    def datashift_audio_settings
+    def datashift_audio_player_setup(tracks, user)
       Jbuilder.encode do |json|
         json.datashift_audio do
 
@@ -57,6 +46,14 @@ module YamsCore
             json.cursor_color 'purple'
             json.bar_width 'w-100'
           end
+
+          json.tracks YamsCore::AudioEnginePlayListBuilder.call(tracks, user)
+
+          json.playlist '0'
+          json.page '0'
+          json.total_pages (tracks.count.to_f / 30).ceil
+          json.track '0'
+          json.position '0'
         end
       end
     end

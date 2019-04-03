@@ -12,8 +12,6 @@ module YamsCore
 
     helper DatashiftAudioEngine::PlayerHelper
 
-    layout 'application_with_player', only: %i[index show]
-
     def index
 
       # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data

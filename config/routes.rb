@@ -33,7 +33,7 @@ YamsCore::Engine.routes.draw do
     resources :tracks, only: [:create, :destroy]
   end
 
-  resources :radio, only: [:index], as: :radio
+  resource :radio, only: [:create, :index], controller: :radio
 
   resources :id3_genres
   resources :licenses
