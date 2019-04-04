@@ -1,19 +1,21 @@
-<!-- ID format important xxxxxx-index - cos JS needs to be able to grab index -->
-<li class="col p-0 m-0" style="border-bottom: 1px solid #74B3CE;" id="track-<%= track.id %>">
-  <div class="row">
-    <div class="col-2 pb-1 pt-1 m-0">
+<!-- ID format important xxxxxx-index - cos JS needs to be able to grab LIST index (not the Rails track id)-->
+<!-- Audio engine expects entries as <li>  as it will add On click event handlers etc to each item -->
+
+<li class="p-0 m-0" id="track-<%= track_counter %>">
+  <div class="row w-100 text-center">
+    <div class="col-1 p-0  m-0 text-center">
       <%# TODO need to sort out variants e.g - track.cover_image.variant(resize: '120x120')) %>
       <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track.cover_image, only_path: true), class: "avatar rounded avatar-lg") %>
     </div>
 
-    <div class="col-4 p-0 m-0 datashift-audio-track-details">
+    <div class="col-3 p-0 m-0 datashift-audio-track-details">
       <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "datashift-audio-full-name") %>
     </div>
-    <div class="col-4 p-0 m-0 datashift-audio-track-details">
+    <div class="col-3 p-0 m-0 datashift-audio-track-details">
       <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
     </div>
 
-    <div class="col-2 p-0 m-0 pt-4 pull-right">
+    <div class="col-4 p-0 m-0 pull-right datashift-audio-track-details">
       <div class="datashift-audio-duration pull-right"><%= track.display_duration %></div>
     </div>
   </div>

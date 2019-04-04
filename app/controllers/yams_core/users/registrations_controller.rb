@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 module YamsCore
   class Users::RegistrationsController < Devise::RegistrationsController
-    layout 'welcome', only: %i[new create]
 
     include PunditHelper
 
