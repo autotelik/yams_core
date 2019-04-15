@@ -12,16 +12,30 @@ module YamsCore
     helper DatashiftAudioEngine::PlayerHelper
 
     def index
-      @playlists = Playlist.for_user(current_user).page(params[:page]).per(30)
+      @playlists = Playlist.for_user(current_user).includes(:tracks).page(params[:page]).per(30)
+
+      if @playlists.present?
+        @tracks = @playlists.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+
+        @playlist = PlaylistPresenter.new(@playlists.first, view_context)
+
+        @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+      else
+        @tracks = []
+
+        @playlist = PlaylistPresenter.new(Playlist.new, view_context)
+
+        @datashift_audio_json = ""
+      end
     end
 
-    def show;
-      # Render the Audio Player via HTML first
-      # Player partial will then make a callback to get the JSON Playlist
+    def show
       respond_to do |format|
         format.html {}
-        format.json do
-          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@playlist.tracks, current_user)
+        format.js do
+          @tracks = @playlist.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+
+          @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
         end
       end
     end

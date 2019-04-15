@@ -1,13 +1,9 @@
-<div class="media row">
+<div id="index-playlist-playlists" class="media row">
 
   <div class="accordion-item playlist-track col-4">
     <div class="card card-sm col p-0">
       <%= bootstrap_card_header( t(:playlists, scope: :global)) %>
     </div>
-
-    <% if @playlists.present? %>
-      <%= datashift_audio_player_in_navbar(init_url: yams_core.audio_player_init_url(format: :json), load_url: yams_core.playlist_url(@playlists.first, format: :json)) %>
-    <% end %>
 
     <ul id="playlist-index" class="striped-list list-group list-group-flush">
       <% @playlists.each do |playlist| %>
@@ -20,7 +16,6 @@
                 <div class="card-header col-12">
                   <div class="row">
                     <div class="col-2">
-                      <!-- format: json does not work ?? -->
                       <%= playlist.cover_image_tag %>
                     </div>
                     <div class="col">
@@ -29,7 +24,12 @@
                       <script type="text/javascript" charset="utf-8">
                           $('#<%= "select_playlist_row_#{playlist.id}" %>').click(function (event) {
                               event.preventDefault(); // Prevent link from following its href
-                              datashift_audio_engine.load('<%= yams_core.playlist_url(playlist, format: :json) %>');
+
+                              $.ajax({
+                                  type: 'GET',
+                                  url: '<%= url_for(yams_core.playlist_url(playlist)) %>',
+                                  dataType: "script"
+                              });
                           });
                       </script>
 
@@ -45,13 +45,23 @@
   </div>
 
   <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
-  <div id="datashift-audio-playlist" class="col-8"></div>
+  <div id="datashift-audio-playlist-wrapper" class="col-8 pt-2">
+    <div class="text-center pb-2"><h5 id="current-playlist-header"><%= @playlists.first.try(:name) %></h5></div>
+    <div id="datashift-audio-playlist" class="col-12">
+    </div>
+  </div>
 
 </div>
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-        datashift_audio_engine.settings.autoplay = true;
-        datashift_audio_engine.save_interval = 30000;
-    });
+
+    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
+                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
+
+    /* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
+    <% content_for :datashift_audio_track_listing do %>
+      <%= render partial: 'yams_core/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+    <% end %>
+
+    $('#datashift-audio-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");
 </script>

@@ -1,38 +1,34 @@
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-        datashift_audio_engine.settings.autoplay = true;
-        datashift_audio_engine.save_interval = 30000;
-    });
-</script>
+<div id="show-tracks" class="media row">
+  <div class="accordion-item artist col-4">
+    <div class="card card-sm col m-0 p-0">
+      <div class="card-header">
 
-<%= content_for 'audio_player_in_navbar' do %>
-  <ul id="navbar-audio-player" class="navbar-nav nav-fill w-100">
-    <li class="nav-item">
-      <%= datashift_audio_player_tag %>
-
-      <%= datashift_audio_player_script(init_url: yams_core.audio_player_init_url(format: :json),
-                                        load_url: yams_core.track_url(@track, format: :json),
-                                        save_url: player_status_callback_url) %>
-    </li>
-  </ul>
-<% end %>
-
-<div class="row pl-5">
-
-  <div class="col-4 pl-2">
-    <h5 class="card-title mb-3"><%= @track.artist_name %></h5>
-    <h5 class="card-title mb-3"><%= @track.title %></h5>
-    <p>
-      <%= @track.description %>
-    </p>
-    <p>
-      <%= @track.license %>
-    </p>
-    <p>
-      <%= @track.id3_genre %>
-    </p>
-    <p>
-      TODO : Ratings, Comments, Likes etc
-    </p>
+        <div class="col-4 pl-2">
+          <h5 class="card-title mb-3">Artist : <%= @track.artist_name %></h5>
+          <h5 class="card-title mb-3">Title: <%= @track.title %></h5>
+          <p>
+            <%= @track.description %>
+          </p>
+          <p>
+            <%= @track.license %>
+          </p>
+          <p>
+            <%= @track.id3_genre %>
+          </p>
+          <p>
+            TODO : Ratings, Comments, Likes etc
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    /*Render Playlist - Accepts a content block containing our desired playlist layout and styling */
+
+    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
+                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
+
+</script>
+

@@ -4,7 +4,7 @@ module YamsCore
   class TracksController < ApplicationController
 
     before_action :set_track,     only: %i[destroy]
-    before_action :set_presenter, only: %i[edit update show]
+    before_action :set_presenter, only: %i[edit update]
 
     helper DatashiftAudioEngine::PlayerHelper
 
@@ -30,18 +30,18 @@ module YamsCore
       end
     end
 
-    # GET /tracks/1
-    # GET /tracks/1.json
-    def show;
+    def show
       respond_to do |format|
-        format.html {}
-        format.json { @track_json = YamsCore::AudioEnginePlayListBuilder.call(@track, current_user) }
+        format.html {
+          track = Track.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } } ]).find(params[:id])
+          @track = TrackPresenter.new(track, view_context)
+
+          @datashift_audio_json = AudioEngineJsonBuilder.call(track, current_user)
+        }
       end
     end
 
-    # GET /tracks/new
     def new
-
       track = Track.new.tap do |t|
         t.availables.build
         t.build_cover

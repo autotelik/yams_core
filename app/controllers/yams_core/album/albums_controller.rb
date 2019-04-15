@@ -14,19 +14,19 @@ module YamsCore
 
     def index
 
-      # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
-      @datashift_audio_json_settings = datashift_audio_settings if request.format.html? || request.format.js?
-
       # Technique to generate same list for a certain time - driven by the cookie expire time
       # seed_val = Track.connection.quote(cookies[:rand_seed])
       seed_val = rand
       Album.connection.execute("select setseed(#{seed_val})")
       @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
 
-      respond_to do |format|
-        format.html {}
-        format.json {}
-      end
+      @tracks = @albums.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+
+      @datashift_audio_json = if @albums.present?
+                                @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+                              else
+                                ""
+                              end
 
     end
 

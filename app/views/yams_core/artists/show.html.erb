@@ -1,12 +1,10 @@
-<div class="media row">
-
-  <div class="accordion-item playlist-track col-4">
-    <div class="card card-sm col p-0">
-
+<div id="show-artists" class="media row">
+  <div class="accordion-item artist col-4">
+    <div class="card card-sm col m-0 p-0">
       <div class="card-header">
         <div class="row">
           <div class="col-3">
-            <%= image_tag(main_app.rails_blob_url(@artist.avatar), class: 'img-fluid rounded') %>
+            <%= image_tag(main_app.rails_blob_url(@artist.avatar_image), class: 'img-fluid rounded') %>
           </div>
           <div class="col-7 pt-3">
             <h5 class="align-middle"><%= @artist.name %></h5>
@@ -18,8 +16,6 @@
           <% end %>
         </div>
       </div>
-
-      <%# datashift_audio_player_in_navbar(load_url: yams_core.artist_url(@artist, format: :json)) %>
     </div>
   </div>
 
@@ -29,18 +25,5 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-        datashift_audio_engine.settings.autoplay = false;
-    });
-
-    $.ajax({
-        type: 'POST',
-        url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
-        dataType: "script",
-        data: {
-            target_element: '#navbar-audio-player-insertion-point',
-            player_settings: '<%#= raw @datashift_audio_json_settings %>',
-            load_url: '<%= yams_core.artist_url(@artist, format: :json) %>'
-        }
-    });
+    <%= render(partial: 'create_playlist.js') %>
 </script>

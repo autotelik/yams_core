@@ -1,6 +1,6 @@
 <% presenter = YamsCore::TrackPresenter.new(sortable_with_track.track, self) %>
 
-<tr id="<%= "#{owner.sortable_id}-#{presenter.sortable_id}" %>" class="sortable_tracks_row p-0">
+<tr id="<%= "#{owner.id}-#{presenter.sortable_id}" %>" class="sortable_tracks_row p-0">
   <td> <%= icon_tag('icon-list') %></td>
   <td><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></td>
   <td>

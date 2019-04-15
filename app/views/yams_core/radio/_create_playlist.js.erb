@@ -1,0 +1,9 @@
+/*Render Playlist - Accepts a content block containing our desired playlist layout and styling */
+
+<% content_for :datashift_audio_track_listing do %>
+  <%= render partial: 'yams_core/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+<% end %>
+
+<div id="radio-create-playlist-wrapper">
+  <%= render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>
+</div>

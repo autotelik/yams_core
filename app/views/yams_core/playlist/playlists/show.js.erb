@@ -1,12 +1,11 @@
-/*
-# Setup the player - Pass JSON representing Settings and PlayList
-# Render the Player with Waveform for Track in Playlist[0]
-*/
+$('#current-playlist-header').html('<%= @playlist.try(:name) %>');
+
 $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
                                                              locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
-/*Render Playlist - Accepts a content block containing our desired playlist layout and styling */
+
+/* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
 <% content_for :datashift_audio_track_listing do %>
 <%= render partial: 'yams_core/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 <% end %>
 
-$('#main-body-container').html("<%= j render(partial: 'create_playlist') %>");
+$('#datashift-audio-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");

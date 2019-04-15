@@ -1,4 +1,4 @@
-<div class="media row">
+<div id="index-album-albums" class="media row">
 
   <div class="accordion-item album-track col-4">
     <div class="card card-sm col p-0">
@@ -25,7 +25,12 @@
                       <script type="text/javascript" charset="utf-8">
                           $('#<%= "select_album_row_#{album.id}" %>').click(function (event) {
                               event.preventDefault(); // Prevent link from following its href
-                              datashift_audio_engine.load('<%= yams_core.album_url(album, format: :json) %>');
+
+                              $.ajax({
+                                  type: 'GET',
+                                  url: '<%= url_for(yams_core.album_url(album)) %>',
+                                  dataType: "script"
+                              });
                           });
                       </script>
                     </div>
@@ -39,33 +44,25 @@
     </ul>
   </div>
 
-  <!-- datashift audio JS insertion point, for rendering any list of tracks -->
-  <div id="datashift-audio-playlist" class="col-8"></div>
+  <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
+  <div id="datashift-audio-album-wrapper" class="col-8 pt-2">
+    <div class="text-center pb-2"><h5 id="current-album-header"><%= @albums.first.try(:title) %></h5></div>
+    <div id="datashift-audio-album-playlist" class="col-12">
+    </div>
+  </div>
 
 </div>
 
 
-<script>
-    $.ajax({
-        type: 'POST',
-        url:  '<%= url_for(datashift_audio_engine.player_in_nav_bars_path) %>',
-        dataType: "script",
-        data: {
-            target_element: '#navbar-audio-player-insertion-point',
-            player_settings: '<%= raw @datashift_audio_json_settings %>',
-            load_url: '<%= yams_core.album_url(@albums.first, format: :json) %>'
-        }
-    });
-</script>
-
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-        datashift_audio_engine.settings.autoplay = true;
-        datashift_audio_engine.save_interval = 30000;
 
-        // auto load first album in list
-        <% if @albums.present? %>
-          datashift_audio_engine.load('<%= yams_core.album_url(@albums.first, format: :json) %>');
-        <% end %>
-    });
+    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
+                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
+
+    /* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
+    <% content_for :datashift_audio_track_listing do %>
+    <%= render partial: 'yams_core/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+    <% end %>
+
+    $('#datashift-audio-album-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");
 </script>

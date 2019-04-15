@@ -12,11 +12,11 @@ module YamsCore
 
     def show;
       respond_to do |format|
-        format.html {}
-        format.json do
-          @tracks = @artist.tracks
+        format.html do
+          @tracks = @artist.tracks.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
 
-          @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@tracks, current_user)
+          # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
+          @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
         end
       end
     end
@@ -25,10 +25,9 @@ module YamsCore
 
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
-      @artist = YamsCore::User.find(params[:id])
+      @artist = YamsCore::ArtistPresenter.new(YamsCore::User.find(params[:id]), view_context)
     end
 
   end
-
 
 end

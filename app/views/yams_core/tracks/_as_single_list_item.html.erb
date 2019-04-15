@@ -1,20 +1,28 @@
-<!-- ID format important xxxxxx-index - cos JS needs to be able to grab LIST index (not the Rails track id)-->
-<!-- Audio engine expects entries as <li>  as it will add On click event handlers etc to each item -->
-
-<li class="p-0 m-0" id="track-<%= track_counter %>">
+<!-- The JS needs to access the LIST index (not Rails DB Id) hence track_counter -->
+<li class="p-0 m-0 pb-2" id="track-<%= track_counter %>" onclick="datashift_audio_playlist_onclick_handler(this)" >
   <div class="row w-100 text-center">
     <div class="col-1 p-0  m-0 text-center">
       <%# TODO need to sort out variants e.g - track.cover_image.variant(resize: '120x120')) %>
       <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track.cover_image, only_path: true), class: "avatar rounded avatar-lg") %>
     </div>
 
-    <div class="col-3 p-0 m-0 datashift-audio-track-details">
-      <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "datashift-audio-full-name") %>
-    </div>
-    <div class="col-3 p-0 m-0 datashift-audio-track-details">
-      <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
-    </div>
+    <%# TODO what are we doing about roles and policies ? %>
 
+    <% if current_user %>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details">
+        <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "datashift-audio-full-name") %>
+      </div>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details">
+        <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
+      </div>
+    <% else %>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details">
+        <%= track.artist_name %>
+      </div>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details">
+        <%= track.title %>
+      </div>
+    <% end %>
     <div class="col-4 p-0 m-0 pull-right datashift-audio-track-details">
       <div class="datashift-audio-duration pull-right"><%= track.display_duration %></div>
     </div>
