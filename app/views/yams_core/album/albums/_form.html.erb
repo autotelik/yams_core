@@ -1,6 +1,9 @@
 <% remote = local_assigns[:remote].present? ? local_assigns[:remote] : true %>
+<% method = local_assigns[:method].present? ? local_assigns[:method] : :post %>
 
-<%= form_for(album, url: yams_core.albums_path, method: :post, remote: remote) do |f| %>
+<% url = local_assigns[:url].present? ? url : yams_core.albums_path %>
+
+<%= form_with(model: album, url: url, method: method, remote: remote) do |f| %>
 
   <%= render 'yams_core/shared/errors', model: album %>
 

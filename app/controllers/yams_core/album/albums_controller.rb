@@ -20,9 +20,13 @@ module YamsCore
       Album.connection.execute("select setseed(#{seed_val})")
       @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
 
-      @tracks = @albums.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+      @tracks = if @albums.present?
+                  @albums.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+                else
+                  []
+                end
 
-      @datashift_audio_json = if @albums.present?
+      @datashift_audio_json = if @tracks.present?
                                 @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
                               else
                                 ""

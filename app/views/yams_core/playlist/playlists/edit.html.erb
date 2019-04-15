@@ -12,7 +12,7 @@
             <div class="media-body">
               <div class="d-flex justify-content-between">
                 <div class="col-12">
-                  <%= render partial: 'form', locals: { method: :put, playlist: @playlist } %>
+                  <%= render partial: 'form', locals: { url: yams_core.playlist_path(@playlist), method: :put, playlist: @playlist } %>
                 </div>
               </div>
             </div>
