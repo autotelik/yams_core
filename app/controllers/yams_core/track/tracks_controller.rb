@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module YamsCore
 
-  class TracksController < ApplicationController
+  class Track::TracksController < ApplicationController
 
     before_action :set_track,     only: %i[destroy]
     before_action :set_presenter, only: %i[edit update]

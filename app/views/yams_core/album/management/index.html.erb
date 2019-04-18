@@ -11,7 +11,7 @@
 
         <ul id="album-management-dashboard-with-dropzone" class="striped-list list-group list-group-flush">
           <!-- Album Management - with drag and drop track section-->
-          <% @albums.each do |album| %>
+          <% @albums.includes([cover: { image_attachment: :blob }, album_tracks: { track: { cover: { image_attachment: :blob }} }]).each do |album| %>
             <li id="album_row_<%= album.id %>">
               <%= render(partial: 'yams_core/album/album_with_dropzone', locals: { album_presenter: YamsCore::AlbumPresenter.new(album, self) }) %>
             </li>

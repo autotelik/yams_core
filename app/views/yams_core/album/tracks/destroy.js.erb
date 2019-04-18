@@ -5,6 +5,6 @@ $("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages'
   $("#<%= "#{@album_presenter.sortable_id}-#{@track_presenter.sortable_id}" %>").remove();
 
   if ($('#draggable-track-row-<%= @track_presenter.sortable_id %>').length == 0) {
-    $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/tracks/draggable_track_in_a_row', locals: { track_presenter: @track_presenter } %>");
+    $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: @track_presenter } %>");
   }
 <% end %>

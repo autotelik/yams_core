@@ -95,22 +95,22 @@ en:
           choose_speadsheet: Select Spreadsheet
           generate_template: Generate Template
           submit: Upload
-    tracks:
-      form:
-        accept_audio_file: Please choose an audio file - MP3s are accepted
-        choose_audio_file: Choose File
-        description: Description
-        edit:
-          card-header: Edit Track
-        submit: Update
-        title: Title
-        track_albums_list: Present In
-      new:
-        accept_audio_file: Please choose an audio file - MP3s are accepted
-        card-header: Upload new Track
-        choose_audio_file: Choose File
-        description: Description
-        submit: Upload
-        title: Title
-      permissions:
-        available_for: Available for
+      tracks:
+        form:
+          accept_audio_file: Please choose an audio file - MP3s are accepted
+          choose_audio_file: Choose File
+          description: Description
+          edit:
+            card-header: Edit Track
+          submit: Update
+          title: Title
+          track_albums_list: Present In
+        new:
+          accept_audio_file: Please choose an audio file - MP3s are accepted
+          card-header: Upload new Track
+          choose_audio_file: Choose File
+          description: Description
+          submit: Upload
+          title: Title
+        permissions:
+          available_for: Available for

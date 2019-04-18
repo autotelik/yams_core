@@ -44,14 +44,14 @@ YamsCore::Engine.routes.draw do
 
   resource :searches, only: [:show]
 
+  resources :tracks, module: 'track'
+
   namespace :track do
     resources :albums, only: [:create]
 
     resource :bulk_uploads, only: [:new, :create]
     resources :bulk_upload_templates, only: [:show]
   end
-
-  resources :tracks
 
   mount DatashiftAudioEngine::Engine, at: '/audio_engine'
 

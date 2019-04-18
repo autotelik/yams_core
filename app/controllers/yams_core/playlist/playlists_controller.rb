@@ -30,12 +30,15 @@ module YamsCore
     end
 
     def show
+      @tracks = @playlist.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+
+      @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+
       respond_to do |format|
         format.html {}
-        format.js do
-          @tracks = @playlist.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
-
-          @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+        format.js {}
+        format.json do
+          render json: @datashift_audio_json
         end
       end
     end
