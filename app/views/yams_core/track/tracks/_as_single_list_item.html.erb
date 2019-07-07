@@ -16,16 +16,11 @@
         <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
       </div>
     <% else %>
-      <div class="col-3 p-0 m-0 datashift-audio-track-details">
-        <%= track.artist_name %>
-      </div>
-      <div class="col-3 p-0 m-0 datashift-audio-track-details">
-        <%= track.title %>
-      </div>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details"><%= track.artist_name %></div>
+      <div class="col-3 p-0 m-0 datashift-audio-track-details"><%= track.title %></div>
     <% end %>
-    <div class="col-4 p-0 m-0 pull-right datashift-audio-track-details">
-      <div class="datashift-audio-duration pull-right"><%= track.display_duration %></div>
-    </div>
+    <div class="col-4 p-0 m-0 datashift-audio-track-details"><%= track.display_duration %></div>
+
   </div>
 </li>
 

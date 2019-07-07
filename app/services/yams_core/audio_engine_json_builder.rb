@@ -29,9 +29,9 @@ module YamsCore
           end
 
           json.waveform do
-            json.wave_color 'white'
-            json.progress_color 'green'
-            json.cursor_color 'purple'
+            json.wave_color DatashiftAudioEngine::Config.call.wave_color
+            json.progress_color DatashiftAudioEngine::Config.call.progress_color
+            json.cursor_color DatashiftAudioEngine::Config.call.cursor_color
             json.bar_width 'w-100'
           end
 

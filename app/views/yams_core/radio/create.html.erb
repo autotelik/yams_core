@@ -1,0 +1,15 @@
+<% content_for :audio_player_in_navbar  do %>
+  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar',  locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
+<% end %>
+
+<% content_for :datashift_audio_track_listing do %>
+  <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+<% end %>
+
+<div class="section accent">
+  <div class="w-container">
+    <div id="radio-create-playlist-wrapper">
+      <%= render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>
+    </div>
+  </div>
+</div>

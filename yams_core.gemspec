@@ -32,7 +32,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'active_storage_validations'
   s.add_dependency 'acts-as-taggable-on'
   s.add_dependency 'administrate'
-  s.add_dependency 'autoprefixer-rails', '8.6.5'
 
   s.add_dependency 'bourbon'
 
