@@ -2,7 +2,7 @@
 
   <div class="col-9">
     <div class="form-group">
-      <%= select(:album, :album_id, options_for_select(YamsCore::Album.without_track(@track, current_user).pluck(:title, :id)), {}, class: 'form-control') %>
+      <%= select(:album, :album_id, options_for_select(YamsCore::Album.without_track(@track, current_user).pluck(:title, :id)), {}, class: 'form-control-yams') %>
     </div>
   </div>
 

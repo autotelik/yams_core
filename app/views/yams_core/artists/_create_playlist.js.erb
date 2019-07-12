@@ -2,7 +2,7 @@ $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift
                                                              locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
 
 /* Render default Playlist - Pass in content block containing our desired track listing layout and styling */
-<% content_for :datashift_audio_track_listing do %>
+<% content_for :datashift_audio_engine_track_playlist do %>
   <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 <% end %>
 

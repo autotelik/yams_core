@@ -36,7 +36,7 @@ module YamsCore
     <div class="card-header">
       <div class="row">
         <div class="col-#{width}">
-         <h5 class=".text-light">#{heading}</h5>
+         <h5 class="text-light">#{heading}</h5>
         </div>
         #{capture(&block) if block_given?}
       </div>

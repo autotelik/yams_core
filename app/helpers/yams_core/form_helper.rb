@@ -75,7 +75,7 @@ module YamsCore
 
       content = raw "<label for='#{id}'>#{label}#{content_for_label}<i class='icon_tag icon-upload-to-cloud'></i></label>"
 
-      content += content_tag(:span, additional, class: 'pl-1') if additional
+      content += content_tag(:div, additional, class: 'custom-file-field-additional pl-1') if additional
       content += form.file_field(field, id: id, options: options)
 
       content_tag(:div, content, class: 'audio-upload')

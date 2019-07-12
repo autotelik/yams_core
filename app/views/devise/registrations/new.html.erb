@@ -1,54 +1,50 @@
-<section class="space-sm">
+<div class="section accent">
+  <div class="w-container">
 
-  <div class="row">
-    <div class="col-3"></div> <!-- TODO how to just centre the next column with width 6 without needing this spacer ?? -->
+    <div class="row">
+      <div class="col-8 offset-2 card p-0">
+        <div class="card-body">
 
-    <div class="col-6 card p-0">
-      <div class="card-body">
+          <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
 
-        <%= render partial: 'yams_core/shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
+          <div class="row">
+            <div class="col-6 offset-3 ">
+              <%= devise_error_messages! %>
 
-        <div class="row">
-          <div class="col text-center" style="padding: 0 64px 0 64px;">
-            <%= devise_error_messages! %>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
 
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
-
-              <div class="form-row form-group">
-                <div class="col">
-                  <%= f.text_field :name, :autofocus => true, class: 'form-control form-control-lg', placeholder: "Name" %>
+                <div class="col centered form-row pb-2">
+                  <%= f.text_field :name, :autofocus => true, class: 'form-control-yams w-100', placeholder: "Name" %>
                 </div>
-              </div>
-              <div class="form-row form-group">
-                <div class="col">
-                  <%= f.email_field :email, class: 'form-control form-control-lg', placeholder: "Email Address" %>
-                </div>
-              </div>
-              <div class="form-row form-group">
-                <div class="col">
-                  <%= f.password_field :password, class: 'form-control form-control-lg', placeholder: "Password" %>
-                </div>
-              </div>
-              <div class="form-row form-group">
-                <div class="col">
-                  <%= f.password_field :password_confirmation, class: 'form-control form-control-lg', placeholder: "Password confirmation" %>
-                </div>
-              </div>
 
-              <%= bootstrap_submit(form: f, text: t('.submit')) %>
+                <div class="col centered form-row pb-2">
+                  <%= f.email_field :email, class: 'form-control-yams w-100', placeholder: "Email Address" %>
+                </div>
 
-            <% end %>
+                <div class="col centered form-row pb-2">
+                  <%= f.password_field :password, class: 'form-control-yams w-100', placeholder: "Password" %>
+                </div>
+
+                <div class="col centered form-row pb-2">
+                  <%= f.password_field :password_confirmation, class: 'form-control-yams w-100', placeholder: "Password confirmation" %>
+                </div>
+
+                <%= bootstrap_submit(form: f, text: t('.submit')) %>
+
+              <% end %>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col text-center" style="padding-top: 16px">
-            <span>By clicking '<%= t('.submit') %>' you agree to our <%= link_to t('terms.link'), page_path(:terms) %></span>
-            <div style="padding-top: 16px">Already have an account? <%= link_to t(:sign_in, scope: :global), yams_core.new_user_session_path, class: 'sign-up' %></div>
+          <div class="col text-center pt-4 pb-4">
+            <span class="text-question pb-1">By clicking '<%= t('.submit') %>' you agree to our <%= link_to t('terms.link'), page_path(:terms) %></span>
+            <div class="text-question">Already have an account? <%= link_to t(:sign_in, scope: :global), yams_core.new_user_session_path, class: 'sign-up' %></div>
           </div>
         </div>
 
       </div>
     </div>
+
   </div>
-</section>
+</div>

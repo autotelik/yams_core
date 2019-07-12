@@ -97,7 +97,7 @@ en:
           submit: Upload
       tracks:
         form:
-          accept_audio_file: Please choose an audio file - MP3s are accepted
+          accept_audio_file: Please choose an audio file - Wav/MP3
           choose_audio_file: Choose File
           description: Description
           edit:
@@ -106,7 +106,7 @@ en:
           title: Title
           track_albums_list: Present In
         new:
-          accept_audio_file: Please choose an audio file - MP3s are accepted
+          accept_audio_file: Please choose an audio file - Wav/MP3
           card-header: Upload new Track
           choose_audio_file: Choose File
           description: Description

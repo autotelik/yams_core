@@ -16,12 +16,12 @@
 
         <div class="form-group">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control-yams' %>
         </div>
 
         <div class="form-group">
           <%= f.label :display_name %><br />
-          <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'form-control' %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'form-control-yams' %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

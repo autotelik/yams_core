@@ -6,15 +6,15 @@
 
   <div class="card-body">
 
-    <div class="col-12">
+    <div class="col">
       <%= form.fields_for :cover do |cover| %>
         <div class="form-group">
           <div class="audio-upload">
             <div class="row">
-              <div class="col-2">
+              <div class="col-4">
                 <%= model.cover_image_tag(size: :thumb, css: 'img-fluid rounded') unless model.new_record?%>
               </div>
-              <div class="col-4">
+              <div class="col-8">
                 <%= custom_file_field(cover, :image, t('.choose_image_file'), options: { accept: 'image/png,image/gif,image/jpeg' }) %>
               </div>
             </div>

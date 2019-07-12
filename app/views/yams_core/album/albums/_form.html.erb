@@ -35,7 +35,7 @@
     <div class="col-8">
       <div class="form-group">
         <%= f.label t('.state') %><br />
-        <%= f.collection_radio_buttons(:published_state, YamsCore::Album.published_states, :first, :first, html_options: { class: 'form-control' }) do |b| %>
+        <%= f.collection_radio_buttons(:published_state, YamsCore::Album.published_states, :first, :first, html_options: { class: 'form-control-yams' }) do |b| %>
           <%= b.label { b.radio_button + " " + b.text } %><br>
         <% end %>
       </div>
