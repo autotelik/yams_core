@@ -1,6 +1,5 @@
-<!-- The JS needs to access the LIST index (not Rails DB Id) hence track_counter -->
+<% # The JS needs to access the LIST index (not Rails DB Id) hence track_counter %>
 <li class="article w-inline-block w-clearfix" id="track-<%= track_counter %>" onclick="datashift_audio_playlist_onclick_handler(this)" >
-  <!--<a href="article.html" class="article w-inline-block w-clearfix">-->
     <div class="image-wrapper"> <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %></div>
     <section class="article-text-wrapper w-clearfix pt-4">
       <div class="row w-100 text-center">
@@ -19,8 +18,7 @@
       </div>
       <div class="article-info-wrapper pt-1">
         <div class="article-info-text"><%= track.created_at.to_s(:short) %></div>
-        <div class="article-info-text tag">TODO</div>
-        <div class="article-info-text tag">TAGS</div>
+        <% track.tag_list.each do |t| %><div class="article-info-text tag"><%= t %></div><% end %>
       </div>
     </section>
 </li>

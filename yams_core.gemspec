@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   # YAMS
   #
   s.add_dependency 'active_storage_validations'
-  s.add_dependency 'acts-as-taggable-on'
+  s.add_dependency 'acts-as-taggable-on'            # https://github.com/mbleigh/acts-as-taggable-on
   s.add_dependency 'administrate'
 
   s.add_dependency 'bourbon'
