@@ -20,6 +20,10 @@ module YamsCore
 
     searchkick callbacks: :queue
 
+    def tracks_for_player
+      tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
+    end
+
     private
 
   end

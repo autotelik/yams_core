@@ -21,8 +21,7 @@
                   <%= f.password_field :password, autocomplete: "off", class: 'form-control-yams w-100', placeholder: "Password" %>
                 </div>
 
-
-                <% if devise_mapping.rememberable? -%>
+                <% if false && devise_mapping.rememberable? -%>
                   <div class="col form-row pb-3">
                     <div class="col-1 pl-0 pull-left">
                       <%= f.check_box :remember_me, class: 'form-control-yams pull-left' %>
@@ -31,32 +30,26 @@
                       Remember me on this computer
                     </div>
                   </div>
-                  </div>
                 <% end -%>
 
                 <%= bootstrap_submit(form: f, text: t('.submit')) %>
 
               <% end %>
 
-              </div>
-        </div>
-
-        <div class="row">
-          <div class="row pt-4 pb-4">
-            <div class="col-9">
-              <%= render "devise/shared/links" %>
-            </div>
-
-            <div class="col-3 float-left p-0">
-              <span class="text-question">Need an account? <%= link_to t(:sign_up, scope: :global), yams_core.new_user_registration_path, class: 'sign-up' %></span>
             </div>
           </div>
+        </div>
 
+        <div class="row pt-4 pb-4">
+          <div class="col-7 text-left pl-4">
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class="col-5 float-left p-0">
+            <span class="text-question">Need an account? <%= link_to t(:sign_up, scope: :global), yams_core.new_user_registration_path, class: 'sign-up' %></span>
+          </div>
         </div>
 
       </div>
     </div>
   </div>
-
-</div>
 </div>

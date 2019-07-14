@@ -1,134 +1,134 @@
-<div class="row">
+<div class="section accent">
+  <div class="w-container">
 
-  <div class="col-8 card p-0 offset-2">
-    <div class="card-body">
+    <div class="row">
+      <div class="col card p-0">
+        <div class="card-body">
 
-      <%= render partial: 'yams_core/shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
+          <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
 
-      <div class="row">
-        <div class="col float-right text-center">
-          <%= render 'yams_core/shared/errors', model: resource %>
-        </div>
-      </div>
+          <div class="row">
+            <div class="col float-right text-center">
+              <%= render 'yams_core/shared/errors', model: resource %>
+            </div>
+          </div>
 
-      <div class="row">
-        <div class="col text-center" style="padding: 0 64px 0 64px;">
-          <% resource.password = nil %>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, autocomplete: "off" }) do |f| %>
+          <div class="row">
+            <div class="col text-left">
+              <% resource.password = nil %>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, autocomplete: "off" }) do |f| %>
 
-            <!-- allowing users to change primary email ?? maybe spam implications ?? -->
-            <div class="row">
+                <div class="row">
 
-              <div class="col-6 pl-0">
-                <div class="col form-group">
-                  <%= f.label t('.email'), class: 'float-left' %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control-yams', style: 'background-color: #9d9d9d', disabled: true %>
-                </div>
-
-                <div class="col form-group">
-                  <%= f.label t('.display_name'), class: 'float-left' %><br />
-                  <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'form-control-yams' %>
-                </div>
-
-                <div class="col form-group">
-                  <%= f.label t('.bio'), class: 'float-left' %><br />
-                  <%= f.text_area(:bio, cols: 20, rows: 4, class: 'form-control-yams') %>
-                </div>
-              </div>
-
-              <div class="col-6 mt-2">
-                <div class="card mt-4 ">
-                  <div class="card-header p-0 pb-1 pt-1">
-                    <h5 class=".text-light"><%= t('.avatar_heading') %></h5>
-                  </div>
-
-                  <div class="card-body mb-4">
-                    <div class="form-group">
-                      <% if current_user.avatar.try(:attached?) %>
-                        <%= image_tag(polymorphic_url(current_user.avatar), class: 'avatar avatar-lg') %>
-                      <% else %>
-                        <% default = DefaultCover.for_user %>
-                        <%= image_tag(polymorphic_url(default.image), class: 'avatar avatar-lg') if default.try(:image) %>
-                      <% end %>
+                  <div class="col-6 pl-0">
+                    <div class="col form-group">
+                      <%= f.label t('.email') %>
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control-yams', style: 'background-color: #9d9d9d', disabled: true %>
                     </div>
 
-                    <div class="form-group">
-                      <%= custom_file_field(f, :avatar, t('.choose_avatar'), options: { accept: 'image/png,image/gif,image/jpeg', class: "filestyle" }) %>
+                    <div class="col form-group">
+                      <%= f.label t('.display_name') %>
+                      <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'form-control-yams' %>
+                    </div>
+
+                    <div class="col form-group">
+                      <%= f.label t('.bio') %>
+                      <%= f.text_area(:bio, cols: 20, rows: 4, class: 'form-control-yams') %>
+                    </div>
+
+                    <div class="col form-group">
+                      <%= f.label t('.firstname')%>
+                      <%= f.text_field :firstname, autofocus: true, autocomplete: "Firstname", class: 'form-control-yams' %>
+                    </div>
+                    <div class="col form-group">
+                      <%= f.label t('.lastname')%>
+                      <%= f.text_field :lastname, autofocus: true, autocomplete: "Lastname", class: 'form-control-yams' %>
+                    </div>
+
+                    <div class="col form-group">
+                      <%= f.label t('.city')%>
+                      <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'form-control-yams' %>
+                    </div>
+                    <div class="col form-group">
+                      <%= f.label t('.country')%>
+                      <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'form-control-yams' %>
                     </div>
                   </div>
-                </div>
-              </div>
 
-            </div> <!-- row -->
+                  <div class="col-6 mt-2">
+                    <div class="card mt-4 ">
+                      <div class="card-header p-0 pb-1 pt-1">
+                        <h5 class="text-center white"><%= t('.avatar_heading') %></h5>
+                      </div>
 
-            <div class="row">
-              <div class="col-6 pl-0">
-                <div class="col form-group">
-                  <%= f.label t('.firstname'), class: 'float-left' %><br />
-                  <%= f.text_field :firstname, autofocus: true, autocomplete: "Firstname", class: 'form-control-yams' %>
-                </div>
-                <div class="col form-group">
-                  <%= f.label t('.lastname'), class: 'float-left' %><br />
-                  <%= f.text_field :lastname, autofocus: true, autocomplete: "Lastname", class: 'form-control-yams' %>
-                </div>
-              </div>
+                      <div class="card-body mb-4">
+                        <div class="form-group text-center">
+                          <% if current_user.avatar.try(:attached?) %>
+                            <%= image_tag(polymorphic_url(current_user.avatar), class: 'avatar avatar-lg') %>
+                          <% else %>
+                            <% default = DefaultCover.for_user %>
+                            <%= image_tag(polymorphic_url(default.image), class: 'avatar avatar-lg') if default.try(:image) %>
+                          <% end %>
+                        </div>
 
-              <div class="col-6 pl-0">
-                <div class="col form-group">
-                  <%= f.label t('.city'), class: 'float-left' %><br />
-                  <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'form-control-yams' %>
-                </div>
-                <div class="col form-group">
-                  <%= f.label t('.country'), class: 'float-left' %><br />
-                  <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'form-control-yams' %>
-                </div>
-              </div>
-            </div>
+                        <div class="col-6 offset-6 form-group">
+                          <%= custom_file_field(f, :avatar, t('.choose_avatar'), options: { accept: 'image/png,image/gif,image/jpeg', class: "filestyle" }) %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-            <% end %>
+                </div> <!-- row -->
 
-            <%= bootstrap_submit(form: f, text: t('.submit')) %>
-
-          <% end %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <%= button_to t('.cancel_button'), registration_path(resource_name), data: { confirm: t('.cancel_confirm') }, method: :delete, class: 'btn btn-danger float-left' %>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Manage TRACKS -->
-
-<div class="row">
-  <div class="col-8 card p-0 offset-2">
-    <div class="card-body">
-
-      <div class="col">
-        <div class="media align-items-center">
-          <div class="accordion-item album-track col-12">
-            <div class="card card-sm col p-0">
-              <%= bootstrap_card_header( t(:tracks, scope: :global)) %>
-            </div>
-
-            <div class="card card-sm p-0 col">
-              <div class="card-body drag show-track-album-dropzone">
-                <div id="target-for-track_removal-reinsertion"></div>   <!-- INSERTION TARGET -->
-                <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
-                  <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div class="row">
+                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                  </div>
                 <% end %>
+
+                <%= bootstrap_submit(form: f, text: t('.submit')) %>
+
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row pt-4 pb-4">
+          <div class="col-7 text-left pl-4">
+            <%= button_to t('.cancel_button'), registration_path(resource_name), data: { confirm: t('.cancel_confirm') }, method: :delete, class: 'btn btn-danger float-left' %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Manage TRACKS -->
+
+    <div class="row">
+      <div class="col card p-0">
+        <div class="card-body">
+
+          <div class="col">
+            <div class="media align-items-center">
+              <div class="accordion-item album-track col-12">
+                <div class="card card-sm col p-0">
+                  <%= bootstrap_card_header( t(:tracks, scope: :global)) %>
+                </div>
+
+                <div class="card card-sm p-0 col">
+                  <div class="card-body drag show-track-album-dropzone">
+                    <div id="target-for-track_removal-reinsertion"></div>   <!-- INSERTION TARGET -->
+                    <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
+                      <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>

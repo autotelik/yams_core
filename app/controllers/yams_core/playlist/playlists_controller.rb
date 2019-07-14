@@ -15,22 +15,20 @@ module YamsCore
       @playlists = Playlist.for_user(current_user).includes(:tracks).page(params[:page]).per(30)
 
       if @playlists.present?
-        @tracks = @playlists.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+        @tracks = @playlists.first.tracks_for_player
 
         @playlist = PlaylistPresenter.new(@playlists.first, view_context)
 
         @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
       else
         @tracks = []
-
         @playlist = PlaylistPresenter.new(Playlist.new, view_context)
-
         @datashift_audio_json = ""
       end
     end
 
     def show
-      @tracks = @playlist.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+      @tracks = @playlist.tracks_for_player
 
       @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 
@@ -50,7 +48,7 @@ module YamsCore
     end
 
     def edit
-      @tracks = Track.for_user(current_user).includes(cover: { image_attachment: :blob } ) - @playlist.tracks.includes(cover: { image_attachment: :blob } )
+      @tracks = Track.for_user(current_user).includes(cover: { image_attachment: :blob } ) - @playlist.tracks_for_player
     end
 
     def create

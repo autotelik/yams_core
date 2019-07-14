@@ -21,7 +21,7 @@ module YamsCore
       @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
 
       @tracks = if @albums.present?
-                  @albums.first.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+                  @albums.first.tracks_for_player
                 else
                   []
                 end
@@ -35,7 +35,7 @@ module YamsCore
     end
 
     def show
-      @tracks = @album.tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+      @tracks = @album.tracks_for_player
 
       @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 

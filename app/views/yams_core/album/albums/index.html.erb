@@ -1,4 +1,4 @@
-<div id="index-album-albums" class="media row">
+<div id="index-album-albums" class="media row pt-4">
 
   <div class="accordion-item album-track col-4">
     <div class="card card-sm col p-0">
@@ -53,13 +53,13 @@
 
 </div>
 
+<% content_for :audio_player_in_navbar  do %>
+  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar', locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
+<% end %>
 
 <script type="text/javascript" charset="utf-8">
 
-    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
-                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
-
-    /* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
+    /* Render Album track list - Pass in this content block containing our desired playlist layout and styling */
     <% content_for :datashift_audio_engine_track_playlist do %>
     <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
     <% end %>

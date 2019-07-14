@@ -1,28 +1,34 @@
-<section class="space-sm">
-  <div class="row">
-    <div class="col-3"></div> <!-- TODO how to just centre the next column with width 6 without needign this spacer ?? -->
+<div class="section accent">
+  <div class="w-container">
 
-    <div class="col-6 card p-0">
-      <div class="card-body">
+    <div class="row">
+      <div class="col-8 offset-2 card p-0">
+        <div class="card-body">
 
-        <%= render partial: 'yams_core/shared/card_body_header', locals: { panel_title: t('.panel_title') } %>
+          <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
 
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
 
-          <%= devise_error_messages! %>
+            <%= devise_error_messages! %>
 
-          <div class="form-row form-group">
-            <div class="col">
-              <%= f.text_field :email, :autofocus => true, class: 'form-control form-control-lg', placeholder: "Email", autocomplete: "email" %>
+            <div class="col centered form-row pb-3">
+              <%= f.text_field :email, :autofocus => true, class: 'form-control-yams w-100', placeholder: "Email", autocomplete: "email" %>
             </div>
+
+            <%= bootstrap_submit(form: f, text: t('.submit')) %>
+
+          <% end %>
+        </div>
+
+        <div class="row pt-4 pb-4">
+          <div class="col-7 text-left pl-4">
+            <%= render "devise/shared/links" %>
           </div>
-
-          <%= bootstrap_submit(form: f, text: t('.submit')) %>
-
-        <% end %>
-
-        <%= render "devise/shared/links" %>
+          <div class="col-5 float-left p-0">
+            <span class="text-question">Need an account? <%= link_to t(:sign_up, scope: :global), yams_core.new_user_registration_path, class: 'sign-up' %></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>

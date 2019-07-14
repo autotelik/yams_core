@@ -1,4 +1,4 @@
-<div id="index-playlist-playlists" class="media row">
+<div id="index-playlist-playlists" class="media row pt-4">
 
   <div class="accordion-item playlist-track col-4">
     <div class="card card-sm col p-0">
@@ -45,6 +45,7 @@
   </div>
 
   <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
+
   <div id="datashift-audio-playlist-wrapper" class="col-8 pt-2">
     <div class="text-center pb-2"><h5 id="current-playlist-header"><%= @playlists.first.try(:name) %></h5></div>
     <div id="datashift-audio-playlist" class="col-12">
@@ -53,14 +54,14 @@
 
 </div>
 
+<% content_for :audio_player_in_navbar  do %>
+  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar', locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
+<% end %>
+
 <script type="text/javascript" charset="utf-8">
-
-    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
-                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
-
     /* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
     <% content_for :datashift_audio_engine_track_playlist do %>
-      <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+    <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
     <% end %>
 
     $('#datashift-audio-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");

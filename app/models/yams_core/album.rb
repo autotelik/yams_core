@@ -31,6 +31,11 @@ module YamsCore
     def attach_cover(file_name)
       update(cover: Cover.create!(owner: self, image: File.open(file_name)))
     end
+
+    def tracks_for_player
+      tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
+    end
+    
 =begin
   private
 
