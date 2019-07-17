@@ -1,21 +1,17 @@
-<div class="row" id="draggable-track-row-<%= track_presenter.sortable_id %>">
+<div class="row article m-0 p-0 pt-3 pb-2" id="draggable-track-row-<%= track_presenter.sortable_id %>">
   <div class="col-12" data-track-id="<%= track_presenter.id %>" draggable="true" ondragstart="drag(event)" id="track_<%= track_presenter.id %>" >
-    <div class="row show_track pb-1 pt-1">
+    <div class="row show_track  align-items-center">
 
-      <div class="col-1">
-        <%= track_presenter.bootstrap_actions_dropdown %>
-      </div>
-
-      <div class="col-2 align-items-center">
+      <div class="col-2">
         <% if track_presenter.cover_image.present? %>
           <%= image_tag(Rails.application.routes.url_helpers.rails_blob_path(track_presenter.cover_image, only_path: true), class: "avatar rounded avatar-sm") %>
         <% end %>
       </div>
 
-      <div class="col-6">
+      <div class="col-7">
         <div class="row pb-1" id="track_row_<%= track_presenter.id %>">
           <div class="col-10" data-track_presenter-id="<%= track_presenter.id %>" draggable="true" ondragstart="drag(event)" id="track_<%= track_presenter.id %>" >
-            <h6 class="mb-0"><%= track_presenter.title %></h6>
+            <h6 class="mb-0 text-white"><%= track_presenter.title %></h6>
           </div>
         </div>
       </div>

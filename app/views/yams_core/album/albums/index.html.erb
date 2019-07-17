@@ -5,7 +5,7 @@
       <%= bootstrap_card_header( t(:albums, scope: :global)) %>
     </div>
 
-    <ul id="album-index" class="striped-list list-group list-group-flush">
+    <ul id="album-index" class="list-group list-group-flush">
       <% @albums.each do |album| %>
 
         <li id="album_row_<%= album.id %>">

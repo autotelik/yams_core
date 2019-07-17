@@ -1,22 +1,19 @@
 <% content_for :playlist_column do %>
+  <div class="accordion-item playlist-track col-12">
+    <div class="card card-sm col p-0">
+      <%= bootstrap_card_header( t('.create')) %>
+    </div>
 
-  <div class="media align-items-center">
-    <div class="accordion-item playlist-track col-12">
-      <div class="card card-sm col p-0">
-        <%= bootstrap_card_header( t('.create')) %>
-      </div>
+    <div class="card card-sm p-0">
+      <div class="card-body">
+        <div id="toggle-new-playlist-form" class="collapse show col-12 playlist-track" role="tabpanel">
 
-      <div class="card card-sm p-0 col">
-        <div class="card-body">
-          <div id="toggle-new-playlist-form" class="collapse show col-12 playlist-track" role="tabpanel">
-            <div class="media-body">
-              <div class="d-flex justify-content-between">
-                <div class="col-12">
-                  <%= render(partial: 'yams_core/playlist/playlists/form', locals: { playlist: YamsCore::Playlist.new }) %>
-                </div>
-              </div>
+          <div class="d-flex justify-content-between">
+            <div id="render-new-playlist-form"  class="col-12">
+              <%= render(partial: 'yams_core/playlist/playlists/form', locals: { playlist: YamsCore::Playlist.new }) %>
             </div>
           </div>
+
         </div>
 
         <ul id="playlist-management-dashboard-with-dropzone" class="striped-list list-group list-group-flush">
@@ -26,7 +23,6 @@
       </div>
     </div>
   </div>
-
 <% end %>
 
 <%= render partial: 'yams_core/playlist/track_selection_form', locals: { header: t('.track_selection_form') } %>

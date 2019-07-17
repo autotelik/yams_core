@@ -6,8 +6,8 @@ module YamsCore
     before_action :authenticate_user!
 
     def index
-      @albums = Album.for_user(current_user)
-      @tracks = Track.for_user(current_user)
+      @albums = Album.for_user(current_user).includes([cover: { image_attachment: :blob }, album_tracks: { track: { cover: { image_attachment: :blob }} }])
+      @tracks = Track.for_user(current_user).includes([cover: { image_attachment: :blob }])
     end
 
   end

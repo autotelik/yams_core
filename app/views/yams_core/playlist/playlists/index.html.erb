@@ -5,7 +5,7 @@
       <%= bootstrap_card_header( t(:playlists, scope: :global)) %>
     </div>
 
-    <ul id="playlist-index" class="striped-list list-group list-group-flush">
+    <ul id="playlist-index" class="list-group list-group-flush">
       <% @playlists.each do |playlist| %>
 
         <li id="playlist_row_<%= playlist.id %>">

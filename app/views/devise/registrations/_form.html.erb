@@ -3,10 +3,12 @@
 
     <div class="row">
       <div class="col card p-0">
-        <div class="card-body">
 
-          <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
+        <div class="card-header">
+            <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
+        </div>
 
+        <div class="card-body pt-1">
           <div class="row">
             <div class="col float-right text-center">
               <%= render 'yams_core/shared/errors', model: resource %>
@@ -45,14 +47,6 @@
                       <%= f.text_field :lastname, autofocus: true, autocomplete: "Lastname", class: 'form-control-yams' %>
                     </div>
 
-                    <div class="col form-group">
-                      <%= f.label t('.city')%>
-                      <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'form-control-yams' %>
-                    </div>
-                    <div class="col form-group">
-                      <%= f.label t('.country')%>
-                      <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'form-control-yams' %>
-                    </div>
                   </div>
 
                   <div class="col-6 mt-2">
@@ -62,7 +56,7 @@
                       </div>
 
                       <div class="card-body mb-4">
-                        <div class="form-group text-center">
+                        <div class="form-group text-center pt-2">
                           <% if current_user.avatar.try(:attached?) %>
                             <%= image_tag(polymorphic_url(current_user.avatar), class: 'avatar avatar-lg') %>
                           <% else %>
@@ -77,16 +71,32 @@
                       </div>
                     </div>
                   </div>
-
                 </div> <!-- row -->
 
-                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                  <div class="row">
-                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                <div class="row">
+                  <div class="col-6 pl-0">
+                    <div class="col form-group">
+                      <%= f.label t('.city')%>
+                      <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'form-control-yams' %>
+                    </div>
+                    <div class="col form-group">
+                      <%= f.label t('.country')%>
+                      <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'form-control-yams' %>
+                    </div>
                   </div>
-                <% end %>
-
-                <%= bootstrap_submit(form: f, text: t('.submit')) %>
+                  <div class="col-6 mt-2">
+                    <div class="col form-group mb-4">
+                      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                        <div class="row">
+                          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="col form-group pt-4">
+                      <%= bootstrap_submit(form: f, text: t('.submit')) %>
+                    </div>
+                  </div>
+                </div>
 
               <% end %>
             </div>
@@ -103,28 +113,17 @@
     </div>
 
     <!-- Manage TRACKS -->
-
     <div class="row">
       <div class="col card p-0">
+        <div class="card-header">
+          <h2 class="section-heading centered white"><%= t(:tracks, scope: :global) %></h2>
+        </div>
+
         <div class="card-body">
-
-          <div class="col">
-            <div class="media align-items-center">
-              <div class="accordion-item album-track col-12">
-                <div class="card card-sm col p-0">
-                  <%= bootstrap_card_header( t(:tracks, scope: :global)) %>
-                </div>
-
-                <div class="card card-sm p-0 col">
-                  <div class="card-body drag show-track-album-dropzone">
-                    <div id="target-for-track_removal-reinsertion"></div>   <!-- INSERTION TARGET -->
-                    <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
-                      <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="datashift-user-track-playlist">
+            <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
+              <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+            <% end %>
           </div>
         </div>
       </div>

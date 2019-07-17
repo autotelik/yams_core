@@ -7,23 +7,23 @@
 
   <%= render 'yams_core/shared/errors', model: playlist %>
 
-  <div class="row">
+  <div class="row pt-2">
     <div class="col-10">
       <div class="form-group">
-        <%= f.label :name %><br />
-        <%= f.text_field :name,  id: :playlist_name, class: "col" %>
+        <%= f.label :name %>
+        <%= f.text_field :name,  id: :playlist_name, class: "col form-control-yams" %>
       </div>
     </div>
   </div>
 
-  <div  class="row">
+  <div class="row">
     <div class="col-10">
       <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: playlist } %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-10">
+    <div class="col-8">
       <%= bootstrap_submit(form: f, text: t(".#{params[:action]}.submit"), css: 'btn btn-block btn-lg float-right') %>
     </div>
   </div>
