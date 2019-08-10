@@ -26,7 +26,7 @@ module YamsCore
         author: track.artist_name,
         name: track.title,
         audio_url: rails_blob_path(track.audio, only_path: true),
-        cover_image: rails_blob_path(track.cover_image, only_path: true),
+        cover_image: track.cover_image_path,
         duration: track.duration
       }
 

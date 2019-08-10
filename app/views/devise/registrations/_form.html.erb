@@ -5,7 +5,7 @@
       <div class="col card p-0">
 
         <div class="card-header">
-            <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
+          <h2 class="section-heading centered white"><%= t('.panel_title') %></h2>
         </div>
 
         <div class="card-body pt-1">
@@ -57,12 +57,7 @@
 
                       <div class="card-body mb-4">
                         <div class="form-group text-center pt-2">
-                          <% if current_user.avatar.try(:attached?) %>
-                            <%= image_tag(polymorphic_url(current_user.avatar), class: 'avatar avatar-lg') %>
-                          <% else %>
-                            <% default = DefaultCover.for_user %>
-                            <%= image_tag(polymorphic_url(default.image), class: 'avatar avatar-lg') if default.try(:image) %>
-                          <% end %>
+                          <%= avatar_image_tag(resource) %>
                         </div>
 
                         <div class="col-6 offset-6 form-group">

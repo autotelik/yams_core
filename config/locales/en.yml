@@ -33,6 +33,7 @@ en:
         submit: Login
   global:
     albums: Albums
+    delete: Delete
     delete_confirm: Sure you want to permanently Delete?
     drop_tracks: Drag and drop tracks here
     edit: Edit

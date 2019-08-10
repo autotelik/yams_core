@@ -24,7 +24,7 @@ module YamsCore
         #{'<a class="dropdown-item" href="#">Share</a>' unless except.include? :delete}
         # TODO - Commentable  #{link_to('Comment', model) unless except.include? :delete}
         <div class="dropdown-divider"></div>
-        #{delete_icon(model, text: 'Delete', html_options: { class: 'dropdown-item' }) unless except.include? :delete}
+        #{delete_icon(model, text: I18n.t(:delete, scope: :global), html_options: { class: 'dropdown-item' }) unless except.include? :delete}
       </div>
     </div>
       EOS
@@ -53,7 +53,7 @@ module YamsCore
          <h5 class=".text-light">#{heading}</h5>
         </div>
         <div class="col-2">
-#{link_to icon_tag('icon-pencil', text: 'Edit', text_front: false), edit_path, class: 'icon_tag float-right'}
+          #{link_to icon_tag('icon-pencil', text: I18n.t(:edit, scope: :global), text_front: false), edit_path, class: 'float-right'}
         </div>
       </div>
     </div>

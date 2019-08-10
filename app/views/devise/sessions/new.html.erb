@@ -32,7 +32,7 @@
                   </div>
                 <% end -%>
 
-                <%= bootstrap_submit(form: f, text: t('.submit')) %>
+                <%= bootstrap_submit(form: f, text: I18n.t(:sign_in, scope: :global)) %>
 
               <% end %>
 

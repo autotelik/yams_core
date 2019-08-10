@@ -36,10 +36,12 @@ module YamsCore
       seed_val = rand
       Track.connection.execute("select setseed(#{seed_val})")
 
-      @tracks = Track.eager_load(:user)
+      tracks = Track.eager_load(:user)
                     .includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
                     .for_free.order('random()')
                     .page(params[:page]).per(per_page)
+
+      @tracks = tracks.collect { |t| TrackPresenter.new(t, view_context) }
     end
 
   end

@@ -1,34 +1,36 @@
-<div id="show-tracks" class="media row">
-  <div class="accordion-item artist col-4">
+<div id="show-tracks" class="media row pt-4">
+  <div class="accordion-item artist col-8 offset-2 ">
     <div class="card card-sm col m-0 p-0">
       <div class="card-header">
 
-        <div class="col-4 pl-2">
-          <h5 class="card-title mb-3">Artist : <%= @track.artist_name %></h5>
-          <h5 class="card-title mb-3">Title: <%= @track.title %></h5>
-          <p>
-            <%= @track.description %>
-          </p>
-          <p>
-            <%= @track.license %>
-          </p>
-          <p>
-            <%= @track.id3_genre %>
-          </p>
-          <p>
-            TODO : Ratings, Comments, Likes etc
-          </p>
+        <div class="row">
+          <div class="col-2"><div class="article-info-text">Uploaded :</div></div>
+          <div class="col-10"><%= @track.created_at.to_s(:short) %></div>
         </div>
+
+        <div class="row">
+          <div class="col-2"><div class="article-info-text">Description :</div></div>
+          <div class="col-10"><%= @track.description %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"><div class="article-info-text">Tags :</div></div>
+          <div class="col-10">
+            <% @track.tag_list.each do |t| %><div class="article-info-text tag"><%= t %></div><% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"><div class="article-info-text">TODO :</div></div>
+          <div class="col-10">Ratings, Comments, Likes etc
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-    /*Render Playlist - Accepts a content block containing our desired playlist layout and styling */
-
-    $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/player_in_navbar',
-                                                                 locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>");
-
-</script>
-
+<% content_for :audio_player_in_navbar  do %>
+  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar',  locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
+<% end %>

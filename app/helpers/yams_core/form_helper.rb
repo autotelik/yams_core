@@ -5,7 +5,7 @@ module YamsCore
 
     # Create an icon tag with text, placed either before or after the icon
     def icon_tag(icon, text: nil, text_front: true)
-      icon = "<i class=\"icon_tag #{icon}\"></i>"
+      icon = "<i class=\"icon-tag-light #{icon}\"></i>"
       if text_front
         raw("#{text} #{icon}")
       else
@@ -81,7 +81,7 @@ module YamsCore
       content_tag(:div, content, class: 'audio-upload')
     end
 
-    def avatar_image_tag(user, html_options: { class: 'avatar avatar-lg' })
+    def avatar_image_tag(user, html_options: {class: 'avatar avatar-lg' })
       if user.avatar.try(:attached?)
         image_tag(rails_blob_url(user.avatar), html_options)
       else

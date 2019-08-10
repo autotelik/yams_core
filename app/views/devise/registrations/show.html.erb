@@ -2,25 +2,25 @@
   <div class="col-8 offset-1">
     <div class="card card-sm p-0 col">
 
-      <% if current_user == @user %>
+      <% if current_user.id == @user.id %>
         <%= bootstrap_card_header_edit( t(".card-header"), yams_core.edit_user_registration_path ) %>
       <% else %>
         <%= bootstrap_card_header( t(".card-header") ) %>
       <% end %>
 
-      <div class="card-body">
+      <div class="card-body pt-4 pb-4">
         <div class="row d-flex flex-wrap tex align-items-center">
-          <div class="col-2 text-center">
+          <div class="col-2 text-center" id="registrations_show_avatar_image_tag">
             <%= avatar_image_tag(@user) %>
           </div>
 
           <div class="col-4">
-            <h3 class=".text-light"> <%= @user.name %></h3>
-            <div><h5 class=".text-light"><%= @user.email %></h5></div>
-            <div><h5 class=".text-light"><%= @user.permalink_url %></h5></div>
-            <div><h6 class=".text-light"><%= @user.city %></h6></div>
-            <div><h6 class=".text-light"><%= @user.country %></h6></div>
-            <div class=".text-light"><%= @user.bio %></div>
+            <div class="pb-1"><span class="text-large text-light"> <%= @user.name %></span></div>
+            <div class="pb-1"><span class="text-light"><%= @user.email %></span></div>
+            <div class="pb-1"><span class="text-light"><%= @user.permalink_url %></span></div>
+            <div class="pb-1">City: <span class="text-light"><%= @user.city %></span></div>
+            <div class="pb-1">Country: <span class="text-light"><%= @user.country %></span></div>
+            <div class="pb-1">Bio: <span class="text-light"><%= @user.bio %></span></div>
           </div>
         </div>
       </div>

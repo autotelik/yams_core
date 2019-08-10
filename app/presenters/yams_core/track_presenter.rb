@@ -33,5 +33,9 @@ module YamsCore
       @track_cover.image
     end
 
+    def cover_image_path(size: :thumb)
+      rails_blob_path(cover_image(size: size), only_path: true)
+    end
+
   end
 end

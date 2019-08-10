@@ -5,7 +5,6 @@ module YamsCore
     include Sidekiq::Worker
 
     def perform(bulk_upload_id)
-     # byebug
       upload = YamsCore::BulkUpload.find(bulk_upload_id)
 
       loader = DataShift::ExcelLoader.new
