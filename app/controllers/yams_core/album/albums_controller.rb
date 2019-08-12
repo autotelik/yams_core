@@ -10,6 +10,8 @@ module YamsCore
 
     before_action :set_presenter, only: %i[edit update]
 
+    include YamsCore::FetchTracks
+
     helper DatashiftAudioEngine::PlayerHelper
 
     def index
@@ -20,18 +22,9 @@ module YamsCore
       Album.connection.execute("select setseed(#{seed_val})")
       @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
 
-      @tracks = if @albums.present?
-                  @albums.first.tracks_for_player
-                else
-                  []
-                end
+      populate_tracks(@albums.first)
 
-      @datashift_audio_json = if @tracks.present?
-                                @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
-                              else
-                                ""
-                              end
-
+      @datashift_audio_json = @tracks.present? ? AudioEngineJsonBuilder.call(@tracks, current_user) : ""
     end
 
     def show
@@ -52,12 +45,12 @@ module YamsCore
     def new
       @album = Album.new(user: current_user)
 
-      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user)
     end
 
     # GET /albums/1/edit
-    def edit;
-      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user).page(params[:page]).per(30)
+    def edit
+      @tracks = Track.includes(cover: { image_attachment: :blob } ).for_user(current_user)
     end
 
     # POST /albums
@@ -123,32 +116,9 @@ module YamsCore
       params.require(:album).permit(:title, :description, :published_state, :user_id, tag_list: [], cover_attributes: %i[id image])
     end
 
-    def datashift_audio_settings
-      Jbuilder.encode do |json|
-        json.datashift_audio do
-
-          json.service do
-            if current_user     # radio stream can be accessed by non signed in visitors
-              json.user_token   current_user.id
-              json.client_token '0987654321' # TODO: - add tokens to devise
-            end
-          end
-
-          json.settings do
-            json.autoplay true
-          end
-
-          json.waveform do
-            json.wave_color 'white'
-            json.progress_color 'blue'
-            json.cursor_color 'purple'
-            json.bar_width 'w-100'
-          end
-        end
-      end
+    def populate_tracks(album)
+      @tracks = album ? to_presenters(album.tracks_for_player) : []
     end
 
   end
-
-
 end

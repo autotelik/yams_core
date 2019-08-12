@@ -9,13 +9,15 @@ module YamsCore
 
     before_action :set_presenter, only: %i[edit update]
 
+    include YamsCore::FetchTracks
+
     helper DatashiftAudioEngine::PlayerHelper
 
     def index
       @playlists = Playlist.for_user(current_user).includes(:tracks).page(params[:page]).per(30)
 
       if @playlists.present?
-        @tracks = @playlists.first.tracks_for_player
+        populate_tracks(@playlists.first)
 
         @playlist = PlaylistPresenter.new(@playlists.first, view_context)
 
@@ -28,7 +30,7 @@ module YamsCore
     end
 
     def show
-      @tracks = @playlist.tracks_for_player
+      populate_tracks(@playlist)
 
       @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 
@@ -108,5 +110,10 @@ module YamsCore
     def playlist_params
       params.require(:playlist).permit(:name, :user_id, tag_list: [])
     end
+
+    def populate_tracks(playlist)
+      @tracks = to_presenters(playlist.tracks_for_player)
+    end
   end
+
 end

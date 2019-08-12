@@ -26,6 +26,9 @@ group :test do
 
   gem 'launchy'
   #gem 'listen'
+
+  gem "mini_magick", ">= 4.9.4"
+
   gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-rails'

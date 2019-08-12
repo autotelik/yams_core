@@ -1,4 +1,4 @@
-<div id="show-artists" class="media row">
+<div id="show-artists" class="media row pt-4">
   <div class="accordion-item artist col-4">
     <div class="card card-sm col m-0 p-0">
       <div class="card-header">
@@ -9,9 +9,9 @@
           <div class="col-7 pt-3">
             <h5 class="align-middle"><%= @artist.name %></h5>
           </div>
-          <% if current_user == @artist %>
+          <% if current_user.id == @artist.id %>
             <div class="col-2 float-right align-middle text-center">
-              <%= link_to icon_tag('icon-pencil'), edit_user_registration_path, class: 'icon_tag' %>
+              <%= link_to icon_tag('icon-pencil'), yams_core.edit_user_registration_path(@artist), class: 'icon_tag' %>
             </div>
           <% end %>
         </div>
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <!-- JS insertion point, for rendering track listing of currently selected Artist -->
+  <!-- JS insertion point, for rendering track listing of  Artist -->
   <div id="datashift-audio-playlist" class="col-8"></div>
 
 </div>
@@ -27,3 +27,7 @@
 <script type="text/javascript" charset="utf-8">
     <%= render(partial: 'create_playlist.js') %>
 </script>
+
+<% content_for :audio_player_in_navbar  do %>
+  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar',  locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
+<% end %>

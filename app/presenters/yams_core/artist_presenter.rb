@@ -9,8 +9,11 @@ module YamsCore
     alias_method :artist, :model
 
     def avatar_image(size: :thumb)
-      @avatar ||= self.avatar.try(:attached?) ? avatar : DefaultCover.for_artist
-      @avatar.image
+      @avatar_image ||= if self.avatar.try(:attached?)
+                          avatar
+                        else
+                          DefaultCover.for_artist.image
+                        end
     end
 
   end

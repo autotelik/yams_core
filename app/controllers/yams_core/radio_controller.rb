@@ -3,6 +3,8 @@
 module YamsCore
   class RadioController < ApplicationController
 
+    include YamsCore::FetchTracks
+
     helper  DatashiftAudioEngine::PlayerHelper
 
     def create
@@ -25,23 +27,8 @@ module YamsCore
 
     private
 
-    def per_page
-        params[:per_page] || 30
-    end
-
     def populate_tracks
-
-      # Technique to generate same list for a certain time - driven by the cookie expire time
-      # seed_val = Track.connection.quote(cookies[:rand_seed])
-      seed_val = rand
-      Track.connection.execute("select setseed(#{seed_val})")
-
-      tracks = Track.eager_load(:user)
-                    .includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
-                    .for_free.order('random()')
-                    .page(params[:page]).per(per_page)
-
-      @tracks = tracks.collect { |t| TrackPresenter.new(t, view_context) }
+      @tracks = to_presenters(random_free_tracks)
     end
 
   end

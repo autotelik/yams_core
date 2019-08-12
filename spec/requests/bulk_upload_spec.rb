@@ -15,9 +15,8 @@ describe 'bulk uploads', type: :request do
       it 'offers ability to generate a blank template spreadsheet or bulk upload a spreadsheet ' do
         get '/track/bulk_uploads/new'
 
-
         expect(response.body).to match(/input.*value="Upload"/)
-        expect(response.body).to match(/input.*value="Generate Template"/)
+        expect(response.body).to match(/title="Generate new empty spreadsheet/)
       end
 
       it 'creates a new bulk upload with spreadsheet as an attachment', js: true do
@@ -31,7 +30,7 @@ describe 'bulk uploads', type: :request do
         parameters = { bulk_upload: attributes_for(:bulk_upload) }
         post '/track/bulk_uploads', params: parameters
 
-        expect(YamsCore::BulkUploadWorker).to have_enqueued_sidekiq_job()
+        expect(YamsCore::BulkUploadWorker).to have_enqueued_sidekiq_job(YamsCore::BulkUpload.last.id)
       end
 
     end

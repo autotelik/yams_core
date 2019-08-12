@@ -4,6 +4,8 @@ module YamsCore
 
   class ArtistsController < ApplicationController
 
+    include YamsCore::FetchTracks
+
     before_action :set_artist, only: %i[show]
 
     before_action :authenticate_user!
@@ -13,7 +15,7 @@ module YamsCore
     def show;
       respond_to do |format|
         format.html do
-          @tracks = @artist.tracks.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } } ])
+          @tracks = to_presenters(@artist.tracks.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings]))
 
           # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
           @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
