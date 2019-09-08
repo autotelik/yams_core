@@ -35,7 +35,11 @@ module YamsCore
       # Re-enable Track for selection
       @track_presenter =  TrackPresenter.new(playlist_track.track, view_context)
 
-      @track_row_id = @track_presenter.sortable_id
+      # TODO - amend js call to pass this ID to us
+      # id="<%= "#{playlist.id}-#{presenter.sortable_id}"
+
+      @track_row_id = "#{playlist_track.playlist.id}-#{@track_presenter.sortable_id}"
+      # puts "Delete Row from Playlist [#{@track_row_id}]"
 
       unless playlist_track.destroy
         flash[:error] = 'Sorry we failed to remove Track from Playlist'

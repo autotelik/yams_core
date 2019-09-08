@@ -19,18 +19,20 @@
 
           var track = document.getElementById(ev.dataTransfer.getData('Text'));
 
+          // Code if  we want to Remove the Track from Listing
+
           // Hide whole Track source row (track details plus any other buttons - edit, delete etc)
-          track.parentNode.remove();
+          // track.parentNode.remove();
 
           // Wrap button in li so tracks insert vertically
-          var wrapper = document.createElement('li');
+          // var wrapper = document.createElement('li');
 
           // Disallow dropping onto these new items., we want it to be elem with the playlist id
-          wrapper.setAttribute("ondrop", "return false;");
+          // wrapper.setAttribute("ondrop", "return false;");
 
-          track.parentNode.insertBefore(wrapper, track);
+          // track.parentNode.insertBefore(wrapper, track);
 
-          wrapper.appendChild(track);
+          // wrapper.appendChild(track);
 
           var rails_playlist = playlist.getAttribute("data-playlist-id");
           var rails_track = track.getAttribute("data-track-id");

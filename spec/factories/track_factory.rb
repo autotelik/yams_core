@@ -21,7 +21,7 @@ FactoryBot.define do
       association :cover, factory: :cover
     end
 
-    trait :availble_for_radio do
+    trait :available_for_radio do
       after(:create) do |t, _evaluator|
         t.availables << Available.build(mode: Available.concepts[:free], on: DateTime.now)
       end

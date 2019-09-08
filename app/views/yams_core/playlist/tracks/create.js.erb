@@ -1,8 +1,9 @@
 $("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages') %>");
 
 <% if(@playlist_track.errors.blank?) %>
-  let content = "<%= j render(partial: 'yams_core/track/tracks/sortable_tracks_row', locals: { owner: @playlist_track.playlist, sortable_with_track: @playlist_track } ) %>"
-  $('#target-for-track-drop-insertion-point-<%= @playlist_track.playlist.id %>').append(content);
+  $('#target-for-track-drop-insertion-point-<%= @playlist_track.playlist.id %>').append(
+      "<%= j render(partial: 'yams_core/track/tracks/sortable_tracks_row', locals: { owner: @playlist_track.playlist, sortable_with_track: @playlist_track } ) %>"
+  );
 <% else %>
-  $('#playlist-target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: @track } %>");
+// $('#playlist-target-for-track_removal-reinsertion').append("<%#= j render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: @track } %>");
 <% end %>
