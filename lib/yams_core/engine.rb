@@ -50,6 +50,8 @@ module YamsCore
     # Add a load path for this specific Engine
     config.autoload_paths << File.expand_path("../app/workers/yams_core", __FILE__)
 
+    config.assets.paths << root.join("app", "assets", "javascripts", "yams_core")
+
     def self.load_thor_tasks
       base = File.join(YamsCore.library_path, 'tasks')
 

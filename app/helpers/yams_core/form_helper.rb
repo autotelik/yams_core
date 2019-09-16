@@ -70,8 +70,9 @@ module YamsCore
       end
     end
 
-    def custom_file_field(form, field, label, options: {}, additional: nil, content_for_label: nil)
-      id = form.object.class.name.downcase + "-#{form.object.id}-file-input"
+    def custom_file_field(form, field, label, options: {}, additional: nil, content_for_label: nil, id: nil)
+
+      id ||= form.object.class.name.downcase + "-#{form.object.id}-file-input"
 
       content = raw "<label for='#{id}'>#{label}#{content_for_label}<i class='icon_tag icon-upload-to-cloud'></i></label>"
 

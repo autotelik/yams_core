@@ -1,26 +1,49 @@
-<% size = :small if local_assigns[:size].nil? %>
+<% cover_file_field_id = 'new-cover-file-upload' %>
 
 <div class="card">
 
   <%= bootstrap_card_header(t('.cover')) %>
 
   <div class="card-body">
-
-    <div class="col">
-      <%= form.fields_for :cover do |cover| %>
-        <div class="form-group">
-          <div class="audio-upload">
-            <div class="row">
-              <div class="col-4">
-                <%= model.cover_image_tag(size: :thumb, css: 'img-fluid rounded') unless model.new_record?%>
-              </div>
-              <div class="col-8">
-                <%= custom_file_field(cover, :image, t('.choose_image_file'), options: { accept: 'image/png,image/gif,image/jpeg' }) %>
-              </div>
-            </div>
-          </div>
+    <%= form.fields_for :cover do |cover| %>
+      <div class="form-group pl-2">
+        <div class="col-4">
+          <%= model.cover_image_tag(size: :thumb, css: 'img-fluid rounded') unless model.new_record?%>
         </div>
-      <% end %>
-    </div>
+      </div>
+      <div class="form-group uploader pl-2 pr-2">
+
+        <%= cover.file_field(:image, accept: "image/*", id: cover_file_field_id, required: true, direct_upload: true ) %>
+
+        <label for="<%= cover_file_field_id %>" id="file-for-cover-drag">
+          <img id="file-for-image-preview" src="#" alt="Preview" class="file-for-image-preview hidden">
+          <div id="choose-image-start" class="file_selection_section pt-4">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <div>Select a file or drag here</div>
+            <div id="not-image-file" class="not-correct-file-type hidden">Please select an image file</div>
+            <span id="cover-file-upload-btn" class="btn btn-primary"><%= t('.choose_image_file') %></span>
+          </div>
+          <div id="file-for-image-response" class="response hidden">
+            <div id="image-upload-messages"></div>
+            <progress class="progress" id="cover-file-upload-progress" max="100" value="0">
+              <span>0</span>%
+            </progress>
+          </div>
+        </label>
+      </div>
+    <% end %>
   </div>
+
 </div>
+
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		manageUpload(
+				'<%= cover_file_field_id %>',
+        'file-for-cover-drag',
+        'cover-file-upload-progress',
+        'image-upload-messages',
+				parseImageFile
+    );
+	});
+</script>

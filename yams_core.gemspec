@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bourbon'
 
   s.add_dependency 'devise'
-  s.add_dependency 'devise-jwt', '~> 0.5.7'          # Tokens
+  s.add_dependency 'devise-jwt'
   s.add_dependency 'devise_invitable'                # An invitation strategy for devise
 
   s.add_dependency 'elasticsearch-model', '~> 5.1.0' # major release should match the ES major release in docker compose
