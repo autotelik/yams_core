@@ -1,6 +1,6 @@
 <% form_id = "taglist-#{model.class.name.demodulize.downcase}-#{model.id}" %>
 
-<div class="form-group p-0">
+<div class="form-group">
   <%= form.select :tag_list, options_for_select(model.tag_list, model.tag_list ), {}, { multiple: true , id: form_id, class: 'form-control-yams' } %>
 </div>
 

@@ -46,12 +46,12 @@ module YamsCore
       AttachCoverService.call(self, path)
     end
 
-    # DEPRECATED - see Presenter
     def cover_image(size: :thumb)
       Rails.logger.info("DEPRECATED Track.cover_image - USE PRESENTER")
       track_cover = self.cover.try(:attached?) ? cover : DefaultCover.for_track
       track_cover.image
     end
+
 
     def artist_name
       user.try(:name)

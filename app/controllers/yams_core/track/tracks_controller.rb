@@ -59,6 +59,9 @@ module YamsCore
     def create
       @track = Track.create(track_params.merge(user: current_user))
 
+      pp 'Track Created'
+      pp @track
+
       @track.audio.attach(track_params[:audio])
 
       respond_to do |format|
@@ -69,7 +72,8 @@ module YamsCore
           format.json { render :show, status: :created, location: @track }
         else
           format.html do
-            @cover = @track.build_cover
+            # TOFIX - this is currently an issue - perhaps with turbolinks - client URL ends up on the INDEX page, so if they do a refresh we
+            @track = TrackPresenter.new(@track, view_context)
             render :new, notice: 'Track upload failed.'
           end
           format.json { render json: @track.errors, status: :unprocessable_entity }
