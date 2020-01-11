@@ -56,7 +56,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-settings-cached'           # https://github.com/huacnlee/rails-settings-cached
   s.add_dependency 'rails_event_store'
   s.add_dependency 'rails_sortable', '~> 1.2.1'
-  s.add_dependency 'rubyzip', '~> 1.2.2'
+  s.add_dependency "rubyzip", ">= 1.3.0"
 
   s.add_dependency 'select2-rails'
   s.add_dependency 'searchkick'

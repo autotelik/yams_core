@@ -23,7 +23,6 @@ group :test do
   gem 'faker'
 
   gem 'launchy'
-  #gem 'listen'
 
   gem "mini_magick", ">= 4.9.4"
 
