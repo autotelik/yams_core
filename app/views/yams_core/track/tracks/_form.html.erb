@@ -1,5 +1,4 @@
 <%= form_with model: @track.model, url: polymorphic_path([yams_core, @track.model]) , local: true do |f| %>
-
   <div class="row">
     <div class="col-6 offset-1">
       <span class="anchor" id="formLogin"></span>
@@ -8,7 +7,7 @@
 
         <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
 
-        <div class="card-body">
+        <div class="card-body pt-2">
 
           <%= render 'yams_core/shared/errors', model: @track %>
 
@@ -31,55 +30,63 @@
 
           <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track.model } %>
 
-          <div class="col centered form-row pb-3">
-            <%= render partial: 'yams_core/shared/choose_cover', locals: { form: f, model: @track } %>
-          </div>
-
-          <%= bootstrap_submit(form: f, text: t('.submit')) %>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Side bar -->
-    <div class="col-4">
-
-      <div class="row">
-        <div class="col-12">
-          <%= render partial: 'permissions', locals: { form: f } %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class="card card-outline-secondary">
-
-            <%= bootstrap_card_header( t(:albums, scope: :global)) %>
-
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <%= render partial: 'yams_core/shared/album_selection' %>
-                </div>
-              </div>
-
-              <hr class="m-3 pb-0">
-
-              <h5><%= t('.track_albums_list') %></h5> <ul>
-              <% track.albums.each do |a|  %>
-                <li class="form-group">
-                  <%= link_to(a.title, yams_core.edit_album_path(a)) %>
-                </li>
-              <% end %>
-              <li class="form-group" id="target-for-add-track-album-selection"></li>
-            </ul>
+          <div class="row">
+            <div class="col-12">
+              <%= render partial: 'permissions', locals: { form: f } %>
             </div>
           </div>
+
+
+          <%= bootstrap_submit(form: f, text: t('.submit'), css: 'btn btn-block btn-lg float-right mt-2') %>
+
+
         </div>
+
       </div>
-
     </div>
+<% end %>
 
+<!-- Side bar -->
+<div class="col-4">
+
+  <div class="row">
+    <div class="col-12">
+      <%= form_with model: [@track] do |f| %>
+        <%= render partial: 'yams_core/shared/choose_cover', locals: { form: f, model:  @track } %>
+      <% end %>
+    </div>
   </div>
 
-<% end %>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline-secondary">
+
+        <%= bootstrap_card_header( t(:albums, scope: :global)) %>
+
+        <div class="card-body pt-2">
+          <div class="row">
+            <div class="col-12">
+              <%= render partial: 'yams_core/shared/album_selection' %>
+            </div>
+          </div>
+
+          <hr class="m-2 pb-0">
+
+          <h5><%= t('.track_albums_list') %></h5> <ul>
+          <% track.albums.each do |a|  %>
+            <li class="form-group pl-4">
+              <%= link_to(a.title, yams_core.edit_album_path(a)) %>
+            </li>
+          <% end %>
+          <li class="form-group" id="target-for-add-track-album-selection"></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+

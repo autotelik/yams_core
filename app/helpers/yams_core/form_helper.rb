@@ -32,15 +32,15 @@ module YamsCore
 
     # icon represents complete deletion from system
     #
-    def delete_icon(model, text: nil, html_options: {})
-      options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: I18n.t(:delete_confirm, scope: :global) } }
+    def delete_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {})
+      options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
 
-      path = polymorphic_path([view.yams_core, model])
+      path = polymorphic_path([yams_core, model])
 
       if text
-        view.link_to back_icon_tag('icon-trash', text: text), path, options.merge(html_options)
+        link_to back_icon_tag('icon-trash', text: text), path, options.merge(html_options)
       else
-        view.link_to icon_tag('icon-trash'), path, options.merge(html_options)
+        link_to icon_tag('icon-trash'), path, options.merge(html_options)
       end
     end
 

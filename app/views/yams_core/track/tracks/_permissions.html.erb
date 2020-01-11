@@ -2,13 +2,11 @@
 
   <%= bootstrap_card_header( t(:permissions, scope: :global)) %>
 
-  <div class="card-body">
-
-    <%= label_tag t('.available_for') %><br>
+  <div class="card-body pt-2">
 
     <% info = { 'free' => 'Available for listening, by any visitor, e.g on radio stream'} %>
 
-    <% YamsCore::Available.concepts.keys.each do |c|  %>
+    <% YamsCore::Available.modes.keys.each do |c|  %>
       <div class="row pl-2">
         <div class="col-1">
           <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c) %>

@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:track_display] = '%Y-%m-%d'

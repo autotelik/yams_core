@@ -3,11 +3,21 @@ module YamsCore
   class Available < ApplicationRecord
     belongs_to :type, polymorphic: true, inverse_of: :availables
 
-    enum concept: %i[free commercial download playlist]
+    enum mode: %i[radio download playlist stream]
 
-    before_create do
+    store_accessor :meta_data, :price, :ccy
+
+    before_create :init_meta_data
+
+    private
+
+    def init_meta_data
+      self.meta_data ||= {}.with_indifferent_access
+
       self.on ||= DateTime.now
     end
 
   end
 end
+
+

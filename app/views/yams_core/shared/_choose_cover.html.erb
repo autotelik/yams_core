@@ -6,14 +6,14 @@
 
   <div class="card-body">
     <%= form.fields_for :cover do |cover| %>
-      <div class="form-group pl-2">
+      <div class="form-group pt-2 pl-2">
         <div class="col-4">
           <%= model.cover_image_tag(size: :thumb, css: 'img-fluid rounded') unless model.new_record?%>
         </div>
       </div>
       <div class="form-group uploader pl-2 pr-2">
 
-        <%= cover.file_field(:image, accept: "image/*", id: cover_file_field_id, required: true, direct_upload: true ) %>
+        <%=cover.file_field(:image, accept: "image/*", id: cover_file_field_id, required: true, direct_upload: true ) %>
 
         <label for="<%= cover_file_field_id %>" id="file-for-cover-drag">
           <img id="file-for-image-preview" src="#" alt="Preview" class="file-for-image-preview hidden">

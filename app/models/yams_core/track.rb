@@ -52,7 +52,6 @@ module YamsCore
       track_cover.image
     end
 
-
     def artist_name
       user.try(:name)
     end
@@ -61,13 +60,17 @@ module YamsCore
       user
     end
 
+    def download?
+      available_for?(:download)
+    end
+
     def duration
       assign_mp3_properties unless length?
       length || 0
     end
 
     def display_duration
-      Time.at(duration).utc.strftime('%H:%M:%S')
+      Time.at(duration).utc.strftime('%M:%S')
     end
 
     private

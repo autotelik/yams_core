@@ -59,9 +59,6 @@ module YamsCore
     def create
       @track = Track.create(track_params.merge(user: current_user))
 
-      pp 'Track Created'
-      pp @track
-
       @track.audio.attach(track_params[:audio])
 
       respond_to do |format|
@@ -87,7 +84,7 @@ module YamsCore
       respond_to do |format|
         if update_track
 
-          Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
+          #Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
 
           format.html { redirect_to yams_core.edit_track_path(@track), notice: 'Track was successfully updated.' }
           format.json { render :show, status: :ok, location: @track }
@@ -114,13 +111,29 @@ module YamsCore
     def update_track
       ActiveRecord::Base.transaction do
         raise ActiveRecord::Rollback unless @track.update(track_params)
+
         # params contains only those selected, so first destroy the existing set
-        @track.availables.delete_all
-        available_for_params[:availables].keys.each { |mode| @track.make_available_for(mode) } if available_for_params[:availables].present?
-        return true
+        #
+        selected = available_for_params[:availables].keys
+
+        #TODO: this will probably be mode dependent e.g setting on radio mode, will not necessarily have price/ccy amount or price will be zero
+        #
+        YamsCore::Available.modes.keys.each do |m|
+
+          meta_data = {
+              price: available_for_params.dig(m, :price) || 0,
+              ccy:   available_for_params.dig(m, :ccy)   || YamsCore::Setting.default_ccy
+          }
+
+          if selected.include?(m)
+            @track.make_available_for(m, meta_data: meta_data)
+          else
+            @track.remove_available_for(m)
+          end
+        end
       end
 
-      false
+      true
     end
 
     def set_presenter
@@ -136,7 +149,7 @@ module YamsCore
     end
 
     def available_for_params
-      params.permit(:album, availables: YamsCore::Available.concepts.keys)
+      params.permit(:album, availables: YamsCore::Available.modes.keys)
     end
 
   end

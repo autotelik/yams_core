@@ -27,6 +27,8 @@ en:
       new:
         panel_title: Sign up to access YAMS
         submit: Create account
+      show:
+        delete: Confirm deletion of Track %{title} ?
     sessions:
       new:
         panel_title: Sign in
@@ -81,7 +83,7 @@ en:
     remove: Really remove %{removal} ?
     shared:
       album_selection:
-        add: Add Track
+        add: Add Track to Album
       choose_cover:
         choose_image_file: Choose Image
         cover: Cover

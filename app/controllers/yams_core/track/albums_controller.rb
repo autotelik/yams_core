@@ -6,7 +6,6 @@ module YamsCore
 
     before_action :authenticate_user!
 
-
     # TODO candidate for concern - mimics app/controllers/yams_core/album/tracks_controller.rb but has different rendering requirements
     def create
 

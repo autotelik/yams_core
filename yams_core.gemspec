@@ -53,7 +53,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg', '~> 0.18'
   s.add_dependency 'pundit'
 
-  s.add_dependency "rails_event_store"
+  s.add_dependency 'rails-settings-cached'           # https://github.com/huacnlee/rails-settings-cached
+  s.add_dependency 'rails_event_store'
   s.add_dependency 'rails_sortable', '~> 1.2.1'
   s.add_dependency 'rubyzip', '~> 1.2.2'
 

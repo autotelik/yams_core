@@ -23,7 +23,13 @@ FactoryBot.define do
 
     trait :available_for_radio do
       after(:create) do |t, _evaluator|
-        t.availables << Available.build(mode: Available.concepts[:free], on: DateTime.now)
+        t.availables << YamsCore::Available.create(mode: :free, on: DateTime.now)
+      end
+    end
+
+    trait :available_for_download do
+      after(:create) do |t, _evaluator|
+        t.availables << create(:available, mode: :download)
       end
     end
   end

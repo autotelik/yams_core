@@ -19,7 +19,7 @@ group :test do
   #
   gem 'capybara-webkit'
 
-  gem 'database_cleaner', platforms: [:mri]
+  gem 'database_cleaner-active_record'
 
   gem 'factory_bot_rails'
   gem 'faker'
