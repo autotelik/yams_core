@@ -28,10 +28,20 @@
     <% track.tag_list.each do |t| %><div class="article-info-text tag"><%= t %></div><% end %>
   </div>
 
-  <div>
+  <div class="align-middle">
     <div class="pull-right">
       <% if track.download? %>
-        <%= button_tag "Download", id: "track-download-link-#{track_counter}", class: "btn btn-download-track pull-right text-small", onclick: "order_download_track(#{track.id})" %>
+        <%#= button_tag "Download", id: "track-download-link-#{track_counter}", class: "btn btn-download-track pull-right text-small", onclick: "order_download_track(#{track.id})" %>
+
+        <form method="POST" action="https://btcpay.yams.fm:444/api/v1/invoices" class="btcpay-form btcpay-form--block py-0">
+          <input type="hidden" name="storeId" value="<%= ENV['YAMS_BTCPAY_DEFAULT_STORE'] %>" />
+          <input type="hidden" name="checkoutDesc" value="Purchase <%= track.title %> by <%= track.artist_name %> for  Download" />
+          <input type="hidden" name="currency" value="BTC " />
+          <input type="hidden" name="price" value="10" />
+          <input type="hidden" name="currency" value="USD" />
+          <input type="hidden" name="OrderId" value="TOM-123-<%= track.title %>" />
+          <input type="submit" name="submit" value="Download" class="btn btn-download-track pull-right text-small">
+        </form>
       <% end %>
     </div>
   </div>

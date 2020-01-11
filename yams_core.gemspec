@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 5.2.1"
+  s.add_dependency "rails", '5.2.4.1'
 
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'jbuilder', '~> 2.5'
@@ -45,8 +45,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'image_processing', '~> 1.7'
 
   s.add_dependency 'kaminari'
-
-  s.add_dependency 'loofah', ">= 2.2.3"
 
   s.add_dependency "nokogiri", ">= 1.8.5"
 
