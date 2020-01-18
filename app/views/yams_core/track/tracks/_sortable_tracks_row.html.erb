@@ -4,10 +4,20 @@
   <td> <%= icon_tag('icon-list') %></td>
   <td><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></td>
   <td>
-    <h6 class="mb-0"><%= link_to presenter.title, edit_polymorphic_path(sortable_with_track.track) %></h6>
+    <%= link_to presenter.title, edit_polymorphic_path(sortable_with_track.track) %>
   </td>
   <td>
-    <%= remove_icon(sortable_with_track, confirm: I18n.t('.remove', scope: :yams_core, removal: sortable_with_track.class.name.demodulize.underscore.humanize) ) %>
+
+    <% path = polymorphic_path(sortable_with_track) %>
+
+    <%= link_to icon_tag('icon-circle-with-cross'), path,
+                method: :delete,
+                remote: true,
+                id: "delete-icon-#{sortable_with_track.class}-#{sortable_with_track.id}",
+                data: { confirm: I18n.t('.remove', scope: :yams_core, removal: sortable_with_track.class.name.demodulize.underscore.humanize) }
+    %>
+
+
   </td>
 </tr>
 

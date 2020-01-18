@@ -13,6 +13,15 @@ module YamsCore
       end
     end
 
+    def material_icon_tag(icon, text: nil, text_front: true)
+      icon = "<i class=\"material-icons\">#{icon}</i>"
+      if text_front
+        raw("#{text} #{icon}")
+      else
+        raw("#{icon} #{text}")
+      end
+    end
+
     # Text then icon
     def back_icon_tag(icon, text: nil)
       icon_tag(icon, text: text, text_front: false)
@@ -35,7 +44,7 @@ module YamsCore
     def delete_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {})
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
 
-      path = polymorphic_path([yams_core, model])
+      path = yams_core.polymorphic_path(model)
 
       if text
         link_to back_icon_tag('icon-trash', text: text), path, options.merge(html_options)
@@ -46,15 +55,15 @@ module YamsCore
 
     # icon represents removal of an item only from a list - item remains in DB, i.e not deletion of that item from system
     #
-    def remove_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {})
+    def remove_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {}, view: view)
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
 
-      path = polymorphic_path([yams_core, model])
+      path = polymorphic_path([view.yams_core, model])
 
       if text
-        link_to back_icon_tag('icon-circle-with-cross', text: text), path, options.merge(html_options)
+        view.link_to back_icon_tag('icon-circle-with-cross', text: text), path, options.merge(html_options)
       else
-        link_to icon_tag('icon-circle-with-cross'), path, options.merge(html_options)
+        view.link_to icon_tag('icon-circle-with-cross'), path, options.merge(html_options)
       end
     end
 

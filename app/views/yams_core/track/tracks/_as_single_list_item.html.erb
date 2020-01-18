@@ -18,17 +18,17 @@
     <div class="col-3 p-0 m-0 datashift-audio-track-details"><%= track.title %></div>
   <% end %>
 
-  <div class="col-1">
+  <div class="col-1 text-center">
     <%= track.created_at.to_s(:track_display) %>
   </div>
-  <div class="col-1">
-    <div class="p-0"><%= track.display_duration %></div>
+  <div class="col-1 text-center">
+    <%= track.display_duration %>
   </div>
   <div class="col-1">
-    <% track.tag_list.each do |t| %><div class="article-info-text tag"><%= t %></div><% end %>
+    <%= render partial: 'yams_core/shared/tag_list', locals: { tag_list: track.tag_list } %>
   </div>
 
-  <div class="align-middle">
+  <div class="align-middle pull-right">
     <div class="pull-right">
       <% if track.download? %>
         <%#= button_tag "Download", id: "track-download-link-#{track_counter}", class: "btn btn-download-track pull-right text-small", onclick: "order_download_track(#{track.id})" %>

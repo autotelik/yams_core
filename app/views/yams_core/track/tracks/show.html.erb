@@ -1,32 +1,27 @@
-<div id="show-tracks" class="media row pt-4">
-  <div class="accordion-item artist col-8 offset-2 ">
-    <div class="card card-sm col m-0 p-0">
-      <div class="card-header">
+<div id="show-track-<%= @track.id %>" class="row pl-4 pt-4">
+  <div class="col-6">
 
-        <div class="row">
-          <div class="col-2"><div class="article-info-text">Uploaded :</div></div>
-          <div class="col-10"><%= @track.created_at.to_s(:short) %></div>
-        </div>
+    <div class="card m-0 p-0">
 
-        <div class="row">
-          <div class="col-2"><div class="article-info-text">Description :</div></div>
-          <div class="col-10"><%= @track.description %></div>
-        </div>
+      <%= bootstrap_card_header( 'details' ) %>
 
-        <div class="row">
-          <div class="col-2"><div class="article-info-text">Tags :</div></div>
-          <div class="col-10">
-            <% @track.tag_list.each do |t| %><div class="article-info-text tag"><%= t %></div><% end %>
+      <div class="card-body show-track pt-4">
+
+        <% details = { t(:artist, scope: :global) => link_to(@track.artist_name, yams_core.artist_path(@track.artist)),
+                       'Uploaded' => @track.created_at.to_s(:short) ,
+                       'Description' => @track.description,
+                       'Tags'  => raw('<div class="tag-list">' + @track.tag_list.collect { |t| "#{t}" }.join(',') + ' </div>'  ),
+                       'TODO' => "Ratings, Comments, Likes etc"
+        } %>
+
+        <% details.each do |k, v| %>
+          <div class="row">
+            <div class="col-3"><div class="article-info-text"><%= k %> :</div></div>
+            <div class="col-9"><%= v %></div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-2"><div class="article-info-text">TODO :</div></div>
-          <div class="col-10">Ratings, Comments, Likes etc
-          </div>
-        </div>
-
+        <% end %>
       </div>
+
     </div>
   </div>
 </div>

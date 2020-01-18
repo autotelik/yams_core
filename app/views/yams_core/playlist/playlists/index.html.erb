@@ -1,57 +1,54 @@
-<div id="index-playlist-playlists" class="media row pt-4">
+<div class="row">
+  <div id="playlist-playlists-index" class="col-4">
 
-  <div class="accordion-item playlist-track col-4">
-    <div class="card card-sm col p-0">
+    <div class="card">
+
       <%= bootstrap_card_header( t(:playlists, scope: :global)) %>
-    </div>
 
-    <ul id="playlist-index" class="list-group list-group-flush">
-      <% @playlists.each do |playlist| %>
+      <div class="card-body">
+        <ul>
+          <% @playlists.each do |playlist| %>
 
-        <li id="playlist_row_<%= playlist.id %>">
-          <% playlist = YamsCore::PlaylistPresenter.new(playlist, self) %>
-          <div class="media align-items-center">
-            <div class="accordion-item playlist-track col-12">
-              <div class="card card-sm ml-2 mr-2">
-                <div class="card-header col-12">
-                  <div class="row">
-                    <div class="col-2">
-                      <%= playlist.cover_image_tag %>
-                    </div>
-                    <div class="col">
-                      <%= link_to(playlist.name, yams_core.playlist_url(playlist, format: :json), id: "select_playlist_row_#{playlist.id}") %>
+            <li id="playlist_row_<%= playlist.id %>">
+              <% playlist = YamsCore::PlaylistPresenter.new(playlist, self) %>
 
-                      <script type="text/javascript" charset="utf-8">
-                          $('#<%= "select_playlist_row_#{playlist.id}" %>').click(function (event) {
-                              event.preventDefault(); // Prevent link from following its href
-
-                              $.ajax({
-                                  type: 'GET',
-                                  url: '<%= url_for(yams_core.playlist_url(playlist)) %>',
-                                  dataType: "script"
-                              });
-                          });
-                      </script>
-
-                    </div>
-                  </div>
+              <div class="row align-middle">
+                <div class="col-2">
+                  <%= playlist.cover_image_tag %>
                 </div>
+                <span class="pt-3">
+                  <%= link_to(playlist.name, yams_core.playlist_url(playlist, format: :json), id: "select_playlist_row_#{playlist.id}") %>
+
+                  <script type="text/javascript" charset="utf-8">
+										$('#<%= "select_playlist_row_#{playlist.id}" %>').click(function (event) {
+											event.preventDefault(); // Prevent link from following its href
+
+											$.ajax({
+												type: 'GET',
+												url: '<%= url_for(yams_core.playlist_url(playlist)) %>',
+												dataType: "script"
+											});
+										});
+                  </script>
+                </span>
               </div>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div> <!-- end playlist column -->
 
-  <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
-
-  <div id="datashift-audio-playlist-wrapper" class="col-8 pt-2">
-    <div class="text-center pb-2"><h5 id="current-playlist-header"><%= @playlists.first.try(:name) %></h5></div>
-    <div id="datashift-audio-playlist" class="col-12">
+  <div id="datashift-audio-playlist-wrapper" class="col-7">
+    <div class="text-center pb-4">
+      <h5 id="current-playlist-header"><%= @playlists.first.try(:name) %></h5>
+    </div>
+    <div class="row">
+      <ul class="col datashift-audio-playlist"><%= render partial: 'yams_core/track/tracks/single_list_item_headers' %></ul>
+    </div>
+    <div id="datashift-audio-playlist" class="col-12">     <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
     </div>
   </div>
-
 </div>
 
 <% content_for :audio_player_in_navbar  do %>
@@ -59,10 +56,10 @@
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
-    /* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
-    <% content_for :datashift_audio_engine_track_playlist do %>
-    <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
-    <% end %>
+	/* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
+	<% content_for :datashift_audio_engine_track_playlist do %>
+	  <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+	<% end %>
 
-    $('#datashift-audio-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");
+	$('#datashift-audio-playlist').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");
 </script>

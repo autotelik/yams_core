@@ -37,7 +37,7 @@
             <% @user.tracks.includes(cover: { image_attachment: :blob }).each do |track| %>
               <% presenter = YamsCore::TrackPresenter.new(track, self) %>
               <tr id="user-registrations-track-<%= track.id %>" class="sortable_tracks_row p-0">
-                <td><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></td>
+                <td><%= presenter.cover_image_tag(size: :thumb, options: { class: "avatar rounded avatar-sm" } ) %></td>
                 <td>
                   <h6 class="mb-0"><%= link_to presenter.title, yams_core.edit_track_path(track) %></h6>
                 </td>

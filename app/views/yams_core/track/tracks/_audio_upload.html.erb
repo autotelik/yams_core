@@ -1,0 +1,37 @@
+<% if track.new_record? %>
+  <% file_field_id = 'new-track-file-upload' %>
+<% else %>
+  <% file_field_id = 'update-track-file-upload' %>
+  <% if track.audio.try(:filename) %>
+    <h6>Replace : <%= @track.audio.filename %></h6></p>
+  <% end %>
+<% end %>
+
+<%= form.file_field(:audio, accept: "audio/*", id: file_field_id, required: true, direct_upload: true ) %>
+
+<label for="<%= file_field_id %>" id="file-for-track-drag" class="form-control-yams">
+  <div id="start" class="file_selection_section pt-4">
+    <i class="fa fa-download" aria-hidden="true"></i>
+    <div><%= t('.choose_audio_file_long') %></div>
+    <div id="not-audio-file" class="not-correct-file-type hidden"><%= t('.not_audio_file') %></div>
+    <span id="file-upload-btn" class="btn btn-primary"><%= t('.choose_audio_file') %></span>
+  </div>
+  <div id="file-for-track-response" class="response hidden">
+    <div id="track-upload-messages"></div>
+    <progress class="progress" id="track-direct-upload-progress" max="100" value="0">
+      <div>0</div>%
+    </progress>
+  </div>
+</label>
+
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		manageUpload(
+				'<%= file_field_id %>',
+				'file-for-track-drag',
+				'track-direct-upload-progress',
+				'track-upload-messages',
+				parseAudioFile
+		);
+	});
+</script>

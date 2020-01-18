@@ -1,6 +1,6 @@
-<div class="row article m-0 p-0 pt-3 pb-2" id="draggable-track-row-<%= track_presenter.sortable_id %>">
+<div class="row draggable-track-row " id="draggable-track-row-<%= track_presenter.sortable_id %>">
   <div class="col-12" data-track-id="<%= track_presenter.id %>" draggable="true" ondragstart="drag(event)" id="track_<%= track_presenter.id %>" >
-    <div class="row show_track  align-items-center">
+    <div class="row align-items-center">
 
       <div class="col-2">
         <% if track_presenter.cover_image.present? %>
@@ -10,8 +10,8 @@
 
       <div class="col-7">
         <div class="row pb-1" id="track_row_<%= track_presenter.id %>">
-          <div class="col-10" data-track_presenter-id="<%= track_presenter.id %>" draggable="true" ondragstart="drag(event)" id="track_<%= track_presenter.id %>" >
-            <h6 class="mb-0 text-white"><%= track_presenter.title %></h6>
+          <div data-track_presenter-id="<%= track_presenter.id %>" draggable="true" ondragstart="drag(event)" id="track_<%= track_presenter.id %>" >
+            <%= track_presenter.title %>
           </div>
         </div>
       </div>

@@ -35,6 +35,10 @@ module YamsCore
     def tracks_for_player
       tracks.includes([:user, { audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
     end
+
+    def name
+      self.title
+    end
     
 =begin
   private

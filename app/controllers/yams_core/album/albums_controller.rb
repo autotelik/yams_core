@@ -22,13 +22,14 @@ module YamsCore
       Album.connection.execute("select setseed(#{seed_val})")
       @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
 
-      populate_tracks(@albums.first)
+      populate_track_presenters(@albums.first)
 
       @datashift_audio_json = @tracks.present? ? AudioEngineJsonBuilder.call(@tracks, current_user) : ""
     end
 
+
     def show
-      @tracks = @album.tracks_for_player
+      populate_track_presenters(@album)
 
       @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 
@@ -116,7 +117,7 @@ module YamsCore
       params.require(:album).permit(:title, :description, :published_state, :user_id, tag_list: [], cover_attributes: %i[id image])
     end
 
-    def populate_tracks(album)
+    def populate_track_presenters(album)
       @tracks = album ? to_presenters(album.tracks_for_player) : []
     end
 

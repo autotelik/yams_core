@@ -37,7 +37,7 @@ en:
     albums: Albums
     delete: Delete
     delete_confirm: Sure you want to permanently Delete?
-    drop_tracks: Drag and drop tracks here
+    drop_tracks: Drag and drop tracks
     edit: Edit
     permissions: Permissions
     playlists: Playlists
@@ -87,6 +87,7 @@ en:
       choose_cover:
         choose_image_file: Choose Image
         cover: Cover
+        replace_image_file: Replace Image
       errors:
         you_have: You have
       track_selection:
@@ -99,6 +100,14 @@ en:
           generate_template: Generate Template
           submit: Upload
       tracks:
+        audio_upload:
+          accept_audio_file: Please choose an audio file - Wav/MP3
+          card-header: Upload new Track
+          choose_audio_file: Choose Audio File
+          choose_audio_file_long: Select an Audio file or drag here
+          not_audio_file: Please select a file of type audio such as wav/aif/mp3
+        edit:
+          track_albums_list: Present In
         form:
           accept_audio_file: Please choose an audio file - Wav/MP3
           choose_audio_file: Choose File
@@ -107,11 +116,17 @@ en:
             card-header: Edit Track
           submit: Update
           title: Title
-          track_albums_list: Present In
+          new:
+            accept_audio_file: Please choose an audio file - Wav/MP3
+            card-header: Upload new Track
+            choose_audio_file: Choose Audio File
+            description: Description
+            submit: Upload
+            title: Title
         new:
           accept_audio_file: Please choose an audio file - Wav/MP3
           card-header: Upload new Track
-          choose_audio_file: Choose File
+          choose_audio_file: Choose Audio File
           description: Description
           submit: Upload
           title: Title

@@ -5,7 +5,7 @@
       <div class="col-8 offset-2 card p-0">
         <div class="card-body">
 
-            <h2 class="section-heading centered white mt-2 mb-2"><%= t('.panel_title') %></h2>
+          <h2 class="section-heading centered white mt-2 mb-2"><%= t('.panel_title') %></h2>
 
           <div class="row">
             <div class="col-6 offset-3 ">
@@ -13,16 +13,16 @@
 
               <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form col") do |f| %>
 
-                <div class="col centered form-row pb-3">
+                <div class="col centered form-row pb-3 px-0">
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control-yams w-100', placeholder: "Your username or email" %>
                 </div>
 
-                <div class="col centered form-row pb-3">
+                <div class="col centered form-row pb-3 px-0">
                   <%= f.password_field :password, autocomplete: "off", class: 'form-control-yams w-100', placeholder: "Password" %>
                 </div>
 
                 <% if false && devise_mapping.rememberable? -%>
-                  <div class="col form-row pb-3">
+                  <div class="col form-row pb-3 px-0">
                     <div class="col-1 pl-0 pull-left">
                       <%= f.check_box :remember_me, class: 'form-control-yams pull-left' %>
                     </div>
@@ -32,7 +32,9 @@
                   </div>
                 <% end -%>
 
-                <%= bootstrap_submit(form: f, text: I18n.t(:sign_in, scope: :global)) %>
+                <div class="row pull-right pt-2">
+                  <%= bootstrap_submit(form: f, text: I18n.t(:sign_in, scope: :global)) %>
+                </div>
 
               <% end %>
 

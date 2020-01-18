@@ -107,6 +107,8 @@ function parseImageFile(file) {
 		document.getElementById('not-image-file').classList.add("hidden");
 
 		// Thumbnail Preview
+
+		document.getElementById('file-for-image-preview').classList.remove("background-image");
 		document.getElementById('file-for-image-preview').classList.remove("hidden");
 		document.getElementById('file-for-image-preview').src = URL.createObjectURL(file);
 	}
@@ -170,8 +172,7 @@ function manageUpload(fileSelectID, fileDragID, directUploadProgressID, messages
 		//}
 		var file = files[0]
 
-		console.log('Parse file : ' + file.name);
-		output(file.name);
+		output(file.name);    // show the new filename
 
 		parseCallback(file);
 

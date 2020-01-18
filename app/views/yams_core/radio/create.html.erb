@@ -6,6 +6,8 @@
 
   <% content_for :datashift_audio_engine_track_playlist do %>
 
+    <%= render partial: 'yams_core/track/tracks/single_list_item_headers' %>
+
     <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 
     <script type="text/javascript">

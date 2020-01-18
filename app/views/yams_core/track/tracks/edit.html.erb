@@ -1,1 +1,35 @@
-<%= render 'form', track: @track %>
+<% content_for :track_form_sidebar_extras do %>
+  <div class="card">
+
+    <div class="row pt-2">
+      <div class="card">
+
+        <%= bootstrap_card_header( t(:albums, scope: :global)) %>
+
+        <div class="card-body pt-2">
+          <div class="row">
+            <div class="col">
+              <%= render partial: 'yams_core/shared/album_selection' %>
+            </div>
+          </div>
+
+          <hr class="pb-0">
+
+          <h5><%= t('.track_albums_list') %></h5> <ul>
+          <% @track.albums.each do |a|  %>
+            <li class="form-group pl-4">
+              <%= link_to(a.title, yams_core.edit_album_path(a)) %>
+            </li>
+          <% end %>
+          <li class="form-group" id="target-for-add-track-album-selection"></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= form_with model: @track.model, url: polymorphic_path([yams_core, @track.model]) , local: true do |f| %>
+  <%= render 'form', form: f, track: @track %>
+<% end %>

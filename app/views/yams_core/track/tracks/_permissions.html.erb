@@ -2,24 +2,34 @@
 
   <%= bootstrap_card_header( t(:permissions, scope: :global)) %>
 
-  <div class="card-body pt-2">
+  <div class="card-body text-center pt-2">
 
-    <% info = { 'free' => 'Available for listening, by any visitor, e.g on radio stream'} %>
+    <% info = {
+        'radio': 'Available in Radio - i.e for listening, by any visitor for free.',
+        'download': 'Available for download by registered users, a fee may apply',
+        'playlist': 'Available for visitors to add to personal playlists, a fee may apply',
+        'stream': 'Available for streaming by registered users, a micro fee may apply'
+    }  %>
 
     <% YamsCore::Available.modes.keys.each do |c|  %>
+
       <div class="row pl-2">
         <div class="col-1">
-          <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c) %>
+          <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c), 'data-toggle': "tooltip", 'data-placement': "left", title: info[c.to_sym] %>
         </div>
-        <div class="col-5 pl-2">
-          <%= form.label c, 'data-toggle': "tooltip", 'data-placement': "right", title: info[c] %>
+        <div class="col-9 pl-2">
+          <%= form.label c  %>
         </div>
       </div>
+
     <% end %>
   </div>
 </div>
+
 <script type="text/javascript" charset="utf-8">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 </script>
+
+

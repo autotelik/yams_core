@@ -12,7 +12,7 @@ module YamsCore
 
       html = <<-EOS
     <div class="dropdown">
-      <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-dropdown dropdown-toggle btn-dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="icon-dots-three-horizontal"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">

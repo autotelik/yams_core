@@ -1,92 +1,60 @@
-<%= form_with model: @track.model, url: polymorphic_path([yams_core, @track.model]) , local: true do |f| %>
-  <div class="row">
-    <div class="col-6 offset-1">
-      <span class="anchor" id="formLogin"></span>
+<div class="row">
+  <div class="col-8 offset-2">
 
-      <div class="card card-outline-secondary">
+    <div class="card ">
 
-        <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
+      <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
 
-        <div class="card-body pt-2">
+      <div class="card-body pb-2">
+        <div class="row pt-2">
+          <div class="col-7 pl-4">
+            <%= render 'yams_core/shared/errors', model: @track %>
 
-          <%= render 'yams_core/shared/errors', model: @track %>
-
-          <div class="form-group">
-            <%= f.label t('.title') %>
-            <%= f.text_field :title, :autofocus => true, class: 'form-control-yams' %>
-          </div>
-
-          <div class="form-group">
-            <% if @track.audio.try(:filename) %>
-              <p>Replace : <%= @track.audio.filename %></p>
-            <% end %>
-            <%= custom_file_field(f, :audio, t('.choose_audio_file'), additional: t('.accept_audio_file')) %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label t('.description') %>
-            <%= f.text_field :description, :autofocus => true, class: 'form-control-yams' %>
-          </div>
-
-          <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: @track.model } %>
-
-          <div class="row">
-            <div class="col-12">
-              <%= render partial: 'permissions', locals: { form: f } %>
+            <div class="form-group">
+              <%= form.label t('.title') %>
+              <%= form.text_field :title, id: "file-upload-title", autofocus: true, class: 'form-control-yams col-12', required: true %>
             </div>
+
+            <div class="form-group">
+              <%= form.label t('.description') %>
+              <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'form-control-yams') %>
+            </div>
+
+            <div class="form-group uploader">
+              <%= render partial: 'audio_upload', locals: { form: form, track: @track } %>
+            </div>
+
+            <div class="form-group">
+              <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: @track } %>
+            </div>
+
           </div>
 
+          <!-- Side bar -->
+          <div class="col-4">
+            <div class="row">
+              <div class="col">
+                <%= render partial: 'yams_core/shared/choose_cover', locals: { form: form, model: @track } %>
+              </div>
+            </div>
 
-          <%= bootstrap_submit(form: f, text: t('.submit'), css: 'btn btn-block btn-lg float-right mt-2') %>
+            <div class="row pt-4">
+              <div class="col">
+                <%= render partial: 'permissions', locals: { form: form } %>
+              </div>
+            </div>
 
+            <%= yield :track_form_sidebar_extrastrack_form_sidebar_extras %>
+          </div>
 
+        </div>
+
+        <div class="pt-4 pr-4">
+          <%= bootstrap_submit(form: form, text: t('.submit')) %>
         </div>
 
       </div>
     </div>
-<% end %>
 
-<!-- Side bar -->
-<div class="col-4">
-
-  <div class="row">
-    <div class="col-12">
-      <%= form_with model: [@track] do |f| %>
-        <%= render partial: 'yams_core/shared/choose_cover', locals: { form: f, model:  @track } %>
-      <% end %>
-    </div>
   </div>
-
-  <div class="row">
-    <div class="col-12">
-      <div class="card card-outline-secondary">
-
-        <%= bootstrap_card_header( t(:albums, scope: :global)) %>
-
-        <div class="card-body pt-2">
-          <div class="row">
-            <div class="col-12">
-              <%= render partial: 'yams_core/shared/album_selection' %>
-            </div>
-          </div>
-
-          <hr class="m-2 pb-0">
-
-          <h5><%= t('.track_albums_list') %></h5> <ul>
-          <% track.albums.each do |a|  %>
-            <li class="form-group pl-4">
-              <%= link_to(a.title, yams_core.edit_album_path(a)) %>
-            </li>
-          <% end %>
-          <li class="form-group" id="target-for-add-track-album-selection"></li>
-        </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
-
-</div>
-
-

@@ -14,7 +14,7 @@ module YamsCore
     helper DatashiftAudioEngine::PlayerHelper
 
     def index
-      @playlists = Playlist.for_user(current_user).includes(:tracks).page(params[:page]).per(30)
+      @playlists = Playlist.for_user(current_user).includes(tracks: { cover: { image_attachment: :blob } } ).page(params[:page]).per(30)
 
       if @playlists.present?
         populate_tracks(@playlists.first)

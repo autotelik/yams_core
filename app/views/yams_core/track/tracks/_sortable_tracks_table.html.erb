@@ -8,10 +8,15 @@
       <td> <%= icon_tag('icon-list') %></td>
       <td><%= presenter.cover_image_tag(size: :thumb, css: "avatar rounded avatar-sm" ) %></td>
       <td>
-        <h6 class="mb-0"><%= link_to presenter.title, edit_polymorphic_path(at.track) %></h6>
+        <%= link_to presenter.title, edit_polymorphic_path(at.track) %>
       </td>
       <td>
-        <%= remove_icon(at, confirm: I18n.t('.remove', scope: :yams_core, removal: at.class.name.demodulize.underscore.humanize) ) %>
+        <%= link_to icon_tag('icon-circle-with-cross'),  polymorphic_path(at),
+                    method: :delete,
+                    remote: true,
+                    id: "delete-icon-#{at.class}-#{at.id}",
+                    data: { confirm: I18n.t('.remove', scope: :yams_core, removal: at.class.name.demodulize.underscore.humanize) }
+        %>
       </td>
     </tr>
   <% end %>

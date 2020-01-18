@@ -19,17 +19,20 @@ module YamsCore
     include YamsCore::FormHelper
     include YamsCore::BootstrapHelper
 
+    delegate :polymorphic_path,  :link_to, :yams_core, to: :@view
+
     def initialize(model, view)
       super(model)
       @view = view
       @model = model
     end
 
-    def cover_image_tag(size: :thumb, css: 'avatar img-fluid rounded')
+    def cover_image_tag(size: :thumb, options: {})
       return unless respond_to?(:cover_image)
       cover = cover_image(size: size)
       return unless cover
-      view.image_tag(Rails.application.routes.url_helpers.rails_blob_path(cover, only_path: true), class: css)
+      options[:class] ||= 'avatar img-fluid rounded'
+      view.image_tag(Rails.application.routes.url_helpers.rails_blob_path(cover, only_path: true), options)
     end
 
     def sortable_id
