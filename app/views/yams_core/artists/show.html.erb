@@ -9,8 +9,18 @@
             <%= image_tag(main_app.rails_blob_url(@artist.avatar_image), class: 'img-fluid rounded') %>
           </div>
           <div class="col-7 pt-3">
-            <h5 class="align-middle"><%= @artist.name %></h5>
+            <h5 class="align-middle pb-2"><%= @artist.name %></h5>
+
+            <div class="row py-1">
+              <span class="text-light"><%= @artist.permalink_url %></span>
+            </div>
+
+            <div class="row pb-1">City: <span class="text-light"><%= @artist.city %></span></div>
+            <div class="row rowpb-1">Country: <span class="text-light"><%= @artist.country %></span></div>
+            <div class="row py-1"><span class="text-light"><%= @artist.bio %></span></div>
+
           </div>
+
           <% if current_user.id == @artist.id %>
             <div class="col-2">
               <%= link_to icon_tag('icon-pencil'), yams_core.edit_user_registration_path(@artist), class: 'icon_tag  pull-right ' %>

@@ -8,7 +8,7 @@
   <%= render 'yams_core/shared/errors', model: album %>
 
   <div class="row pt-2">
-    <div class="col-10">
+    <div class="col">
       <div class="form-group">
         <%= f.label :title %>
         <%= f.text_field :title,  id: :album_title, class: "col form-control-yams" %>
@@ -17,7 +17,7 @@
   </div>
 
   <div  class="row">
-    <div class="col-10">
+    <div class="col">
       <div class="form-group">
         <%= f.label :description %>
         <%= f.text_area :description, id: :album_description, class: "col form-control-yams" %>
@@ -26,15 +26,15 @@
   </div>
 
   <div  class="row">
-    <div class="col-10">
+    <div class="col">
       <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: f, model: album } %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-8">
+    <div class="col">
       <div class="form-group">
-        <%= f.label t('.state') %>
+        <%= f.label t('.state') %> :
         <%= f.collection_radio_buttons(:published_state, YamsCore::Album.published_states, :first, :first, html_options: { class: 'form-control-yams' }) do |b| %>
           <%= b.label { b.radio_button + " " + b.text } %>
         <% end %>
@@ -43,7 +43,7 @@
   </div>
 
   <div class="row">
-    <div class="col-6 offset-2">
+    <div class="col">
       <%= bootstrap_submit(form: f, text: t(".#{params[:action]}.submit"), css: 'btn btn-block btn-lg float-right') %>
     </div>
   </div>

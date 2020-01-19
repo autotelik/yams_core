@@ -1,16 +1,16 @@
 <% content_for :album_column do %>
   <!-- ALBUMS -->
   <div class="album-track-manager-dropzone m-0 p-0 mb-2">
-    <div class="accordion-item album-track col-12">
+    <div class="album-track col p-0">
       <div class="card card-sm col p-0">
         <%= bootstrap_card_header( t(:albums, scope: :global)) %>
       </div>
 
-      <div class="card-body p-0">
-        <ul id="album-management-dashboard-with-dropzone" class="striped-list list-group list-group-flush">
+      <div class="card-body px-0 pt-2">
+        <ul id="album-management-dashboard-with-dropzone" class="list-group list-group-flush">
           <!-- Album Management - with drag and drop track section-->
           <% @albums.each do |album| %>
-            <li id="album_row_<%= album.id %>">
+            <li id="album_row_<%= album.id %>" class="pt-4">
               <%= render(partial: 'yams_core/album/album_with_dropzone', locals: { album_presenter: YamsCore::AlbumPresenter.new(album, self) }) %>
             </li>
           <% end %>

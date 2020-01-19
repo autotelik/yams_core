@@ -19,8 +19,11 @@
 
           var track = document.getElementById(ev.dataTransfer.getData('Text'));
 
-          // Hide whole Track source row (track details plus any other buttons - edit, delete etc)
-          track.parentNode.remove();
+          // We enable multiple Albumes to be administered from same view, so do not remove Track added to the Album from
+          // Track selection list, so it can be added to other Albums if wanted
+          //
+          // In future if instead we only want tracks added to single album, just remove it
+          // track.parentNode.remove();
 
           // Wrap button in li so tracks insert vertically
           var wrapper = document.createElement('li');

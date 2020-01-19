@@ -11,7 +11,7 @@ module YamsCore
       seed_val = rand
       Track.connection.execute("select setseed(#{seed_val})")
 
-      Track.eager_load(:user)
+      Track.eager_load(:user, :availables)
           .includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
           .order('random()')
           .page(params[:page])

@@ -14,6 +14,8 @@ module YamsCore
     end
 
     def call
+      puts "Oh FFS", DatashiftAudioEngine::Config.call.wave_color, DatashiftAudioEngine::Config.call.progress_color ,DatashiftAudioEngine::Config.call.cursor_color
+
       Jbuilder.encode do |json|
         json.datashift_audio do
 
@@ -29,19 +31,23 @@ module YamsCore
           end
 
           json.waveform do
-            json.wave_color DatashiftAudioEngine::Config.call.wave_color
-            json.progress_color DatashiftAudioEngine::Config.call.progress_color
-            json.cursor_color DatashiftAudioEngine::Config.call.cursor_color
-            json.bar_width 'w-100'
+            json.wave_color     '#f7931a'
+            json.progress_color '#c7630a'
+            json.cursor_color   '#010101'
           end
 
-          json.tracks YamsCore::AudioEnginePlayListBuilder.call(tracks, current_user)
+          json.playlist do
+            json.tracks    YamsCore::AudioEnginePlayListBuilder.call(tracks, current_user)
+            json.track_idx '0'
+            json.position  '0'
+          end
 
-          json.playlist '0'
-          json.page '0'
-          json.total_pages (tracks.count.to_f / 30).ceil
-          json.track '0'
-          json.position '0'
+          # TODO: how is pagination gonna work ?
+          json.pagination do
+            json.page '0'
+            json.total_pages 1
+          end
+
         end
       end
     end

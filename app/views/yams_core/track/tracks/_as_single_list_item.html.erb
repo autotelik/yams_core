@@ -1,6 +1,6 @@
 <% # The JS needs to access the LIST index (not Rails DB Id) hence track_counter %>
 
-<li id="track-<%= track_counter %>" onclick="datashift_audio_playlist_onclick_handler(this)" >
+<li id="track-<%= track_counter %>" onclick="datashift_audio_engine.playlist_onclick(this)" >
 
   <div class="col-1 image-wrapper">
     <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %>
@@ -37,10 +37,10 @@
           <input type="hidden" name="storeId" value="<%= ENV['YAMS_BTCPAY_DEFAULT_STORE'] %>" />
           <input type="hidden" name="checkoutDesc" value="Purchase <%= track.title %> by <%= track.artist_name %> for  Download" />
           <input type="hidden" name="currency" value="BTC " />
-          <input type="hidden" name="price" value="10" />
+          <input type="hidden" name="price"    value="0.001" />
           <input type="hidden" name="currency" value="USD" />
-          <input type="hidden" name="OrderId" value="TOM-123-<%= track.title %>" />
-          <input type="submit" name="submit" value="Download" class="btn btn-download-track pull-right text-small">
+          <input type="hidden" name="OrderId"  value="TOM-123-<%= track.title %>" />
+          <input type="submit" name="submit"  value="Download" class="btn btn-download-track pull-right text-small">
         </form>
       <% end %>
     </div>

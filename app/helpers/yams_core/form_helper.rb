@@ -55,7 +55,7 @@ module YamsCore
 
     # icon represents removal of an item only from a list - item remains in DB, i.e not deletion of that item from system
     #
-    def remove_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {}, view: view)
+    def remove_icon(model, text: nil, confirm: I18n.t('.remove_confirm'), html_options: {}, view:)
       options = { method: :delete, remote: true, id: "delete-icon-#{model.class}-#{model.id}", data: { confirm: confirm } }
 
       path = polymorphic_path([view.yams_core, model])
