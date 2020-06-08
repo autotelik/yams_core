@@ -20,7 +20,7 @@ describe 'track made available', type: :request do
 
         track = YamsCore::Track.last
         expect(track.availables.count).to eq 1
-        expect(track.available_for?(:free)).to eq false
+        expect(track.available_for?(:radio)).to eq false
         expect(track.available_for?(:download)).to eq true
       end
     end

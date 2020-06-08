@@ -9,8 +9,8 @@ module YamsCore
 
       accepts_nested_attributes_for :availables, allow_destroy: true
 
-      scope :for_free, -> { joins(:availables).where('availables.mode': YamsCore::Available.modes[:free]) }
-      scope :for_commercial, -> { joins(:availables).where('availables.mode': YamsCore::Available.modes[:commercial]) }
+      scope :for_free, -> { joins(:availables).where('availables.mode' => YamsCore::Available.modes[:free]) }
+      scope :for_commercial, -> { joins(:availables).where('availables.mode' => YamsCore::Available.modes[:commercial]) }
     end
 
     # TODO - benchmark ways nof getting at the modes e.g

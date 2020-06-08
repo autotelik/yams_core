@@ -23,7 +23,7 @@ FactoryBot.define do
 
     trait :available_for_radio do
       after(:create) do |t, _evaluator|
-        t.availables << YamsCore::Available.create(mode: :free, on: DateTime.now)
+        t.availables << YamsCore::Available.create(mode: :radio, on: DateTime.now)
       end
     end
 

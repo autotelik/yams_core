@@ -1,47 +1,54 @@
-require "rails"
+# Require gems needed for initialisation
 
-require 'coffee-rails'
-require 'jbuilder'
-
-require 'sass-rails'
-require 'turbolinks'
-require 'uglifier'
+require 'byebug' unless Rails.env.production?
 
 require 'active_storage_validations'
-require 'acts-as-taggable-on'
+require 'acts-as-taggable-on'            # https://github.com/mbleigh/acts-as-taggable-on
 require 'administrate'
-require 'autoprefixer-rails'
 
 require 'bourbon'
 
 require 'devise'
 require 'devise_invitable'                # An invitation strategy for devise
 
-require 'elasticsearch'
+require 'elasticsearch'                   # major release should match the ES major release in docker compose
+#require 'elasticsearch-rails'
 
 require 'image_processing'
 
 require 'kaminari'
 
-require 'loofah'
-require 'nokogiri'
+require "nokogiri"
 
-require 'pg'
 require 'pundit'
 
-require "rails_event_store"
-require 'rails_sortable'
+#  N.B 1.3 and 1.4 breaks
+#     ActiveSupport::MessageVerifier::InvalidSignature (ActiveSupport::MessageVerifier::InvalidSignature):
+
+require 'rails_sortable'  # https://github.com/itmammoth/rails_sortable
 
 require 'select2-rails'
 require 'searchkick'
 require 'sidekiq'
 
 module YamsCore
+
+  ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
+
+  class << self
+    def webpacker
+      @webpacker ||= ::Webpacker::Instance.new(
+          root_path: ROOT_PATH,
+          config_path: ROOT_PATH.join("config/webpacker.yml")
+      )
+    end
+  end
+
   class Engine < ::Rails::Engine
     isolate_namespace YamsCore
 
     # Add a load path for this specific Engine
-    config.autoload_paths << File.expand_path("../app/workers/yams_core", __FILE__)
+    #config.autoload_paths << File.expand_path("../app/workers/yams_core", __FILE__)
 
     config.assets.paths << root.join("app", "assets", "javascripts", "yams_core")
 
@@ -69,6 +76,10 @@ module YamsCore
     config.to_prepare do
       ApplicationController.helper(YamsCore::FormHelper)
       ApplicationController.helper(YamsCore::BootstrapHelper)
+    end
+
+    config.generators do |g|
+      g.test_framework :rspec
     end
 
   end

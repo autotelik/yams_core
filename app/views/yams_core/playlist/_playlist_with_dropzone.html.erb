@@ -1,46 +1,43 @@
 <% accordion = "playlist-track-manager-#{playlist.id}" %>
 
-<div class="card card-sm ml-2 mr-2">
+<div class="row">
+  <div class="col p-0">
+    <div class="card mx-0">
 
-  <div class="card-header col-12">
-    <div class="row">
+      <div class="card-header-light col-12">
+        <div class="row">
+          <div class="col-1 pl-0"><%= playlist.bootstrap_actions_dropdown %></div>
 
-      <div class="col-2">
-        <%= playlist.cover_image_tag %>
-      </div>
-      <div class="col"><h5 class="playlist-track"><%= playlist.name %></h5></div>
+          <div class="col-2"><%= playlist.cover_image_tag %></div>
 
-      <div class="col-1">
-        <%= playlist.bootstrap_actions_dropdown %>
-      </div>
+          <div class="col"><h5 class="playlist-track"><%= playlist.name %></h5></div>
 
-      <a data-toggle="collapse" href="#<%= accordion %>" aria-expanded="true">
-        <div class="col"><i class="icon-chevron-small-right" style="border: 2px solid;"></i></div>
-      </a>
+          <a data-toggle="collapse" href="#<%= accordion %>" aria-expanded="true">
+            <div class="col pt-1 pr-0"><i class="icon-chevron-small-right"></i></div>
+          </a>
 
-    </div>
-  </div>
-
-  <!-- PLAYLIST TRACKS -->
-  <div class="card-body">
-
-    <!-- DROP INSERTION POINT - ID given by : data-playlist-id -->
-    <ul id="playlist-track-drop-zone-<%= playlist.id %>" data-playlist-id="<%= playlist.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-      <h6 class="text-white py-2"><%= t('global.drop_tracks') %></h6>
-
-
-      <div id="<%= accordion %>" class="collapse show col-12 playlist-track" role="tabpanel">
-        <div class="show-track-playlist-dropzone">
-          <%= render partial: 'yams_core/track/tracks/sortable_tracks_table', locals: { owner: playlist, sortable: playlist.playlist_tracks } %>
         </div>
       </div>
-    </ul>
-  </div>
 
+      <!-- PLAYLIST TRACKS -->
+
+      <div class="card-header-drag-drop" ondrop="return false;">
+        <!-- DROP INSERTION POINT - ID given by : data-playlist-id -->
+        <ul id="playlist-track-drop-zone-<%= playlist.id %>" data-playlist-id="<%= playlist.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h6 class="text-white"><%= t('global.drop_tracks') %></h6>
+        </ul>
+      </div>
+
+      <div class="card-body">
+        <div id="<%= accordion %>" class="collapse show col-12 playlist-track" role="tabpanel">
+          <div class="show-track-playlist-dropzone">
+            <%= render partial: 'yams_core/track/tracks/sortable_tracks_table', locals: {
+                owner: playlist,
+                sortable: playlist.playlist_tracks } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-	$(function() {
-		$('.sortable').railsSortable();
-	})
-</script>

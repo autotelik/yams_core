@@ -34,10 +34,15 @@ en:
         panel_title: Sign in
         submit: Login
   global:
+    about: About
+    add_album: Add album
+    add_playlist: Add playlist
+    admin: Admin
     albums: Albums
+    choose_audio_help: 300MB max, lossless # .wav, .aif or .flac
     delete: Delete
     delete_confirm: Sure you want to permanently Delete?
-    drop_tracks: Drag and drop tracks
+    drop_tracks: Drag and drop tracks here
     edit: Edit
     permissions: Permissions
     playlists: Playlists
@@ -45,6 +50,26 @@ en:
     sign_up: Register
     tags: Tags
     tracks: Tracks
+    albums: Albums
+    artist: Artist
+    artists: Artists
+    bulk_upload: Bulk upload
+    discography: Discography
+    home: Home
+    learn_more: Learn More
+    manage: Manage
+    manage_albums: Manage albums
+    manage_playlists: Manage playlists
+    playlists: Playlists
+    profile: Profile
+    radio: Radio
+    remove_confirm: Sure you want to Delete?
+    sign_in: Sign in
+    sign_out: Sign out
+    sign_up: Sign up
+    title: Title
+    tracks: Tracks
+    upload: Upload
   terms:
     link: Terms & Privacy Policy
   yams_core:
@@ -84,8 +109,9 @@ en:
     shared:
       album_selection:
         add: Add Track to Album
-      choose_cover:
+      cover_upload:
         choose_image_file: Choose Image
+        choose_image_file_long: Choose an Image file or drag here
         cover: Cover
         replace_image_file: Replace Image
       errors:
@@ -104,17 +130,20 @@ en:
           accept_audio_file: Please choose an audio file - Wav/MP3
           card-header: Upload new Track
           choose_audio_file: Choose Audio File
-          choose_audio_file_long: Select an Audio file or drag here
-          not_audio_file: Please select a file of type audio such as wav/aif/mp3
+          choose_audio_file_long: Choose an Audio file or drag here
+          not_audio_file: Please select a file of type audio - lossless .wav, .aif or .flac
+
         edit:
           track_albums_list: Present In
         form:
           accept_audio_file: Please choose an audio file - Wav/MP3
           choose_audio_file: Choose File
+          create:
+            submit: Save
           description: Description
           edit:
             card-header: Edit Track
-          submit: Update
+            submit: Update
           title: Title
           new:
             accept_audio_file: Please choose an audio file - Wav/MP3
@@ -123,6 +152,7 @@ en:
             description: Description
             submit: Upload
             title: Title
+          submit: Save
         new:
           accept_audio_file: Please choose an audio file - Wav/MP3
           card-header: Upload new Track

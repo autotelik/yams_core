@@ -53,6 +53,6 @@ YamsCore::Engine.routes.draw do
     resources :bulk_upload_templates, only: [:show]
   end
 
-  mount DatashiftAudioEngine::Engine, at: '/audio_engine'
+  mount YamsAudioEngine::Engine, at: '/audio_engine'
 
 end

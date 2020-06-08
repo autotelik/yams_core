@@ -1,3 +1,1 @@
-<%= form_with model: [@track], url: yams_core.tracks_path, method: :post, id: 'file-upload-form', local: true do |f| %>
-  <%= render 'form', form: f, track: @track %>
-<% end %>
+<%= render 'form', track: @track %>

@@ -9,7 +9,7 @@
     </div>
 
     <div class="card-body">
-      <%= devise_error_messages! %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
 

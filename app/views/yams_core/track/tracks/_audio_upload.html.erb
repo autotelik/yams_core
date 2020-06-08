@@ -1,37 +1,34 @@
-<% if track.new_record? %>
-  <% file_field_id = 'new-track-file-upload' %>
-<% else %>
-  <% file_field_id = 'update-track-file-upload' %>
-  <% if track.audio.try(:filename) %>
-    <h6>Replace : <%= @track.audio.filename %></h6></p>
-  <% end %>
-<% end %>
+<% if track.audio.try(:filename) %>
+  <h6>Replace : <%= track.audio.filename %></h6></p>
+<% end if track.new_record? %>
 
-<%= form.file_field(:audio, accept: "audio/*", id: file_field_id, required: true, direct_upload: true ) %>
+<label for="new-audio-upload-file-field" id="label-for-audio-upload" class="align-middle w-100 label-for-uploads icons-for-uploads">
 
-<label for="<%= file_field_id %>" id="file-for-track-drag" class="form-control-yams">
-  <div id="start" class="file_selection_section pt-4">
-    <i class="fa fa-download" aria-hidden="true"></i>
-    <div><%= t('.choose_audio_file_long') %></div>
-    <div id="not-audio-file" class="not-correct-file-type hidden"><%= t('.not_audio_file') %></div>
-    <span id="file-upload-btn" class="btn btn-primary"><%= t('.choose_audio_file') %></span>
+  <div id="audio-upload-messages" class="mb-2 text-info"></div>
+  <div id="audio-upload-messages-errors" class="mb-2 text-danger"></div>
+
+  <div class="row">
+    <div id="audio-upload-progress-wrapper" class="col-12 response pt-2 px-0">
+      <progress class="col-12 progress px-0 d-none " id="audio-upload-progress" max="100" value="0"></progress>
+    </div>
   </div>
-  <div id="file-for-track-response" class="response hidden">
-    <div id="track-upload-messages"></div>
-    <progress class="progress" id="track-direct-upload-progress" max="100" value="0">
-      <div>0</div>%
-    </progress>
+
+  <div class="upload-btn-wrapper pt-4">
+
+    <div class="col">
+      <i class="fa fa-download" aria-hidden="true"></i>
+    </div>
+    <span class="upload-btn"><%= t('.choose_audio_file_long') %></span>
+
+    <% acceptable_types = "audio/*" %>
+    <%= form.file_field(:audio,
+                        id: 'new-audio-upload-file-field',
+                        accept: acceptable_types,
+                        direct_upload: true) %>
+
+    <div class="text-info pt-4"><%= t('choose_audio_help', scope: :global) %></div>
+
   </div>
+
+
 </label>
-
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		manageUpload(
-				'<%= file_field_id %>',
-				'file-for-track-drag',
-				'track-direct-upload-progress',
-				'track-upload-messages',
-				parseAudioFile
-		);
-	});
-</script>

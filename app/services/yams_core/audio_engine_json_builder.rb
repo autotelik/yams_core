@@ -14,13 +14,11 @@ module YamsCore
     end
 
     def call
-      puts "Oh FFS", DatashiftAudioEngine::Config.call.wave_color, DatashiftAudioEngine::Config.call.progress_color ,DatashiftAudioEngine::Config.call.cursor_color
-
       Jbuilder.encode do |json|
         json.datashift_audio do
 
           json.service do
-            if current_user     #  Soem streamms such as Radio stream can be accessed by non signed in visitors
+            if current_user     #  Some streamms such as Radio stream can be accessed by non signed in visitors
               json.user_token   current_user.id
               json.client_token '0987654321' # TODO: - add tokens to devise
             end
@@ -31,9 +29,9 @@ module YamsCore
           end
 
           json.waveform do
-            json.wave_color     '#f7931a'
-            json.progress_color '#c7630a'
-            json.cursor_color   '#010101'
+            json.wave_color     YamsAudioEngine::Config.call.wave_color
+            json.progress_color YamsAudioEngine::Config.call.progress_color
+            json.cursor_color   YamsAudioEngine::Config.call.cursor_color
           end
 
           json.playlist do

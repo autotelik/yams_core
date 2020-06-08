@@ -1,54 +1,49 @@
 <div class="row">
   <div class="col-8 offset-2">
-
     <div class="card p-0">
-      <div class="card-header">
-        <h5 class="section-heading centered"><%= t('.panel_title') %></h5>
-      </div>
 
-      <div class="card-body pt-1">
-        <div class="row">
-          <div class="col float-right text-center">
-            <%= render 'yams_core/shared/errors', model: resource %>
-          </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, autocomplete: "off" }) do |f| %>
+        <div class="card-header">
+          <h5><%= t('.panel_title') %></h5>
         </div>
 
-        <div class="row">
-          <div class="col text-left">
-            <% resource.password = nil %>
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, autocomplete: "off" }) do |f| %>
+        <div class="card-body pb-2">
+          <div class="row pt-2">
+            <div class="col pl-4">
+              <%= render 'yams_core/shared/errors', model: resource %>
+
+              <% resource.password = nil %>
 
               <div class="row">
 
-                <div class="col-6 pl-0">
-                  <div class="col form-group">
+                <div class="col-6">
+                  <div class="form-group">
                     <%= f.label t('.email') %>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control-yams', style: 'background-color: #9d9d9d', disabled: true %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", style: 'background-color: #9d9d9d', disabled: true, class: 'col-10 form-control-yams' %>
                   </div>
 
-                  <div class="col form-group">
+                  <div class="form-group">
                     <%= f.label t('.display_name') %>
-                    <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'form-control-yams' %>
+                    <%= f.text_field :name, autofocus: true, autocomplete: "user", class: 'col-10 form-control-yams' %>
                   </div>
 
-                  <div class="col form-group">
+                  <div class="form-group">
                     <%= f.label t('.bio') %>
-                    <%= f.text_area(:bio, cols: 20, rows: 4, class: 'form-control-yams') %>
+                    <%= f.text_area(:bio, cols: 20, rows: 4, class: 'col-10 form-control-yams') %>
                   </div>
 
-                  <div class="col form-group">
+                  <div class="form-group">
                     <%= f.label t('.firstname')%>
-                    <%= f.text_field :firstname, autofocus: true, autocomplete: "Firstname", class: 'form-control-yams' %>
+                    <%= f.text_field :firstname, autofocus: true, autocomplete: "Firstname", class: 'col-10 form-control-yams' %>
                   </div>
-                  <div class="col form-group">
+                  <div class="form-group">
                     <%= f.label t('.lastname')%>
-                    <%= f.text_field :lastname, autofocus: true, autocomplete: "Lastname", class: 'form-control-yams' %>
+                    <%= f.text_field :lastname, autofocus: true, autocomplete: "Lastname", class: 'col-10 form-control-yams' %>
                   </div>
-
                 </div>
 
-                <div class="col-6 mt-2">
-                  <div class="card mt-4 ">
+                <div class="col-6">
+                  <div class="card pt-2">
                     <div class="card-header p-0 pb-1 pt-1">
                       <h5 class="text-center white"><%= t('.avatar_heading') %></h5>
                     </div>
@@ -67,60 +62,60 @@
               </div> <!-- row -->
 
               <div class="row">
-                <div class="col-6 pl-0">
-                  <div class="col form-group">
+                <div class="col-6">
+                  <div class="form-group">
                     <%= f.label t('.city')%>
-                    <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'form-control-yams' %>
+                    <%= f.text_field :city, autofocus: true, autocomplete: "City", class: 'col-10 form-control-yams' %>
                   </div>
-                  <div class="col form-group">
+                  <div class="form-group">
                     <%= f.label t('.country')%>
-                    <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'form-control-yams' %>
+                    <%= f.text_field :country, autofocus: true, autocomplete: "Country", class: 'col-10 form-control-yams' %>
                   </div>
                 </div>
                 <div class="col-6 mt-2">
-                  <div class="col form-group mb-4">
+                  <div class="form-group">
                     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                       <div class="row">
                         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                       </div>
                     <% end %>
                   </div>
-                  <div class="col form-group pt-4">
-                    <%= bootstrap_submit(form: f, text: t('.submit')) %>
-                  </div>
+                </div>
+                <div class="col">
+                  <%= bootstrap_submit(form: f, text: t('.submit')) %>
                 </div>
               </div>
+            </div>
 
-            <% end %>
           </div>
         </div>
-      </div>
+      <% end %>
 
-      <div class="row py-2">
-        <div class="col-7 text-left pl-4">
+      <div class="row">
+        <div class="col-7 text-left pl-4 pb-2">
           <%= button_to t('.cancel_button'), registration_path(resource_name), data: { confirm: t('.cancel_confirm') }, method: :delete, class: 'btn btn-danger float-left' %>
         </div>
       </div>
-    </div>
+      </div>
 
 
-    <!-- Manage TRACKS -->
-    <div class="row pt-4">
-      <div class="card p-0">
-        <div class="card-header">
-          <h5 class="section-heading centered"><%= t(:tracks, scope: :global) %></h5>
-        </div>
+  <!-- Manage TRACKS -->
+  <div class="row pt-4">
+    <div class="card p-0">
+      <div class="card-header">
+        <h5 class="section-heading centered"><%= t(:tracks, scope: :global) %></h5>
+      </div>
 
-        <div class="card-body">
-          <div class="datashift-user-track-playlist">
-            <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
-              <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
-            <% end %>
-          </div>
+      <div class="card-body">
+        <div class="datashift-user-track-playlist">
+          <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
+            <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+          <% end %>
         </div>
       </div>
     </div>
-
-
   </div>
+
+
+</div>
 </div>

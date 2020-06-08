@@ -1,7 +1,7 @@
 <% content_for :album_column do %> <!-- ALBUM COLUMN -->
 
   <div class="album-track col">
-    <div class="card card-sm col p-0">
+    <div class="card col p-0">
       <%= bootstrap_card_header( t('.create')) %>
     </div>
 
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <ul id="album-management-dashboard-with-dropzone" class="striped-list list-group list-group-flush">
+      <ul id="album-management-dashboard-with-dropzone">
         <!-- Target for dynamic CREATE - new album from remote controller-->
         <div id="target-for-album-create-insertion-point"></div>
       </ul>

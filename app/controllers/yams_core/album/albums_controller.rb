@@ -12,7 +12,7 @@ module YamsCore
 
     include YamsCore::FetchTracks
 
-    helper DatashiftAudioEngine::PlayerHelper
+    helper YamsAudioEngine::PlayerHelper
 
     def index
 
@@ -24,20 +24,20 @@ module YamsCore
 
       populate_track_presenters(@albums.first)
 
-      @datashift_audio_json = @tracks.present? ? AudioEngineJsonBuilder.call(@tracks, current_user) : ""
+      @yams_audio_json = @tracks.present? ? AudioEngineJsonBuilder.call(@tracks, current_user) : ""
     end
 
 
     def show
       populate_track_presenters(@album)
 
-      @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+      @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 
       respond_to do |format|
         format.html {}
         format.js {}
         format.json do
-          render json: @datashift_audio_json
+          render json: @yams_audio_json
         end
       end
     end

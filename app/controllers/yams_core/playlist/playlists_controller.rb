@@ -11,7 +11,7 @@ module YamsCore
 
     include YamsCore::FetchTracks
 
-    helper DatashiftAudioEngine::PlayerHelper
+    helper YamsAudioEngine::PlayerHelper
 
     def index
       @playlists = Playlist.for_user(current_user).includes(tracks: { cover: { image_attachment: :blob } } ).page(params[:page]).per(30)
@@ -21,24 +21,24 @@ module YamsCore
 
         @playlist = PlaylistPresenter.new(@playlists.first, view_context)
 
-        @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+        @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
       else
         @tracks = []
         @playlist = PlaylistPresenter.new(Playlist.new, view_context)
-        @datashift_audio_json = ""
+        @yams_audio_json = ""
       end
     end
 
     def show
       populate_tracks(@playlist)
 
-      @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+      @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
 
       respond_to do |format|
         format.html {}
         format.js {}
         format.json do
-          render json: @datashift_audio_json
+          render json: @yams_audio_json
         end
       end
     end
@@ -50,7 +50,7 @@ module YamsCore
     end
 
     def edit
-      @tracks = Track.for_user(current_user).includes(cover: { image_attachment: :blob } ) - @playlist.tracks_for_player
+      @tracks = Track.for_user(current_user).includes(cover: { image_attachment: :blob } ) - @playlist.tracks
     end
 
     def create

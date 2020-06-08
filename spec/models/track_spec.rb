@@ -32,15 +32,15 @@ RSpec.describe YamsCore::Track, type: :model do
 
   it 'is not radio friendly by default' do
     track = build(:track)
-    expect(track.available_for?(:free)).to eq false
+    expect(track.available_for?(:radio)).to eq false
   end
 
   it 'can be made available_for radio' do
     track = create(:track, :with_audio)
 
-    expect(track.make_available_for(:free)).to be_a YamsCore::Available
+    expect(track.make_available_for(:radio)).to be_a YamsCore::Available
 
-    expect(track.reload.available_for?(:free)).to eq true
+    expect(track.reload.available_for?(:radio)).to eq true
 
     expect(YamsCore::Track.for_free.first).to eq track
   end
@@ -81,23 +81,23 @@ RSpec.describe YamsCore::Track, type: :model do
     track = create(:track, :with_audio)
     YamsCore::Available.modes.keys.each do |c| track.make_available_for(c) end
 
-    expect(track.available_for?(:free)).to eq true
-    expect{track.remove_available_for(:free)}.to change(track.availables, :count).by(-1)
-    expect(track.available_for?(:free)).to eq false
+    expect(track.available_for?(:radio)).to eq true
+    expect{track.remove_available_for(:radio)}.to change(track.availables, :count).by(-1)
+    expect(track.available_for?(:radio)).to eq false
   end
 
   it 'attempting to make unavailable when not available should not cause error' do
     track = create(:track, :with_audio)
 
-    expect(track.available_for?(:free)).to eq false
-    expect {track.remove_available_for(:free) }.to_not raise_error
+    expect(track.available_for?(:radio)).to eq false
+    expect {track.remove_available_for(:radio) }.to_not raise_error
 
-    track.make_available_for(:free)
-    expect(track.available_for?(:free)).to eq true
+    track.make_available_for(:radio)
+    expect(track.available_for?(:radio)).to eq true
 
-    expect {track.remove_available_for(:free) }.to_not raise_error
+    expect {track.remove_available_for(:radio) }.to_not raise_error
 
-    expect(track.available_for?(:free)).to eq false
+    expect(track.available_for?(:radio)).to eq false
   end
 
 end

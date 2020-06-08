@@ -19,9 +19,12 @@ module YamsCore
 =end
 
       results = {
+          artist: YamsCore::Artist.search(query, operator: "or", page: params[:page], per_page: 20),
           track: YamsCore::Track.search(query, operator: "or", page: params[:page], per_page: 20),
           album: YamsCore::Album.search(query, operator: "or", page: params[:page], per_page: 20)
       }
+
+      pp results
 
       @search_results = SearchPresenter.new(results, view_context)
     end

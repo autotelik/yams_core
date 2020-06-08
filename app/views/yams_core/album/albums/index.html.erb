@@ -39,22 +39,22 @@
     </div>
   </div> <!-- end album column -->
 
-  <div id="datashift-audio-album-wrapper" class="col-7">
+  <div id="yams-audio-album-wrapper" class="col-7">
     <div class="text-center pb-4">
       <h5 id="current-album-header"><%= @albums.first.try(:name) %></h5>
     </div>
     <div class="row">
-      <ul class="col datashift-audio-playlist"><%= render partial: 'yams_core/track/tracks/single_list_item_headers' %></ul>
+      <ul class="col yams-audio-playlist"><%= render partial: 'yams_core/track/tracks/single_list_item_headers' %></ul>
     </div>
 
-    <div id="datashift-audio-album-insertion-point" class="col-12">     <!-- datashift audio JS insertion point, for rendering album of currently selected list -->
+    <div id="yams-audio-album-insertion-point" class="col-12">     <!-- datashift audio JS insertion point, for rendering album of currently selected list -->
     </div>
   </div>
 </div>
 
 <% content_for :audio_player_in_navbar  do %>
-  <%= render(partial: 'datashift_audio_engine/shared/player_in_navbar', locals: { datashift_audio_setup_json: @datashift_audio_json } ) %>
-<% end %>
+  <%= render(partial: 'yams_audio_engine/shared/player_in_navbar', locals: { yams_audio_json: @yams_audio_json } ) %>
+<% end if @tracks.present? %>
 
 <script type="text/javascript" charset="utf-8">
 	/* Render Playlist - Pass in this content block containing our desired album layout and styling */
@@ -62,5 +62,5 @@
 	<%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 	<% end %>
 
-	$('#datashift-audio-album-insertion-point').html("<%= j render(partial: 'datashift_audio_engine/shared/track_playlist.html') %>");
+	$('#yams-audio-album-insertion-point').html("<%= j render(partial: 'yams_audio_engine/shared/track_playlist.html') %>");
 </script>

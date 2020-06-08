@@ -1,0 +1,62 @@
+<div class="card">
+
+  <%= bootstrap_card_header(t('.cover')) %>
+
+  <div class="card-body text-center">
+
+    <%= form.fields_for :cover do |cover| %>
+
+      <div class="cover-uploader pt-2 pl-2 pr-2 col">
+        <div class="row">
+
+          <label for="new-image-upload-file-field" id="label-for-image-upload" class="align-middle w-100 label-for-image-uploads icons-for-uploads">
+
+            <div id="image-upload-messages" class="mb-2 text-info"></div>
+            <div id="image-upload-messages-errors" class="mb-2 text-danger"></div>
+
+            <div class="row">
+              <div id="image-upload-preview-wrapper" class="col-12">
+                <img id="image-upload-preview" src="#" alt="Preview" class="d-none">
+              </div>
+            </div>
+
+            <div class="row">
+              <div id="image-upload-progress-wrapper" class="col-12 response pt-2 px-0">
+                <progress class="col-12 progress px-0 d-none" id="image-upload-progress" max="100" value="0"></progress>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col centered">
+                <div class="upload-btn-wrapper pt-4">
+                  <div class="col">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </div>
+                  <span class="upload-btn text-small"><%= t('.choose_image_file_long') %></span>
+
+                  <% acceptable_types = "image/*" %>
+                  <%= cover.file_field(:image,
+                                       id: 'new-image-upload-file-field',
+                                       accept: acceptable_types,
+                                       direct_upload: true) %>
+                </div>
+              </div>
+            </div>
+
+          </label>
+
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+<% unless model.new_record? %>
+  <script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$("#cover-image-preview-panel").css( { "background-image": "url('<%= rails_blob_url(model.cover.image) %>')" } );
+			//$("#cover-file-upload-btn").css( { "margin-top": "40px" } );
+		});
+  </script>
+<% end %>

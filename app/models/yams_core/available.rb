@@ -3,7 +3,7 @@ module YamsCore
   class Available < ApplicationRecord
     belongs_to :type, polymorphic: true, inverse_of: :availables
 
-    enum mode: %i[radio download playlist stream]
+    enum mode: %i[free download playlist stream]
 
     store_accessor :meta_data, :price, :ccy
 

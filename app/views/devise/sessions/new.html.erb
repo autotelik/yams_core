@@ -9,7 +9,7 @@
 
           <div class="row">
             <div class="col-6 offset-3 ">
-              <%= devise_error_messages! %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
               <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form col") do |f| %>
 

@@ -10,7 +10,7 @@ module YamsCore
 
     before_action :authenticate_user!
 
-    helper DatashiftAudioEngine::PlayerHelper
+    helper YamsAudioEngine::PlayerHelper
 
     def show;
       respond_to do |format|
@@ -18,7 +18,7 @@ module YamsCore
           @tracks = to_presenters(@artist.tracks.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings]))
 
           # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
-          @datashift_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+          @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
         end
       end
     end

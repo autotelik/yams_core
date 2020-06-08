@@ -18,11 +18,9 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", '5.2.4.1'
+  s.add_dependency "rails", '>= 6.0'
 
-  s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'jbuilder', '~> 2.5'
-
   s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'turbolinks', '~> 5'
   s.add_dependency 'uglifier', '>= 1.3.0'
@@ -48,12 +46,13 @@ Gem::Specification.new do |s|
 
   s.add_dependency "nokogiri", ">= 1.8.5"
 
-  s.add_dependency 'pg', '~> 0.18'
   s.add_dependency 'pundit'
 
-  s.add_dependency 'rails-settings-cached'           # https://github.com/huacnlee/rails-settings-cached
-  s.add_dependency 'rails_event_store'
-  s.add_dependency 'rails_sortable', '~> 1.2.1'
+  #  N.B 1.3 and 1.4 breaks
+  #     ActiveSupport::MessageVerifier::InvalidSignature (ActiveSupport::MessageVerifier::InvalidSignature):
+
+  s.add_dependency 'rails_sortable', '>= 1.3', '< 1.5'   # https://github.com/itmammoth/rails_sortable
+
   s.add_dependency "rubyzip", ">= 1.3.0"
 
   s.add_dependency 'select2-rails'
@@ -62,6 +61,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'tzinfo-data'
 
+  s.add_dependency 'webpacker'
+
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
 
@@ -69,9 +70,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
 
   s.add_development_dependency 'rails_layout'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rubocop', '~> 0.57.2'
   s.add_development_dependency 'web-console', '>= 3.3.0'
-
-  s.add_development_dependency "sqlite3", "~> 1.3.6"
 
 end

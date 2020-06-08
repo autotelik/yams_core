@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module YamsCore
-  class UserPolicy
+  class UserPolicy < ApplicationPolicy
     attr_reader :current_user, :model
 
     def initialize(current_user, model)
@@ -29,3 +29,5 @@ module YamsCore
 
   end
 end
+
+puts "FFFSSSSSSSSSSSSSSSSSSSS", YamsCore::UserPolicy

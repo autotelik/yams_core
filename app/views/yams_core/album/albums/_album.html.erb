@@ -11,9 +11,9 @@
 
   <div class="card-body-plain">
     <div class="collapse show col-12 album-track" role="tabpanel">
-      <div class="datashift-audio-album-content p-1 col-12 w-100">
+      <div class="yams-audio-album-content p-1 col-12 w-100">
 
-        <ul id="datashift-audio-album" class="datashift-audio-album p-1 col-12 ">
+        <ul id="yams-audio-album" class="yams-audio-album p-1 col-12 ">
           <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: album.album_tracks.includes(track: { cover: { image_attachment: :blob } } ).order([:sort]), as: :track %>
         </ul>
 
@@ -25,9 +25,9 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
         $("li[id^='track-']").click(function() {
-            datashift_audio_engine.audio_data.track = parseInt(this.id.split('-')[1]);
-            datashift_audio_engine.settings.autoplay = true;
-            datashift_audio_engine.render_wave_from_audio_file()
+            yams_audio_engine.audio_data.track = parseInt(this.id.split('-')[1]);
+            yams_audio_engine.settings.autoplay = true;
+            yams_audio_engine.render_wave_from_audio_file()
         });
     });
 </script>

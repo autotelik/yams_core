@@ -19,6 +19,8 @@ module YamsCore
 
     acts_as_taggable
 
+    searchkick callbacks: :queue
+
     after_create :assign_mp3_properties
 
     after_save :after_save_hook
@@ -27,7 +29,6 @@ module YamsCore
 
     validates :audio, attached: true, content_type: YamsCore::AudioService.valid_types
 
-    searchkick callbacks: :queue
 
     # Tracks not in any Album
     scope :no_album, -> { includes(:albums).where(albums: { id: nil }) }
@@ -74,6 +75,12 @@ module YamsCore
     end
 
     private
+
+    def search_data
+      {
+          title: title
+      }
+    end
 
     def assign_mp3_properties
 

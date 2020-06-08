@@ -2,7 +2,7 @@
 #
 FactoryBot.define do
   factory :available, class: YamsCore::Available do
-    mode { "free" }
+    mode { :radio }
 
     meta_data  {
       { price:  1000,     # approx 0.07 usd

@@ -62,7 +62,7 @@ module YamsCore
     end
 
     def bootstrap_submit(form:, text:, css: 'btn btn-block btn-lg float-right')
-      content_tag(:div, class: 'form-row form-group float-right') do
+      content_tag(:div, class: 'float-right') do
         content_tag(:div, class: 'col') do
           form.submit(text, class: css, data: { disable_with: false })
         end

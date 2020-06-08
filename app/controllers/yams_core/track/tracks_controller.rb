@@ -6,7 +6,7 @@ module YamsCore
     before_action :set_track,     only: %i[destroy]
     before_action :set_presenter, only: %i[edit update]
 
-    helper DatashiftAudioEngine::PlayerHelper
+    helper YamsAudioEngine::PlayerHelper
 
     include YamsCore::RandomSeed
 
@@ -36,7 +36,7 @@ module YamsCore
           track = Track.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } } ]).find(params[:id])
           @track = TrackPresenter.new(track, view_context)
 
-          @datashift_audio_json = AudioEngineJsonBuilder.call(@track, current_user)
+          @yams_audio_json = AudioEngineJsonBuilder.call(@track, current_user)
         }
       end
     end

@@ -1,21 +1,21 @@
 <% # The JS needs to access the LIST index (not Rails DB Id) hence track_counter %>
 
-<li id="track-<%= track_counter %>" onclick="datashift_audio_engine.playlist_onclick(this)" >
+<li id="track-<%= track_counter %>" onclick="yams_audio_engine.playlist_onclick(this)" >
 
   <div class="col-1 image-wrapper">
     <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %>
   </div>
 
   <% if current_user %>
-    <div class="col-3 p-0 m-0 datashift-audio-track-details">
-      <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "datashift-audio-full-name") %>
+    <div class="col-3 p-0 m-0 yams-audio-track-details">
+      <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "yams-audio-full-name") %>
     </div>
-    <div class="col-3 p-0 m-0 datashift-audio-track-details">
-      <%= link_to(track.title, yams_core.track_path(track), class: "datashift-audio-track-title") %>
+    <div class="col-3 p-0 m-0 yams-audio-track-details">
+      <%= link_to(track.title, yams_core.track_path(track), class: "yams-audio-track-title") %>
     </div>
   <% else %>
-    <div class="col-3 p-0 m-0 datashift-audio-track-details"><%= track.artist_name %></div>
-    <div class="col-3 p-0 m-0 datashift-audio-track-details"><%= track.title %></div>
+    <div class="col-3 p-0 m-0 yams-audio-track-details"><%= track.artist_name %></div>
+    <div class="col-3 p-0 m-0 yams-audio-track-details"><%= track.title %></div>
   <% end %>
 
   <div class="col-1 text-center">

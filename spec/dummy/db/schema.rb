@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_103434) do
+ActiveRecord::Schema.define(version: 2020_03_01_144652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_103434) do
     t.integer "mode"
     t.datetime "on"
     t.datetime "expires"
+    t.json "meta_data", default: {}
+    t.index ["meta_data"], name: "index_availables_on_meta_data"
     t.index ["mode"], name: "index_availables_on_mode"
     t.index ["type_id", "type_type", "mode"], name: "index_availables_on_type_id_and_type_type_and_mode", unique: true
     t.index ["type_type", "type_id"], name: "index_availables_on_type_type_and_type_id"
@@ -96,6 +98,24 @@ ActiveRecord::Schema.define(version: 2019_03_02_103434) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_store_events", id: :string, limit: 36, force: :cascade do |t|
+    t.string "event_type", null: false
+    t.text "metadata"
+    t.text "data", null: false
+    t.datetime "created_at", null: false
+    t.index ["created_at"], name: "index_event_store_events_on_created_at"
+  end
+
+  create_table "event_store_events_in_streams", force: :cascade do |t|
+    t.string "stream", null: false
+    t.integer "position"
+    t.string "event_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["created_at"], name: "index_event_store_events_in_streams_on_created_at"
+    t.index ["stream", "event_id"], name: "index_event_store_events_in_streams_on_stream_and_event_id", unique: true
+    t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
+  end
+
   create_table "id3_genres", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -109,6 +129,26 @@ ActiveRecord::Schema.define(version: 2019_03_02_103434) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "order_id"
+    t.bigint "amount"
+    t.integer "currency"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "number", limit: 32
+    t.string "aasm_state"
+    t.integer "user_id"
+    t.datetime "completed_at"
+    t.integer "currency"
+    t.string "last_ip_address"
+    t.integer "store_id"
+    t.index ["store_id"], name: "index_orders_on_store_id"
   end
 
   create_table "playlist_tracks", force: :cascade do |t|
@@ -128,6 +168,36 @@ ActiveRecord::Schema.define(version: 2019_03_02_103434) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_playlists_on_name"
     t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer "product_id"
+    t.bigint "amount"
+    t.integer "currency"
+    t.index ["product_id"], name: "index_prices_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "sellable_type"
+    t.integer "sellable_id"
+    t.integer "available_for"
+    t.string "slug"
+    t.text "meta_description"
+    t.string "meta_keywords"
+    t.string "meta_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["available_for"], name: "index_products_on_available_for"
+    t.index ["sellable_type", "sellable_id"], name: "index_products_on_sellable_type_and_sellable_id"
+    t.index ["slug"], name: "index_products_on_slug"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -217,4 +287,15 @@ ActiveRecord::Schema.define(version: 2019_03_02_103434) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "album_tracks", "albums"
+  add_foreign_key "album_tracks", "tracks"
+  add_foreign_key "albums", "users"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "playlist_tracks", "playlists"
+  add_foreign_key "playlist_tracks", "tracks"
+  add_foreign_key "playlists", "users"
+  add_foreign_key "prices", "products"
+  add_foreign_key "tracks", "licenses"
+  add_foreign_key "tracks", "users"
 end

@@ -11,14 +11,14 @@ module YamsCore
 
     acts_as_taggable
 
-    enum role: %i[users vip admin]
+    enum role: %i[user artist admin]
 
     after_initialize :set_default_role, if: :new_record?
 
     # TODO validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
     def set_default_role
-      self.role ||= :users
+      self.role ||= :user
     end
 
     # Include default devise modules. Others available are:

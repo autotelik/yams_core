@@ -1,5 +1,26 @@
 <!-- TODO - do we really need to load the records from the DB - can we just get the cover ? -->
 
+<% if presenter.search_results[:artist].present? %>
+
+  <div class="col-12">
+    <div class="card card-outline-secondary">
+
+      <%= bootstrap_card_header( t(:artists, scope: :global) ) %>
+
+      <div class="card-body">
+        <div class="col-md-12 search_result">
+
+          <% presenter.search_results[:artist].each do |t| %>
+            <%= t %>
+            <%= paginate presenter.search_results[:artist] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
 <% if presenter.search_results[:track].present? %>
 
   <div class="col-12">

@@ -6,18 +6,19 @@
 
       <div class="card-header-light col-12">
         <div class="row">
-          <div class="col-1 pl-0">
-            <%= album_presenter.bootstrap_actions_dropdown %>
-          </div>
+          <div class="col-1 pl-0"><%= album_presenter.bootstrap_actions_dropdown %></div>
+
           <div class="col-2"><%= album_presenter.cover_image_tag %></div>
+
           <div class="col"><h5 class="album-track"><%= album_presenter.title %></h5></div>
+
           <a data-toggle="collapse" href="#<%= accordion %>" aria-expanded="true">
-            <div class="col pt-1 pr-0"><i class="icon-chevron-small-right" style="border: 2px solid;"></i></div>
+            <div class="col pt-1 pr-0"><i class="icon-chevron-small-right"></i></div>
           </a>
         </div>
       </div>
 
-      <div class="card-header-drag-drop p-2 pr-0" ondrop="return false;">
+      <div class="card-header-drag-drop" ondrop="return false;">
         <ul id="album-track-drop-zone-<%= album_presenter.id %>" data-album-id="<%= album_presenter.id %>" ondrop="drop(event, this)" ondragover="allowDrop(event)">
           <h6 class="text-white"><%= t('global.drop_tracks') %></h6>
         </ul>
@@ -38,9 +39,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-	$(function() {
-		$('.sortable').railsSortable();
-	})
-</script>

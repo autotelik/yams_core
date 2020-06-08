@@ -14,12 +14,10 @@ module YamsCore
       Track.eager_load(:user, :availables)
           .includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
           .order('random()')
-          .page(params[:page])
-          .per(per_page)
     end
 
     def random_free_tracks
-      random_tracks.for_free
+      random_tracks.for_free.page(params[:page]).per(per_page)
     end
 
     def to_presenters(tracks)

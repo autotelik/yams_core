@@ -42,7 +42,7 @@ describe 'track', type: :request do
 
         track = YamsCore::Track.last
         expect(track.availables.count).to eq 1
-        expect(track.available_for?(:free)).to eq true
+        expect(track.available_for?(:radio)).to eq true
         expect(track.available_for?(:download)).to eq false
       end
 

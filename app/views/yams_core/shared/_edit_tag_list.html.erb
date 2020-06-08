@@ -1,13 +1,15 @@
 <% form_id = "taglist-#{model.class.name.demodulize.downcase}-#{model.id}" %>
 
 <div class="form-group">
-  <%= form.select :tag_list, options_for_select(model.tag_list, model.tag_list ), {}, { multiple: true , id: form_id, class: 'form-control-yams' } %>
+  <%= form.select :tag_list, options_for_select(model.tag_list, model.tag_list ), {}, { multiple: true , id: form_id, class: 'col form-control-yams' } %>
 </div>
 
 <script type="text/javascript">
-    $('#<%= form_id %>').select2({
-        placeholder: 'Tags',
-        tags: true,
-        tokenSeparators: [',', ' ']
-    });
+	$('#<%= form_id %>').select2({
+		placeholder: 'Tags',
+		allowClear: true,
+		height: '34px',
+		tags: true,
+		tokenSeparators: [',', ' ']
+	});
 </script>

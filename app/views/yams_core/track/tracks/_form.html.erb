@@ -1,60 +1,63 @@
-<div class="row">
-  <div class="col-8 offset-2">
+<%= form_with model: [track], url: yams_core.tracks_path, method: :post, id: 'track-tracks-upload-form', local: true do |form| %>
 
-    <div class="card ">
+  <div class="row">
+    <div class="col-8 offset-2">
 
-      <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
+      <div class="card ">
 
-      <div class="card-body pb-2">
-        <div class="row pt-2">
-          <div class="col-7 pl-4">
-            <%= render 'yams_core/shared/errors', model: @track %>
+        <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
 
-            <div class="form-group">
-              <%= form.label t('.title') %>
-              <%= form.text_field :title, id: "file-upload-title", autofocus: true, class: 'form-control-yams col-12', required: true %>
+        <div class="card-body pb-2">
+          <div class="row pt-2">
+            <div class="col-7 pl-4">
+              <%= render 'yams_core/shared/errors', model: track %>
+
+              <div class="form-group">
+                <%= form.label t('.title') %>
+                <%= form.text_field :title, id: "file-upload-title", autofocus: true, class: 'col form-control-yams', required: true %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label t('.description') %>
+                <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'col form-control-yams') %>
+              </div>
+
+              <div class="form-group uploader">
+                <%= render partial: 'audio_upload', locals: { form: form, track: track } %>
+              </div>
+
+              <div class="form-group">
+                <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: track } %>
+              </div>
+
             </div>
 
-            <div class="form-group">
-              <%= form.label t('.description') %>
-              <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'form-control-yams') %>
-            </div>
+            <!-- Side bar -->
+            <div class="col-5">
+              <div class="row">
+                <div class="col">
+                  <%= render partial: 'yams_core/shared/cover_upload', locals: { form: form, model: track } %>
+                </div>
+              </div>
 
-            <div class="form-group uploader">
-              <%= render partial: 'audio_upload', locals: { form: form, track: @track } %>
-            </div>
+              <div class="row pt-4">
+                <div class="col">
+                  <%= render partial: 'permissions', locals: { form: form } %>
+                </div>
+              </div>
 
-            <div class="form-group">
-              <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: @track } %>
+              <%= yield :track_form_sidebar_extrastrack_form_sidebar_extras %>
             </div>
 
           </div>
 
-          <!-- Side bar -->
-          <div class="col-5">
-            <div class="row">
-              <div class="col">
-                <%= render partial: 'yams_core/shared/choose_cover', locals: { form: form, model: @track } %>
-              </div>
-            </div>
-
-            <div class="row pt-4">
-              <div class="col">
-                <%= render partial: 'permissions', locals: { form: form } %>
-              </div>
-            </div>
-
-            <%= yield :track_form_sidebar_extrastrack_form_sidebar_extras %>
+          <div class="pt-4 pr-4">
+            <%= bootstrap_submit(form: form, text: t('.' + controller.action_name + '.submit') ) %>
           </div>
 
         </div>
-
-        <div class="pt-4 pr-4">
-          <%= bootstrap_submit(form: form, text: t('.submit')) %>
-        </div>
-
       </div>
-    </div>
 
+    </div>
   </div>
-</div>
+<% end %>

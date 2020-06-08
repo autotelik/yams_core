@@ -11,7 +11,7 @@
     <div class="col">
       <div class="form-group">
         <%= f.label :title %>
-        <%= f.text_field :title,  id: :album_title, class: "col form-control-yams" %>
+        <%= f.text_field :title,  id: :album_title, class: "col" %>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="col">
       <div class="form-group">
         <%= f.label :description %>
-        <%= f.text_area :description, id: :album_description, class: "col form-control-yams" %>
+        <%= f.text_area :description, id: :album_description, class: "col" %>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
     <div class="col">
       <div class="form-group">
         <%= f.label t('.state') %> :
-        <%= f.collection_radio_buttons(:published_state, YamsCore::Album.published_states, :first, :first, html_options: { class: 'form-control-yams' }) do |b| %>
+        <%= f.collection_radio_buttons(:published_state, YamsCore::Album.published_states, :first, :first,) do |b| %>
           <%= b.label { b.radio_button + " " + b.text } %>
         <% end %>
       </div>
@@ -44,7 +44,7 @@
 
   <div class="row">
     <div class="col">
-      <%= bootstrap_submit(form: f, text: t(".#{params[:action]}.submit"), css: 'btn btn-block btn-lg float-right') %>
+        <%= bootstrap_submit(form: f, text: t(".#{params[:action]}.submit"), css: 'btn btn-block') %>
     </div>
   </div>
 
