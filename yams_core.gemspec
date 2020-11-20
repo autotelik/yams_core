@@ -59,8 +59,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'tzinfo-data'
 
-  s.add_dependency 'webpacker'
-
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
 

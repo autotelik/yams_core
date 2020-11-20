@@ -10,12 +10,13 @@
 
     <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 
+    <!-- TODO - hook into BtcPay Server API to generate invoice -->
     <script type="text/javascript">
 			function order_download_track(track_id) {
-				$.ajax({
+				/*$.ajax({
 					type: "POST",
 					dataType: "script",
-					url: '<%= yams_events.download_invoice_path %>',
+					url: '<%#= yams_events.download_invoice_path %>',
 					data: { download_invoice: { track_id: track_id } },
 					success:function(data){
 						alert('Invoice created OK')
@@ -23,7 +24,7 @@
 					error:function(){
 						alert('Invoice creation FAILED');
 					}
-				})
+				})*/
 			};
     </script>
 
