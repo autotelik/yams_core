@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LicensesController < ApplicationController
+class YamsCore::LicensesController < ApplicationController
   before_action :set_license, only: %i[show edit update destroy]
 
   # GET /licenses

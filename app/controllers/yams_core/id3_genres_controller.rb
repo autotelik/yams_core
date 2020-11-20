@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Id3GenresController < ApplicationController
+
+class YamsCore::Id3GenresController < ApplicationController
   before_action :set_id3_genre, only: %i[show edit update destroy]
 
   # GET /id3_genres

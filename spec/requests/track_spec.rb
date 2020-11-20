@@ -25,9 +25,12 @@ describe 'track', type: :request do
       end
 
       it 'stores a cover image against the new track' do
-        parameters = { track: attributes_for(:track, :with_audio_upload_fixture).merge(cover_attributes: {
-                                                                                  image: fixture_file_upload(fixture_file('test_image.jpg'), 'image/jpeg')
-                                                                                }) }
+        parameters = {
+            track: attributes_for(:track, :with_audio_upload_fixture)
+                       .merge(cover_attributes: {
+                           image: fixture_file_upload(fixture_file('test_image.jpg'), 'image/jpeg')
+                       })
+        }
 
         expect { post '/tracks', params: parameters }.to change(YamsCore::Cover, :count).by(1)
 
@@ -36,7 +39,7 @@ describe 'track', type: :request do
       end
 
       it 'sets available for fields correctly' do
-        parameters = { track: attributes_for(:track, :with_audio_upload_fixture), "availables": { free: 'true' } }
+        parameters = { track: attributes_for(:track, :with_audio_upload_fixture), availables: { free: 'true' } }
 
         expect { post '/tracks', params: parameters }.to change(YamsCore::Available, :count).by(1)
 
