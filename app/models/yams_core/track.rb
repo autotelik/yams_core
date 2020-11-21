@@ -66,7 +66,6 @@ module YamsCore
     end
 
     def duration
-      assign_mp3_properties unless length?
       length || 0
     end
 
@@ -85,8 +84,8 @@ module YamsCore
     def assign_mp3_properties
 
       begin
-        Rails.logger.debug("Calling Mp3Worker for Track #{id}")
-        YamsCore::Mp3Worker.perform_async(id)
+        Rails.logger.debug("Calling Mp3Worker for Track #{self.id}")
+        YamsCore::Mp3Worker.perform_async(self.id)
       rescue Redis::CannotConnectError => x
         Rails.logger.error("Redis DOWN - MP3 properties not updated #{x.message}")
 
@@ -97,6 +96,8 @@ module YamsCore
     end
 
     def after_save_hook
+
+      assign_mp3_properties
 
       begin
         Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")

@@ -49,7 +49,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'pundit'
   s.add_dependency 'rails_event_store', '~>1.2.2'
 
-  s.add_dependency 'rails_sortable', '>= 1.3', '< 1.5'   # https://github.com/itmammoth/rails_sortable
+  s.add_dependency 'rails_sortable', '>= 1.3', '< 1.5'    # https://github.com/itmammoth/rails_sortable
+  s.add_dependency 'rails-settings-cached', '>= 2.3.5'    # https://github.com/huacnlee/rails-settings-cached
+
 
   s.add_dependency "rubyzip", ">= 1.3.0"
 

@@ -1,7 +1,9 @@
-#TODO: commits in Rails master will make this hacky stuff obsolete sooner or later
+#TODO commits in Rails master have made this hacky stuff obsolete - REFACTOR to just download blob
 
-module ActiveStorage
-  class Downloader #:nodoc:
+module YamsCore
+
+  module ActiveStorage #:nodoc:
+
     def initialize(blob, tempdir: nil)
       @blob    = blob
       @tempdir = tempdir

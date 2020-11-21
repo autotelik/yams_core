@@ -6,7 +6,6 @@ module YamsCore
 
     include YamsCore::Services
 
-    include ActiveStorage::Downloading
 
     attr_reader :blob
 

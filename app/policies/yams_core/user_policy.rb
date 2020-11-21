@@ -29,5 +29,3 @@ module YamsCore
 
   end
 end
-
-puts "FFFSSSSSSSSSSSSSSSSSSSS", YamsCore::UserPolicy
