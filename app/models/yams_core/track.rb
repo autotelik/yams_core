@@ -44,6 +44,7 @@ module YamsCore
     end
 
     def attach_cover(path)
+      self.save if new_record?
       AttachCoverService.call(self, path)
     end
 

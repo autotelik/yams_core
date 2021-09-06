@@ -6,7 +6,7 @@ module YamsCore
     before_action :set_track,     only: %i[destroy]
     before_action :set_presenter, only: %i[edit update]
 
-    helper YamsAudioEngine::PlayerHelper
+    helper YamsAudio::PlayerHelper
 
     include YamsCore::RandomSeed
 

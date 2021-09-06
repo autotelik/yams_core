@@ -1,0 +1,24 @@
+Pagy::VARS[:items] = ENV['YAMS_DEFAULT_PAGY_ITEMS'] || 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

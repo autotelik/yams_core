@@ -16,10 +16,9 @@ require 'elasticsearch'                   # major release should match the ES ma
 
 require 'image_processing'
 
-require 'kaminari'
-
 require "nokogiri"
 
+require 'pagy'
 require 'pundit'
 
 #  N.B 1.3 and 1.4 breaks
@@ -30,6 +29,8 @@ require 'rails_sortable'  # https://github.com/itmammoth/rails_sortable
 require 'select2-rails'
 require 'searchkick'
 require 'sidekiq'
+
+require 'yams_audio'
 
 module YamsCore
 

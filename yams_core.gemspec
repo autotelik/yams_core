@@ -21,8 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", '>= 6.0'
 
   s.add_dependency 'jbuilder', '~> 2.5'
-  s.add_dependency 'sass-rails', '~> 5.0'
-  s.add_dependency 'turbolinks', '~> 5'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'uglifier', '>= 1.3.0'
 
   # YAMS
@@ -42,17 +41,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'image_processing', '~> 1.7'
 
-  s.add_dependency 'kaminari'
-
   s.add_dependency "nokogiri", ">= 1.8.5"
 
+  s.add_dependency 'pagy'
   s.add_dependency 'pundit'
-  s.add_dependency 'rails_event_store', '~>1.2.2'
 
+  s.add_dependency 'rails_event_store', '~>1.2.2'
   s.add_dependency 'rails_sortable', '>= 1.3', '< 1.5'    # https://github.com/itmammoth/rails_sortable
   s.add_dependency 'rails-settings-cached', '>= 2.3.5'    # https://github.com/huacnlee/rails-settings-cached
-
-
   s.add_dependency "rubyzip", ">= 1.3.0"
 
   s.add_dependency 'select2-rails'

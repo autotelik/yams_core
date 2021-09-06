@@ -33,7 +33,8 @@ YamsCore::Engine.routes.draw do
     resources :tracks, only: [:create, :destroy]
   end
 
-  resource :radio, only: [:create, :show], controller: :radio
+  resource :radio, only: [:show], controller: :radio
+  resources :radio_tracks, only: [:index, :show]
 
   resources :id3_genres
   resources :licenses
@@ -53,6 +54,6 @@ YamsCore::Engine.routes.draw do
     resources :bulk_upload_templates, only: [:show]
   end
 
-  mount YamsAudioEngine::Engine, at: '/audio_engine'
+  mount YamsAudio::Engine, at: '/audio_engine'
 
 end

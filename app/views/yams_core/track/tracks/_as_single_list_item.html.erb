@@ -1,9 +1,9 @@
-<% # The JS needs to access the LIST index (not Rails DB Id) hence track_counter %>
-
-<li id="track-<%= track_counter %>" onclick="yams_audio_engine.playlist_onclick(this)" >
+<li id="track-<%= track.id %>">
 
   <div class="col-1 image-wrapper">
-    <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %>
+    <a href="<%= yams_core.radio_track_path(track) %>" data-turbo-frame="yams-player-in-navbar">
+      <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %>
+    </a>
   </div>
 
   <% if current_user %>

@@ -17,16 +17,13 @@ module YamsCore
     end
 
     def random_free_tracks
-      random_tracks.for_free.page(params[:page]).per(per_page)
+      random_tracks.for_free
     end
 
     def to_presenters(tracks)
       tracks.collect { |t| TrackPresenter.new(t, view_context) }
     end
 
-    def per_page
-      params[:per_page] || 30
-    end
 
   end
 end

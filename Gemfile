@@ -3,13 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
-# TODO: remove once dev complete move to core gemspec
-if File.exists?('/home/rubyuser/SoftwareDev/git/yams_audio_engine')
-  gem 'yams_audio_engine', path: '/home/rubyuser/SoftwareDev/git/yams_audio_engine'
-else
-  gem 'yams_audio_engine', git: 'https://github.com/autotelik/yams_audio_engine.git'
-end
-
 library_path = File.expand_path("../../yams_events", __FILE__)
 if File.exist?(library_path)
   gem 'yams_events', :path => library_path
@@ -17,6 +10,11 @@ else
   gem 'yams_events', :git => "https://github.com/autotelik/yams_events.git"#, :branch => branch
 end
 
+if File.exists?('/home/rubyuser/SoftwareDev/git/yams_audio_engine')
+  gem 'yams_audio', path: '/home/rubyuser/SoftwareDev/git/yams_audio_engine'
+else
+  gem 'yams_audio', git: 'https://github.com/autotelik/yams_audio_engine.git'
+end
 
 group :development do
   gem "spring"

@@ -32,10 +32,10 @@ module YamsCore
 
     def cover_image_tag(cover, size: :thumb, css: 'img-fluid rounded')
       if cover.attached?
-        view.image_tag(rails_blob_url(cover.image, only_path: true), class: css)
+        image_tag(rails_blob_url(cover.image, only_path: true), class: css)
       else
         default = DefaultCover.for_track
-        view.image_tag(rails_blob_url(default.image), class: css) if default.attached?
+        image_tag(rails_blob_url(default.image), class: css) if default.attached?
       end
     end
 

@@ -10,7 +10,7 @@ module YamsCore
 
     before_action :authenticate_user!
 
-    helper YamsAudioEngine::PlayerHelper
+    helper YamsAudio::PlayerHelper
 
     def show;
       respond_to do |format|

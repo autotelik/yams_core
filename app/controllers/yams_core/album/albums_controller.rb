@@ -12,7 +12,7 @@ module YamsCore
 
     include YamsCore::FetchTracks
 
-    helper YamsAudioEngine::PlayerHelper
+    helper YamsAudio::PlayerHelper
 
     def index
 

@@ -1,4 +1,4 @@
-$('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'yams_audio_engine/shared/player_in_navbar',
+$('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'yams_audio/shared/player_in_navbar',
                                                              locals: { yams_audio_json: @yams_audio_json } ) %>");
 
 /* Render default Playlist - Pass in content block containing our desired track listing layout and styling */
@@ -8,4 +8,4 @@ $('#navbar-audio-player-insertion-point').html("<%= j render(partial: 'yams_audi
   <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
 <% end %>
 
-$('#yams-audio-playlist').html("<%= j render(partial: 'yams_audio_engine/shared/track_playlist.html') %>");
+$('#yams-audio-playlist').html("<%= j render(partial: 'yams_audio/shared/track_playlist.html') %>");

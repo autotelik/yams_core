@@ -11,7 +11,7 @@ module YamsCore
 
     include YamsCore::FetchTracks
 
-    helper YamsAudioEngine::PlayerHelper
+    helper YamsAudio::PlayerHelper
 
     def index
       @playlists = Playlist.for_user(current_user).includes(tracks: { cover: { image_attachment: :blob } } ).page(params[:page]).per(30)

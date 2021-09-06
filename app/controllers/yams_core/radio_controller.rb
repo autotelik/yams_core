@@ -5,25 +5,13 @@ module YamsCore
 
     include YamsCore::FetchTracks
 
-    helper  YamsAudioEngine::PlayerHelper
-
-    # Resource with no model so no index route
-    def create
-      populate_tracks
-
-      # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
-      @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
-      #pp JSON.parse(@yams_audio_json)
-    end
+    helper  YamsAudio::PlayerHelper
 
     def show
-      populate_tracks
+      # Settings for rendering the Audio Player
+      @yams_player_settings = YamsAudio::PlayerSettingsBuilder.call(user: current_user, auto_play: false)
 
-      # HTML or JS is to Render the Audio Player, a JSON format is to Render the Playlist and actual audio data
-      @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
-      #pp JSON.parse(@yams_audio_json)
-      #
-      render :create
+      @track = YamsAudio::TrackPresenter.new(view_context: view_context)
     end
 
     private
