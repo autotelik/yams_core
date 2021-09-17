@@ -3,13 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
-library_path = File.expand_path("../../yams_events", __FILE__)
-if File.exist?(library_path)
-  gem 'yams_events', :path => library_path
-else
-  gem 'yams_events', :git => "https://github.com/autotelik/yams_events.git"#, :branch => branch
-end
-
 if File.exists?('/home/rubyuser/SoftwareDev/git/yams_audio_engine')
   gem 'yams_audio', path: '/home/rubyuser/SoftwareDev/git/yams_audio_engine'
 else
@@ -24,13 +17,6 @@ group :test do
 
   gem 'byebug'
   gem 'capybara', '~> 2.13'
-
-  # On Centos - QMAKE=/usr/lib64/qt5/bin/qmake gem install capybara-webkit
-  #
-  # TODO How to set in bundle - this dont seem to work :
-  #   bundle config build.capybara-webkit  --with-opt-include=/usr/lib64/qt5/bin/qmake
-  #
-  gem 'capybara-webkit'
 
   gem 'database_cleaner'
 
