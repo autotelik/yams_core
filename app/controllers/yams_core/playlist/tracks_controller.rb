@@ -15,7 +15,7 @@ module YamsCore
 
       @playlist_track = PlaylistTrack.new(playlist: playlist, track: track)
 
-      @track = TrackPresenter.new(track, view_context)
+      @track = YamsAudio::TrackPresenter.new(track: track)
 
       respond_to do |format|
         if @playlist_track.save
@@ -33,7 +33,7 @@ module YamsCore
       playlist_track = PlaylistTrack.find(params[:id])
 
       # Re-enable Track for selection
-      @track_presenter =  TrackPresenter.new(playlist_track.track, view_context)
+      @track_presenter =  YamsAudio::TrackPresenter.new(track: playlist_track.track)
 
       # TODO - amend js call to pass this ID to us
       # id="<%= "#{playlist.id}-#{presenter.sortable_id}"

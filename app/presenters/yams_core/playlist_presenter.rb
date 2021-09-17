@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 module YamsCore
+
   class PlaylistPresenter < YamsCore::Presenter
 
-    def initialize(playlist, view)
-      super(playlist, view)
+    def initialize(playlist: nil, view:)
+      super(playlist, view: view)
     end
 
 
@@ -50,8 +51,7 @@ module YamsCore
     end
 
     def cover_image(size: :thumb)
-      # Use first Track's cover if possible
-      return YamsCore::TrackPresenter.new(playlist_tracks.first.track, view).cover_image(size: size) if playlist_tracks.present?
+      return YamsAudio::TrackPresenter.new(track: playlist_tracks.first.track, view: view).cover_image(size: size) if playlist_tracks.present?
       DefaultCover.for_playlist.try(:image)
     end
 

@@ -4,14 +4,12 @@
   <% end %>
 <% end  %>
 
-<div id="yams-audio-track-playlist-wrapper-row" class="col">
-  <div class="yams-audio-playlist-content">
-    <ul id="yams-audio-playlist" class="yams-audio-playlist">
-      <%= render partial: 'yams_core/track/tracks/single_list_item_headers' %>
+<div id="yams-audio-radio-playlist-wrapper" class="col">
+    <ul id="yams-audio-radio-playlist" class="yams-audio-playlist">
+      <%= render partial: 'yams_core/track/as_list_item_headers' %>
 
       <%= turbo_frame_tag "radio_1", loading: "lazy", src: yams_core.radio_tracks_path do %>
         <h3>Loading...</h3>
       <% end %>
     </ul>
-  </div>
 </div>

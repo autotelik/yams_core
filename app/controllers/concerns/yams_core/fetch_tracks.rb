@@ -20,10 +20,5 @@ module YamsCore
       random_tracks.for_free
     end
 
-    def to_presenters(tracks)
-      tracks.collect { |t| TrackPresenter.new(t, view_context) }
-    end
-
-
   end
 end

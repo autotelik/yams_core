@@ -6,13 +6,14 @@ module YamsCore
 
     before_action :authenticate_user!
 
-    before_action :set_album, only: %i[show edit destroy]
+    before_action :set_album, only: %i[destroy]
 
-    before_action :set_presenter, only: %i[edit update]
+    before_action :set_presenter, only: %i[edit show update]
 
     include YamsCore::FetchTracks
 
     helper YamsAudio::PlayerHelper
+
 
     def index
 
@@ -20,24 +21,35 @@ module YamsCore
       # seed_val = Track.connection.quote(cookies[:rand_seed])
       seed_val = rand
       Album.connection.execute("select setseed(#{seed_val})")
-      @albums = Album.includes(cover: { image_attachment: :blob } ).eager_load(:tracks, :user).published.order('random()').page(params[:page]).per(30)
+      albums = Album.includes(cover: { image_attachment: :blob } )
+                    .eager_load(:tracks, :user)
+                    .published
+                    .with_tracks
+                    .order('random()') #TODO.page(params[:page]).per(30)
 
-      populate_track_presenters(@albums.first)
+      @albums = albums.collect { |a| YamsCore::AlbumPresenter.new(album: a, view: view_context) }
 
-      @yams_audio_json = @tracks.present? ? AudioEngineJsonBuilder.call(@tracks, current_user) : ""
+      if @albums.present?
+        populate_tracks(@albums.first)
+        @track = @tracks.first || YamsAudio::TrackPresenter.new(view: view_context)
+        @album = @albums.first
+      else
+        @tracks = []
+        @track = YamsAudio::TrackPresenter.new(view: view_context)
+        @album = PlaylistPresenter.new(playlist: Playlist.new, view: view_context)
+      end
     end
 
-
     def show
-      populate_track_presenters(@album)
+      populate_tracks(@album)
 
-      @yams_audio_json = AudioEngineJsonBuilder.call(@tracks, current_user)
+      @track = @tracks.first || YamsAudio::TrackPresenter.new(view: view_context)
 
       respond_to do |format|
         format.html {}
         format.js {}
         format.json do
-          render json: @yams_audio_json
+          render json: @album
         end
       end
     end
@@ -102,14 +114,12 @@ module YamsCore
     private
 
     def set_presenter
-      @album = AlbumPresenter.new(Album.find(params[:id]), view_context)
+      @album = YamsCore::AlbumPresenter.new(album: set_album, view: view_context)
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = Album.find(params[:id])
-
-      @album.build_cover unless @album.nil? || @album.cover.present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -117,8 +127,8 @@ module YamsCore
       params.require(:album).permit(:title, :description, :published_state, :user_id, tag_list: [], cover_attributes: %i[id image])
     end
 
-    def populate_track_presenters(album)
-      @tracks = album ? to_presenters(album.tracks_for_player) : []
+    def populate_tracks(album)
+      @tracks = album.tracks_for_player.collect { |t| YamsAudio::TrackPresenter.new(track: t, view: view_context) }
     end
 
   end

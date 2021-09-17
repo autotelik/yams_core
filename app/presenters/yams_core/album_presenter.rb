@@ -2,8 +2,8 @@
 module YamsCore
   class AlbumPresenter < YamsCore::Presenter
 
-    def initialize(album, view)
-      super(album, view)
+    def initialize(album: nil, view:)
+      super(album, view: view)
 
       album.build_cover if album && album.cover.blank?
     end
@@ -26,7 +26,8 @@ module YamsCore
         #{delete_icon(model, text: 'Delete', html_options: { class: 'dropdown-item' }) unless except_list.include? :delete}
       </div>
     </div>
-      EOS
+EOS
+
       raw(html)
     end
 
@@ -34,6 +35,7 @@ module YamsCore
       cover = self.cover.try(:attached?) ? cover : DefaultCover.for_album
       cover.try(:image)
     end
+  
 
     alias_method :album, :model
 

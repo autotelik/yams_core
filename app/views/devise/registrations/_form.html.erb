@@ -109,7 +109,7 @@
       <div class="card-body">
         <div class="datashift-user-track-playlist">
           <% resource.tracks.includes(cover: { image_attachment: :blob }).each do |t| %>
-            <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(t, self) } %>
+            <%= render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsAudio::TrackPresenter.new(t, self) } %>
           <% end %>
         </div>
       </div>

@@ -7,8 +7,7 @@ module YamsCore
 
       logger.info "Process #{track.id} MP3 properties"
 
-      # TODO - active storage come along way - this needs refactoring
-      #track.update(length: YamsCore::Mp3PropertiesService.length(track.audio)) unless track.length?
+      service = YamsCore::Mp3PropertiesService.new(track)
     end
 
   end

@@ -11,7 +11,7 @@ module YamsCore
 
       @album_track = AlbumTrack.new(album: @album, track: track)
 
-      @track = TrackPresenter.new(track, view_context)
+      @track = YamsAudio::TrackPresenter.new(track: track)
 
       respond_to do |format|
         if @album_track.save
@@ -29,8 +29,8 @@ module YamsCore
       album_track = AlbumTrack.find(params[:id])
 
       # Need presenters so we can find the right ID to remove from Album, and then re-enable in Track listing for selection
-      @track_presenter = TrackPresenter.new(album_track.track, view_context)
-      @album_presenter = TrackPresenter.new(album_track.album, view_context)
+      @track_presenter = YamsAudio::TrackPresenter.new(track: album_track.track)
+      @album_presenter = YamsAudio::TrackPresenter.new(track: album_track.album)
 
       unless album_track.destroy
         flash[:error] = 'Sorry we failed to remove Track from Album'

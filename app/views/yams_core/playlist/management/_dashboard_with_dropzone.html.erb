@@ -16,7 +16,9 @@
           <!-- Playlist Management - with drag and drop track section-->
           <% playlists.each do |playlist| %>
             <li id="playlist_row_<%= playlist.id %>" class="pb-4">
-              <%= render(partial: 'yams_core/playlist/playlist_with_dropzone', locals: { playlist: YamsCore::PlaylistPresenter.new(playlist, self) }) %>
+              <%= render(partial: 'yams_core/playlist/playlist_with_dropzone', locals: { 
+                playlist: YamsCore::PlaylistPresenter.new(playlist: playlist, view_context: self) 
+                }) %>
             </li>
           <% end %>
 

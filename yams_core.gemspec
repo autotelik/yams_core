@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'elasticsearch-model', '~> 5.1.0' # major release should match the ES major release in docker compose
   s.add_dependency 'elasticsearch-rails', '~> 5.1.0'
 
+  s.add_dependency 'id3tag', '~> 0.14.0'
   s.add_dependency 'image_processing', '~> 1.7'
 
   s.add_dependency "nokogiri", ">= 1.8.5"

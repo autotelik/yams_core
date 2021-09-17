@@ -29,7 +29,7 @@ describe 'Artist', type: :request do
         expect(response).to render_template('yams_core/artists/show')
         expect(response.body).to include(me.name)
         expect(assigns(:tracks).size).to eq 2
-        expect(assigns(:tracks).first).to be_a YamsCore::TrackPresenter
+        expect(assigns(:tracks).first).to be_a YamsAudio::TrackPresenter
       end
     end
   end

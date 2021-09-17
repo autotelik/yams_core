@@ -97,9 +97,6 @@ module YamsCore
     end
 
     def after_save_hook
-
-      assign_mp3_properties
-
       begin
         Searchkick::ProcessQueueJob.perform_later(class_name: "YamsCore::Track")
       rescue Redis::CannotConnectError => x
@@ -107,7 +104,6 @@ module YamsCore
       rescue  => x
         Rails.logger.error("UNHANDLED - Elastic search update failed #{x.message}")
       end
-
     end
 
   end

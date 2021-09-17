@@ -2,8 +2,8 @@
 module YamsCore
   class ArtistPresenter < YamsCore::Presenter
 
-    def initialize(artist, view)
-      super(artist, view)
+    def initialize(artist: nil, view:)
+      super(artist, view: view)
     end
 
     alias_method :artist, :model

@@ -8,26 +8,16 @@ module YamsCore
     helper YamsAudio::PlayerHelper
 
     def index
-      @pagy, @tracks = pagy(random_free_tracks)
-    end
 
-    def show
-      @track = YamsAudio::TrackPresenter.new(view_context: view_context, track: YamsCore::Track.for_free.find(params[:id]))
+      # TODO - how to generate a random selection but then paginate it and load it over multiple lazy load calls ?
+      # @pagy, @tracks = pagy(random_free_tracks)
 
-      respond_to do |format|
-        format.turbo_stream
-        format.html { render :show }
+      @pagy, tracks = pagy(YamsCore::Track.eager_load(:user, :availables)
+          .includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } }, :taggings])
+          .for_free)
 
-        format.json { 
-          render json: { partial: render_to_string(:show, formats: :html, layout: false) }
-        }
-      end
-    end
+      @tracks = tracks.collect { |t| YamsAudio::TrackPresenter.new(track: t, view: view_context) }
 
-    private
-
-    def populate_tracks
-      @tracks = to_presenters(random_free_tracks)
     end
 
   end

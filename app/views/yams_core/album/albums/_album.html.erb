@@ -14,7 +14,7 @@
       <div class="yams-audio-album-content p-1 col-12 w-100">
 
         <ul id="yams-audio-album" class="yams-audio-album p-1 col-12 ">
-          <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: album.album_tracks.includes(track: { cover: { image_attachment: :blob } } ).order([:sort]), as: :track %>
+          <%= render partial: 'yams_core/track/as_list_item.html', collection: album.album_tracks.includes(track: { cover: { image_attachment: :blob } } ).order([:sort]), as: :track %>
         </ul>
 
       </div>

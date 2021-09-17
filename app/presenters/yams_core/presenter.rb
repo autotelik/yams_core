@@ -9,19 +9,17 @@ module YamsCore
     include ActionView::Helpers::TextHelper
     include ActionView::Helpers::TagHelper
 
-
     # Enable Presenters to access view helpers too
     #
     include Rails.application.routes.url_helpers
-    include YamsCore::Engine.routes.url_helpers
-    extend YamsCore::Engine.routes.url_helpers
 
-    include YamsCore::FormHelper
-    include YamsCore::BootstrapHelper
 
-    delegate :polymorphic_path,  :link_to, :yams_core, to: :@view
+    # include YamsCore::FormHelper
+    # include YamsCore::BootstrapHelper
 
-    def initialize(model, view)
+    delegate :polymorphic_path, :link_to, :yams_core, to: :@view
+
+    def initialize(model, view:)
       super(model)
       @view = view
       @model = model
@@ -32,7 +30,7 @@ module YamsCore
       cover = cover_image(size: size)
       return unless cover
       options[:class] ||= 'avatar img-fluid rounded'
-      view.image_tag(Rails.application.routes.url_helpers.rails_blob_path(cover, only_path: true), options)
+      view.image_tag(rails_blob_path(cover, only_path: true), options)
     end
 
     def sortable_id

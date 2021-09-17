@@ -24,5 +24,6 @@ module YamsCore
       duration
     end
 
+
   end
 end

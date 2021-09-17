@@ -1,65 +1,37 @@
-<div class="row">
-  <div id="playlist-playlists-index" class="col-4">
+<% content_for :audio_player_in_navbar do %>
+  <%= turbo_frame_tag "yams-player-in-navbar" do %>
+    <%= render partial: 'yams_audio/shared/player', locals: { track: @track } %>
+  <% end %>
+<% end %>
+
+<div class="row" data-controller="yams-playlists">
+  <div id="playlist-playlists-index" class="col-3 sidebar">
 
     <div class="card">
-
       <%= bootstrap_card_header( t(:playlists, scope: :global)) %>
 
       <div class="card-body">
         <ul>
           <% @playlists.each do |playlist| %>
-
-            <li id="playlist_row_<%= playlist.id %>">
-              <% playlist = YamsCore::PlaylistPresenter.new(playlist, self) %>
-
+            <li id="playlist_row_<%= playlist.id %>" class="mt-4">
               <div class="row align-middle">
                 <div class="col-2">
                   <%= playlist.cover_image_tag %>
                 </div>
-                <span class="pt-3">
-                  <%= link_to(playlist.name, yams_core.playlist_url(playlist, format: :json), id: "select_playlist_row_#{playlist.id}") %>
-
-                  <script type="text/javascript" charset="utf-8">
-										$('#<%= "select_playlist_row_#{playlist.id}" %>').click(function (event) {
-											event.preventDefault(); // Prevent link from following its href
-
-											$.ajax({
-												type: 'GET',
-												url: '<%= url_for(yams_core.playlist_url(playlist)) %>',
-												dataType: "script"
-											});
-										});
-                  </script>
-                </span>
+                <div class="col-10 pt-3">
+                  <%= link_to playlist.name, yams_core.playlist_url(playlist), 'data-turbo-frame': "yams-selected-playlist-track-listing" %>
+                </div>
               </div>
             </li>
           <% end %>
         </ul>
       </div>
     </div>
+
   </div> <!-- end playlist column -->
 
-  <div id="yams-audio-playlist-wrapper" class="col-7">
-    <div class="text-center pb-4">
-      <h5 id="current-playlist-header"><%= @playlists.first.try(:name) %></h5>
-    </div>
-    <div class="row">
-      <ul class="col yams-audio-playlist"><%= render partial: 'yams_core/track/tracks/single_list_item_headers' %></ul>
-    </div>
-    <div id="yams-audio-playlist" class="col-12">     <!-- datashift audio JS insertion point, for rendering playlist of currently selected list -->
-    </div>
+  <div id="yams-audio-playlist-wrapper" class="col-9">
+    <%= render partial: 'show.html' %>
   </div>
+
 </div>
-
-<% content_for :audio_player_in_navbar  do %>
-  <%= render(partial: 'yams_audio/shared/player_in_navbar', locals: { yams_audio_json: @yams_audio_json } ) %>
-<% end if @tracks.present? %>
-
-<script type="text/javascript" charset="utf-8">
-	/* Render Playlist - Pass in this content block containing our desired playlist layout and styling */
-	<% content_for :datashift_audio_engine_track_playlist do %>
-	  <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
-	<% end %>
-
-	$('#yams-audio-playlist').html("<%= j render(partial: 'yams_audio/shared/track_playlist.html') %>");
-</script>

@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "yams-player-in-navbar" do %>
+  <%= render partial: 'yams_audio/shared/player.html', locals: { track: @track, list_item_id: @list_item_id} %>
+<% end%>
+
+<%= render partial: 'show.html' %>

@@ -23,6 +23,8 @@ module YamsCore
     scope :for_user, -> (user) { Album.where('user_id = ?', user.id) }
 
     scope :without_track, -> (track, user) { Album.for_user(user).where.not(id: AlbumTrack.where('track_id = ?', track.id).select(:album_id)) }
+   
+    scope :with_tracks, -> { joins(:tracks) }
 
     include YamsCore::AvailableFor
 

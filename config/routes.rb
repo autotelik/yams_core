@@ -45,6 +45,8 @@ YamsCore::Engine.routes.draw do
 
   resource :searches, only: [:show]
 
+  resources :track, only: [:show]
+
   resources :tracks, module: 'track'
 
   namespace :track do

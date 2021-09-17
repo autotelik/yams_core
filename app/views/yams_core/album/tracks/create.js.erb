@@ -5,5 +5,5 @@ $("#messages_container").html("<%= j render(partial: 'yams_core/shared/messages'
       "<%= j render(partial: 'yams_core/track/tracks/sortable_tracks_row', locals: { owner: @album_track.album, sortable_with_track: @album_track} ) %>"
   );
 <% else %>
-  $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsCore::TrackPresenter.new(@track, self) } %>");
+  $('#target-for-track_removal-reinsertion').append("<%= j render partial: 'yams_core/track/tracks/draggable_track_in_a_row', locals: { track_presenter: YamsAudio::TrackPresenter.new(@track, self) } %>");
 <% end %>

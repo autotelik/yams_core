@@ -1,6 +1,8 @@
 <%= turbo_frame_tag "radio_#{@pagy.page}" do %>
 
-    <%= render partial: 'yams_core/track/tracks/as_single_list_item.html', collection: @tracks, as: :track %>
+    <% @tracks.each_with_index do |t, i| %>
+      <%= render partial: 'yams_core/track/as_list_item.html', locals: { track: t } %>
+    <% end%>
 
     <% if @pagy.next %>
       <%= turbo_frame_tag "radio_#{@pagy.next}", loading: "lazy", src: yams_core.radio_tracks_path(page: @pagy.next)  %>

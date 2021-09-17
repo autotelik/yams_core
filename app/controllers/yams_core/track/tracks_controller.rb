@@ -30,16 +30,22 @@ module YamsCore
       end
     end
 
-    def show
-      respond_to do |format|
-        format.html {
-          track = Track.includes([{ audio_attachment: :blob }, { cover: { image_attachment: :blob } } ]).find(params[:id])
-          @track = TrackPresenter.new(track, view_context)
 
-          @yams_audio_json = AudioEngineJsonBuilder.call(@track, current_user)
+    def show
+      @track = YamsAudio::TrackPresenter.new(view: view_context, track: YamsCore::Track.for_free.find(params[:id]))
+
+      @list_item_id = params[:list_item_id]
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { render :show }
+
+        format.json { 
+          render json: { partial: render_to_string(:show, formats: :html, layout: false) }
         }
       end
     end
+
 
     def new
       track = Track.new.tap do |t|

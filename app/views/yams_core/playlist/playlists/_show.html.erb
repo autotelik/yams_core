@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "yams-selected-playlist-track-listing" do %>
+  <div class="text-center pb-4">
+    <h5 id="current-playlist-header"><%= @playlist.try(:name) %></h5>
+  </div>
+
+  <ul id="yams-audio-playlist-<%= dom_id(@playlist) %>" class="yams-audio-track-listing">
+    <%= render partial: 'yams_core/track/as_list_item_headers' %>
+
+    <% @tracks.each_with_index do |t, i| %>
+      <%= render partial: 'yams_core/track/as_list_item.html', locals: { track: t } %>
+    <% end%>
+  </ul>
+<% end %>

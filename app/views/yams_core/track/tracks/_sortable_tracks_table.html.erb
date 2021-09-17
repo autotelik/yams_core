@@ -2,7 +2,7 @@
   <tbody class="sortable" id="target-for-track-drop-insertion-point-<%= owner.id %>">  <!-- gem rails_sortable : sortable target and insertion point -->
   <% sortable.each_with_sortable_id do |at, sortable_id| %>
 
-    <% presenter = YamsCore::TrackPresenter.new(at.track, self) %>
+    <% presenter = YamsAudio::TrackPresenter.new(track: at.track) %>
 
     <tr id="<%= sortable_id %>" class="sortable_tracks_row p-0">
       <td> <%= icon_tag('icon-list') %></td>

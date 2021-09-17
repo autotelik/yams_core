@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "id3tag"
+
 module YamsCore
 
   class Mp3PropertiesService
@@ -7,21 +9,27 @@ module YamsCore
     include YamsCore::Services
 
 
-    attr_reader :blob
+    attr_reader :blob, :storage, :tags, :tmp_file
 
-    def initialize(storage)
-      @blob = storage
-    end
+    def initialize(track)
+      @storage = track.audio
+     # @blob = storage.download
 
-    def self.length(storage)
-      new(storage).length
-    end
+      storage.open do |temp_file|
+        # if needed can access MP3 tags
 
-    def length
-      download_blob_to_tempfile do |file|
-        Rails.logger.debug("Mp3PropertiesService calculating Durations for #{file.path.inspect}")
-        YamsCore::AudioService.get_duration_secs(file.path)
+        #@tags = ID3Tag.read(temp_file)
+        #puts "TAGS:"
+        #pp tags.inspect
+      
+        track.length = YamsCore::AudioService.get_duration_secs(temp_file.path)
+        track.save!
+
+
+        temp_file.close
+        temp_file.unlink 
       end
+
     end
 
   end

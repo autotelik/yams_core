@@ -1,31 +1,30 @@
-<li id="track-<%= track.id %>">
+<li id="yams-track-<%= track.id %>">
 
   <div class="col-1 image-wrapper">
-    <a href="<%= yams_core.radio_track_path(track) %>" data-turbo-frame="yams-player-in-navbar">
-      <%= image_tag(rails_blob_path(track.cover_image, only_path: true), width: '80px', class: "thumbnail") %>
-    </a>
+    <%= link_to yams_core.track_path(track, list_item_id: "yams-track-#{track.id}"), 'data-turbo-frame': "yams-player-in-navbar" do %>
+      <%= track.cover_image_tag %>
+    <% end %>
   </div>
 
   <% if current_user %>
-    <div class="col-3 p-0 m-0 yams-audio-track-details">
-      <%= link_to(track.artist_name, yams_core.artist_path(track.artist), class: "yams-audio-full-name") %>
+    <div class="col-3 p-0 m-0">
+      <%= link_to(track.artist_name, yams_core.artist_path(track.artist), id: "yams-audio-track-artist") %>
     </div>
-    <div class="col-3 p-0 m-0 yams-audio-track-details">
-      <%= link_to(track.title, yams_core.track_path(track), class: "yams-audio-track-title") %>
+    <div class="col-3 p-0 m-0">
+      <%= link_to(track.title, yams_core.track_path(track), id: "yams-audio-track-title",) %>
     </div>
   <% else %>
-    <div class="col-3 p-0 m-0 yams-audio-track-details"><%= track.artist_name %></div>
-    <div class="col-3 p-0 m-0 yams-audio-track-details"><%= track.title %></div>
+    <div class="col-3 p-0 m-0" id="yams-audio-track-details"><%= track.artist_name %></div>
+    <div class="col-3 p-0 m-0" id="yams-audio-track-title"><%= track.title %></div>
   <% end %>
 
-  <div class="col-1 text-center">
-    <%= track.created_at.to_s(:track_display) %>
-  </div>
-  <div class="col-1 text-center">
+
+  <div class="col-1">
     <%= track.display_duration %>
   </div>
+
   <div class="col-1">
-    <%= render partial: 'yams_core/shared/tag_list', locals: { tag_list: track.tag_list } %>
+    <%#= render partial: 'yams_core/shared/tag_list', locals: { tag_list: track.tag_list } %>
   </div>
 
   <div class="align-middle pull-right">
