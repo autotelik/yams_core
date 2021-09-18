@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
 
-  include PunditHelper
+  #include PunditHelper
 
   def show
     @user = User.find(params[:id])
