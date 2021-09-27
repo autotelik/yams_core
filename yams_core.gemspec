@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-settings-cached', '>= 2.3.5'    # https://github.com/huacnlee/rails-settings-cached
   s.add_dependency "rubyzip", ">= 1.3.0"
 
-  s.add_dependency 'select2-rails'
   s.add_dependency 'searchkick'
   s.add_dependency 'sidekiq'
 

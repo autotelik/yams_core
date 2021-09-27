@@ -26,7 +26,6 @@ require 'pundit'
 
 require 'rails_sortable'  # https://github.com/itmammoth/rails_sortable
 
-require 'select2-rails'
 require 'searchkick'
 require 'sidekiq'
 

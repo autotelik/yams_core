@@ -1,35 +1,34 @@
-<%= form_with model: [track], url: yams_core.tracks_path, method: :post, id: 'track-tracks-upload-form', local: true do |form| %>
+<div class="col-8 offset-2">
 
-  <div class="row">
-    <div class="col-8 offset-2">
+  <div class="track-upload col">
+
+<%= form_with model: [track], url: yams_core.tracks_path, method: :post, id: 'track-tracks-upload-form', local: true do |form| %>
 
       <div class="card ">
 
         <%= bootstrap_card_header( t(".#{params[:action]}.card-header") ) %>
 
-        <div class="card-body pb-2">
+        <div class="card-body mt-2 pb-2">
           <div class="row pt-2">
             <div class="col-7 pl-4">
               <%= render 'yams_core/shared/errors', model: track %>
 
               <div class="form-group">
                 <%= form.label t('.title') %>
-                <%= form.text_field :title, id: "file-upload-title", autofocus: true, class: 'col form-control-yams', required: true %>
+                <%= form.text_field :title, id: "file-upload-title", autofocus: true, class: 'text', required: true %>
               </div>
 
               <div class="form-group">
                 <%= form.label t('.description') %>
-                <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'col form-control-yams') %>
+                <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'input_text') %>
               </div>
 
               <div class="form-group uploader">
                 <%= render partial: 'audio_upload', locals: { form: form, track: track } %>
               </div>
 
-              <div class="form-group">
-                <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: track } %>
-              </div>
-
+              <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: track } %>
+             
             </div>
 
             <!-- Side bar -->
@@ -52,7 +51,7 @@
           </div>
 
           <div class="pt-4 pr-4">
-            <%= bootstrap_submit(form: form, text: t('.' + controller.action_name + '.submit') ) %>
+            <%= form.submit( t('.submit'), class: 'signin', data: { disable_with: false }) %>
           </div>
 
         </div>
@@ -61,3 +60,5 @@
     </div>
   </div>
 <% end %>
+</div>
+</div>

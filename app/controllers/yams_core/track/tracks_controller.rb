@@ -15,7 +15,7 @@ module YamsCore
 
     # GET /tracks
     # GET /tracks.json
-    def index
+=begin     def index
       # Technique to generate same list for a certain time - driven by the cookie expire time
       # seed_val = Track.connection.quote(cookies[:rand_seed])
       seed_val = rand
@@ -28,8 +28,8 @@ module YamsCore
         format.html {}
         format.json {}
       end
-    end
-
+    end 
+=end
 
     def show
       @track = YamsAudio::TrackPresenter.new(view: view_context, track: YamsCore::Track.for_free.find(params[:id]))
@@ -46,14 +46,13 @@ module YamsCore
       end
     end
 
-
     def new
       track = Track.new.tap do |t|
         t.availables.build
         t.build_cover
       end
 
-      @track = TrackPresenter.new(track, view_context)
+      @track = YamsAudio::TrackPresenter.new(track: track, view: view_context)
     end
 
     # GET /tracks/1/edit

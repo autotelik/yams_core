@@ -1,53 +1,50 @@
-<div class="section accent">
-  <div class="w-container">
+<div class="col-6 offset-3 ">
 
-    <div class="row">
-      <div class="col-8 offset-2 card p-0">
-        <div class="card-body">
+  <%= render "devise/shared/error_messages", resource: resource %>
 
-          <h2 class="section-heading centered white  mt-2 mb-2"><%= t('.panel_title') %></h2>
+  <div class="login col-9">
+    <h2 class="section-heading centered white mb-5"><%= t('.panel_title') %></h2>
 
-          <div class="row">
-            <div class="col-6 offset-3 ">
-              <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
 
-              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
+      <%= f.text_field :name, :autofocus => true, class: 'text' %>
+      <span>username</span>
+      <br>
 
-                <div class="col centered form-row pb-2 px-0">
-                  <%= f.text_field :name, :autofocus => true, class: 'form-control-yams w-100', placeholder: "Name" %>
-                </div>
+      <%= f.email_field :email, class: 'text' %>
+      <span>email</span>
+      <br>
 
-                <div class="col centered form-row pb-2 px-0">
-                  <%= f.email_field :email, class: 'form-control-yams w-100', placeholder: "Email Address" %>
-                </div>
+      <%= f.password_field :password, class: 'text' %>
+      <span>password</span>
+      <br>
 
-                <div class="col centered form-row pb-2 px-0">
-                  <%= f.password_field :password, class: 'form-control-yams w-100', placeholder: "Password" %>
-                </div>
+      <%= f.password_field :password_confirmation, class: 'text' %>
+      <span>confirmation</span>
+      <br>
 
-                <div class="col centered form-row pb-2 px-0">
-                  <%= f.password_field :password_confirmation, class: 'form-control-yams w-100', placeholder: "Password confirmation" %>
-                </div>
-
-                <div class="row pull-right pt-2">
-                  <%= bootstrap_submit(form: f, text: t('.submit')) %>
-                </div>
-
-
-              <% end %>
-            </div>
+      <% if false && devise_mapping.rememberable? -%>
+        <div class="col form-row pb-3 px-0">
+          <div class="col-1 pl-0 pull-left">
+            <%= f.check_box :remember_me, class: 'form-control-yams pull-left' %>
+          </div>
+          <div class="col-10 pl-1 text-small">
+            Remember me on this computer
           </div>
         </div>
+      <% end -%>
 
-        <div class="row">
-          <div class="col text-center pt-4 pb-4">
-            <span class="text-question pb-1">By clicking '<%= t('.submit') %>' you agree to our <%= link_to t('terms.link'), page_path(:terms) %></span>
-            <div class="text-question">Already have an account? <%= link_to t(:sign_in, scope: :global), yams_core.new_user_session_path, class: 'sign-up' %></div>
-          </div>
-        </div>
+      <%= f.submit( t('.submit'), class: 'signin', data: { disable_with: false }) %>
 
+      <div class="row sign_up">
+        <p class="col mt-4">By clicking '<%= t('.submit') %>' you agree to our <%= link_to t('terms.link'), page_path(:terms), class:  'sign_up' %></p>
       </div>
-    </div>
 
+    <% end %>
   </div>
 </div>
+
+<div class="col-6 offset-3 text-left mt-5 have_account">
+  <p class="col mt-4 have_account">Have an account ? <%= link_to t(:sign_in, scope: :global), yams_core.new_user_session_path, class: 'have_account' %> </p>
+</div>
+
