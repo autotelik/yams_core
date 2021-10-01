@@ -8,7 +8,6 @@ module YamsCore
     helper YamsAudio::PlayerHelper
 
     def index
-
       # TODO - how to generate a random selection but then paginate it and load it over multiple lazy load calls ?
       # @pagy, @tracks = pagy(random_free_tracks)
 
@@ -18,6 +17,7 @@ module YamsCore
 
       @tracks = tracks.collect { |t| YamsAudio::TrackPresenter.new(track: t, view: view_context) }
 
+      @track = @tracks.first
     end
 
   end

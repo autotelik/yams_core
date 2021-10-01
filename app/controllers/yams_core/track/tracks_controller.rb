@@ -8,28 +8,6 @@ module YamsCore
 
     helper YamsAudio::PlayerHelper
 
-    include YamsCore::RandomSeed
-
-    # For returning random lists of records
-    before_action :set_rand_cookie, only: %i[index]
-
-    # GET /tracks
-    # GET /tracks.json
-=begin     def index
-      # Technique to generate same list for a certain time - driven by the cookie expire time
-      # seed_val = Track.connection.quote(cookies[:rand_seed])
-      seed_val = rand
-      Track.connection.execute("select setseed(#{seed_val})")
-      @tracks = Track.eager_load(:cover, :user).for_commercial.order('random()').page(params[:page]).per(30)
-
-      @tracks_json = YamsCore::AudioEnginePlayListBuilder.call(@tracks, current_user)
-
-      respond_to do |format|
-        format.html {}
-        format.json {}
-      end
-    end 
-=end
 
     def show
       @track = YamsAudio::TrackPresenter.new(view: view_context, track: YamsCore::Track.for_free.find(params[:id]))
@@ -75,7 +53,7 @@ module YamsCore
         else
           format.html do
             # TOFIX - this is currently an issue - perhaps with turbolinks - client URL ends up on the INDEX page, so if they do a refresh we
-            @track = TrackPresenter.new(@track, view_context)
+            @track = YamsAudio::TrackPresenter.new(track: @track, view: view_context)
             render :new, notice: 'Track upload failed.'
           end
           format.json { render json: @track.errors, status: :unprocessable_entity }

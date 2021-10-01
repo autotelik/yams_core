@@ -2,10 +2,11 @@
 
   <%= bootstrap_card_header( t(:permissions, scope: :global)) %>
 
-  <div class="card-body text-center pt-2">
+  <div class="card-body text-left pt-2">
 
     <% info = {
-        'radio': 'Available in Radio - i.e for listening, by any visitor for free.',
+        'radio': 'Available to any visitor for free, including Radio.',
+        'free':  'Available to any visitor for free, including Radio.',
         'download': 'Available for download by registered users, a fee may apply',
         'playlist': 'Available for visitors to add to personal playlists, a fee may apply',
         'stream': 'Available for streaming by registered users, a micro fee may apply'
@@ -15,10 +16,10 @@
 
       <div class="row pl-2">
         <div class="col-1">
-          <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c), 'data-toggle': "tooltip", 'data-placement': "left", title: info[c.to_sym] %>
+          <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c) %>
         </div>
         <div class="col-9 pl-2">
-          <%= form.label c  %>
+          <%= form.label c, 'data-toggle': "tooltip", 'data-placement': "left", title: info[c.to_sym] %>
         </div>
       </div>
 

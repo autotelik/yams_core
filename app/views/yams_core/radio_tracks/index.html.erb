@@ -1,12 +1,22 @@
 <%= turbo_frame_tag "radio_#{@pagy.page}" do %>
 
-    <% @tracks.each_with_index do |t, i| %>
-      <%= render partial: 'yams_core/track/as_list_item.html', locals: { track: t } %>
-    <% end%>
+  <% @tracks.each_with_index do |t, i| %>
+    <%= render partial: 'yams_core/track/as_list_item.html', locals: { track: t } %>
+  <% end%>
 
-    <% if @pagy.next %>
-      <%= turbo_frame_tag "radio_#{@pagy.next}", loading: "lazy", src: yams_core.radio_tracks_path(page: @pagy.next)  %>
-    <% end %>
+  <% if @pagy.page == 1 %>
 
+    <%# struggling to target two turbo frames at once so can't get track into player,
+        bit crap but for now click play 'manually' %>
+    <script>
+        $(document).ready(function(){
+            $("#<%= dom_id(@track) %>")[0].click();
+        });
+    </script>
+
+  <% end %>
+
+  <% if @pagy.next %>
+    <%= turbo_frame_tag "radio_#{@pagy.next}", loading: "lazy", src: yams_core.radio_tracks_path(page: @pagy.next)  %>
+  <% end %>
 <% end %>
-

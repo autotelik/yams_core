@@ -146,6 +146,7 @@ en:
           edit:
             card-header: Edit Track
             submit: Update
+          panel_title: Upload Music
           title: Title
           new:
             accept_audio_file: Please choose an audio file - Wav/MP3

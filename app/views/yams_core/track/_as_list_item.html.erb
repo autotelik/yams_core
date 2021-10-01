@@ -1,7 +1,7 @@
-<li class="row" id="yams-track-<%= track.id %>">
+<li class="row">
 
   <div class="col-1 image-wrapper">
-    <%= link_to yams_core.track_path(track, list_item_id: "yams-track-#{track.id}"), 'data-turbo-frame': "yams-player-in-navbar" do %>
+    <%= link_to yams_core.track_path(track, list_item_id: "yams-track-#{track.id}"), id: dom_id(track), 'data-turbo-frame': "yams-player-in-navbar" do %>
       <%= track.cover_image_tag %>
     <% end %>
   </div>
@@ -18,11 +18,9 @@
     <div class="col-3 p-0 m-0" id="yams-audio-track-title"><%= track.title %></div>
   <% end %>
 
-
   <div class="col-1">
     <%= track.display_duration %>
   </div>
-
 
   <div class="col-2 align-middle pull-right">
     <div class="pull-right">
