@@ -7,21 +7,17 @@
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
 
+      <%= f.label t('.username') %>
       <%= f.text_field :name, :autofocus => true, class: 'text' %>
-      <span>username</span>
-      <br>
 
+      <%= f.label t('.email') %>
       <%= f.email_field :email, class: 'text' %>
-      <span>email</span>
-      <br>
 
+      <%= f.label t('.password') %>
       <%= f.password_field :password, class: 'text' %>
-      <span>password</span>
-      <br>
 
+      <%= f.label t('.confirmation') %>
       <%= f.password_field :password_confirmation, class: 'text' %>
-      <span>confirmation</span>
-      <br>
 
       <% if false && devise_mapping.rememberable? -%>
         <div class="col form-row pb-3 px-0">

@@ -7,13 +7,12 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form") do |f| %>
 
+      <%= f.label t('.username') %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'text' %>
-      <span>username</span>
-      <br>
-      <br>
+
+      <%= f.label t('.password') %>
       <%= f.password_field :password, autocomplete: "off", class: 'text' %>
-      <span>password</span>
-      <br>
+
 
       <% if false && devise_mapping.rememberable? -%>
         <div class="col form-row pb-3 px-0">

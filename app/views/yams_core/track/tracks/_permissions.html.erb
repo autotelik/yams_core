@@ -1,6 +1,6 @@
 <div class="card">
 
-  <%= bootstrap_card_header( t(:permissions, scope: :global)) %>
+  <%= form.label t(:permissions, scope: :global) %>
 
   <div class="card-body text-left pt-2">
 
@@ -19,7 +19,7 @@
           <%= check_box_tag "availables[#{c}]", 'true', @track.available_for?(c) %>
         </div>
         <div class="col-9 pl-2">
-          <%= form.label c, 'data-toggle': "tooltip", 'data-placement': "left", title: info[c.to_sym] %>
+          <%= form.label c, class: 'inner-label', 'data-toggle': "tooltip", 'data-placement': "left", title: info[c.to_sym] %>
         </div>
       </div>
 

@@ -21,12 +21,6 @@
             </div>
 
             <%= render partial: 'yams_core/shared/edit_tag_list', locals: { form: form, model: track } %>
-
-            <div class="form-group">
-              <%= form.label t('.description') %>
-              <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'input_text') %>
-            </div>
-
           </div>
 
           <!-- Side bar -->
@@ -34,7 +28,20 @@
             <div class="form-group">
               <%= render partial: 'yams_core/shared/cover_upload', locals: { form: form, model: track } %>
             </div>
+          </div>
 
+        </div>
+
+        <div class="row">
+          <div class="col-7">
+            <div class="form-group">
+              <%= form.label t('.description') %>
+              <%= form.text_area(:description, cols: 20, rows: 3, :autofocus => true, class: 'input_text') %>
+            </div>
+          </div>
+
+          <!-- Side bar -->
+          <div class="col-4 offset-1">
             <div class="row pt-4">
               <div class="col">
                 <%= render partial: 'permissions', locals: { form: form } %>
@@ -43,7 +50,6 @@
 
             <%= yield :track_form_sidebar_extras %>
           </div>
-
         </div>
 
         <div class="pt-4 pr-4">
