@@ -2,7 +2,10 @@
   <h6>Replace : <%= track.audio.filename %></h6></p>
 <% end if track.new_record? %>
 
-<label for="new-audio-upload-file-field" id="label-for-audio-upload" class="align-middle w-100 label-for-uploads icons-for-uploads">
+<label for="new-audio-upload-file-field"
+       id="label-for-audio-upload"
+       class="dropzone dropzone-default dz-clickable align-middle w-100 label-for-uploads icons-for-uploads"
+       data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" >
 
   <div id="audio-upload-messages" class="mb-2 text-info"></div>
   <div id="audio-upload-messages-errors" class="mb-2 text-danger"></div>
@@ -13,9 +16,9 @@
     </div>
   </div>
 
-  <div class="upload-btn-wrapper dropzone dropzone-default dz-clickable pt-4" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+  <div class="upload-btn-wrapper pt-4" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
     <div class="col">
-      <i class="fa fa-download" aria-hidden="true"></i>
+      <i class="material-icons view_list active">file_download</i>
     </div>
     <span class="upload-btn dropzone-msg-title"><%= t('.choose_audio_file_long') %></span>
 
@@ -24,7 +27,8 @@
                         id: 'new-audio-upload-file-field',
                         accept: acceptable_types,
                         direct_upload: true,
-                        data: { target: 'dropzone.input' } ) %>
+                        'data-dropzone-target': "input"
+                        ) %>
 
     <div class="dropzone-msg dz-message needsclick text-gray-600">
       <div class="dropzone-msg-desc text-info pt-4"><%= t('choose_audio_help', scope: :global) %></div>
