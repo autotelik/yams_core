@@ -8,11 +8,13 @@
 
     <%# struggling to target two turbo frames at once so can't get track into player,
         bit crap but for now click play 'manually' %>
-    <script>
-        $(document).ready(function(){
-            $("#<%= dom_id(@track) %>")[0].click();
-        });
-    </script>
+    <% if @track %>
+      <script>
+          $(document).ready(function(){
+              $("#<%= dom_id(@track) %>")[0].click();
+          });
+      </script>
+    <% end%>
 
   <% end %>
 
