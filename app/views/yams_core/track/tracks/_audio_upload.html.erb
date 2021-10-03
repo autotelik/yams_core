@@ -13,20 +13,22 @@
     </div>
   </div>
 
-  <div class="upload-btn-wrapper pt-4">
-
+  <div class="upload-btn-wrapper dropzone dropzone-default dz-clickable pt-4" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
     <div class="col">
       <i class="fa fa-download" aria-hidden="true"></i>
     </div>
-    <span class="upload-btn"><%= t('.choose_audio_file_long') %></span>
+    <span class="upload-btn dropzone-msg-title"><%= t('.choose_audio_file_long') %></span>
 
     <% acceptable_types = "audio/*" %>
     <%= form.file_field(:audio,
                         id: 'new-audio-upload-file-field',
                         accept: acceptable_types,
-                        direct_upload: true) %>
+                        direct_upload: true,
+                        data: { target: 'dropzone.input' } ) %>
 
-    <div class="text-info pt-4"><%= t('choose_audio_help', scope: :global) %></div>
-
+    <div class="dropzone-msg dz-message needsclick text-gray-600">
+      <div class="dropzone-msg-desc text-info pt-4"><%= t('choose_audio_help', scope: :global) %></div>
+    </div>
   </div>
+
 </label>

@@ -1,7 +1,12 @@
 <div class="col-8 offset-2">
   <div class="track-upload col">
 
-    <%= form_with model: [track], url: yams_core.tracks_path, method: :post, id: 'track-tracks-upload-form', local: true do |form| %>
+    <%= form_with model: [track],
+                  url: yams_core.tracks_path,
+                  method: :post,
+                  id: 'track-tracks-upload-form',
+                  multipart: true,
+                  local: true do |form| %>
 
       <div class="card ">
 
